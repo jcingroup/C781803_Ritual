@@ -1,14 +1,9 @@
-﻿using OutWeb.Models.FrontEnd.ProductFrontEndModels;
-using OutWeb.Modules.FontEnd;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using WebUser.Controller;
 
 namespace OutWeb.Controllers
 {
-    public class PublicController : Controller
+    public class PublicController : WebUserController
     {
         public ActionResult Index()
         {
