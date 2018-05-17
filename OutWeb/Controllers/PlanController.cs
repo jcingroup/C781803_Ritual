@@ -1,11 +1,9 @@
-﻿using OutWeb.Models.FrontEnd.NewsFrontEndModels;
-using OutWeb.Modules.FontEnd;
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using WebUser.Controller;
 
 namespace OutWeb.Controllers
 {
-    public class PlanController : Controller
+    public class PlanController : WebUserController
     {
         public ActionResult Index()
         {

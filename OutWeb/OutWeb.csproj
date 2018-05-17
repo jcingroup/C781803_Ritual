@@ -170,7 +170,7 @@
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\TrustController.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
-    <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\_SysAdmController.cs" />
     <Compile Include="Entities\WBAGENT.cs">
@@ -482,7 +482,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Plan\Plan.cshtml" />
     <Content Include="Views\Public\Public.cshtml" />
-    <Content Include="Views\Service\Service.cshtml" />
+    <Content Include="Views\Services\Services.cshtml" />
     <Content Include="Views\Team\Team.cshtml" />
     <Content Include="Views\Trust\Trust.cshtml" />
     <None Include="Web.Debug2.config">
