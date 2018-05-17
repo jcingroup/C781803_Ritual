@@ -491,7 +491,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ckfinder\bin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -504,12 +503,6 @@
     <Content Include="Entities\WBDB.edmx.diagram">
       <DependentUpon>WBDB.edmx</DependentUpon>
     </Content>
-    <Content Include="ckfinder\plugins\fileeditor\codemirror\LICENSE" />
-    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="ckfinder\userfiles\.htaccess" />
     <None Include="Properties\PublishProfiles\Demo.pubxml" />
     <None Include="Properties\PublishProfiles\Server.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
