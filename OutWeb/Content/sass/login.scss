@@ -31,7 +31,7 @@ $isLogin:              true;
 // main
 // ------------------------------------------------------------
 .sub-copyright {
-    @extend .font-sp, .text-primary, .mt-8;
+    @extend .font-sp, .text-secondary, .mt-8;
 }
 form {
     @extend .center, .pt-12, .bg-light;

@@ -26,15 +26,17 @@
 .wrapper {
     @if $wrapper-bg      { background: $wrapper-bg; }
     @if not $enable-RWD  { min-width: $min-width; }
-    @if $footBeBottom {
-        @if $lte7 { _height: 100%; }
-        min-height: 100%;
 
-        @if $isAdmin {
-            padding-bottom: $wrapper-b-spacing; // 內容與footer間距
-        }
-        @if $isLogin {
+    @if $isLogin {
+        @if $footBeBottom {
+            @if $lte7 { _height: 100%; }
+            min-height: 100%;
             padding-bottom: $footer-height + $wrapper-b-spacing; // 內容與footer間距
+        }
+    }
+    @if $isAdmin {
+        .footFixed & {
+            padding-bottom: 50px;
         }
     }
 }
@@ -43,14 +45,16 @@
 // ----------------------------------------------------------------------
 @if $isAdmin {
     #header {
-        @extend %container-fluid;
+        // @extend %container-fluid;
         @if $header-bg     { background: $header-bg; }
         @if $header-height { height: $header-height; }
         z-index: z(header);
 
         // 本次專案
+        @include clearfix;
         @include fixed(top 0 left 0 right 0);
-        padding-right: $gutter;
+        min-width: $min-width;
+        // padding-right: $gutter;
         padding-left: $gutter;
     }
 }
@@ -134,8 +138,8 @@
             border-bottom: 1px solid darken($sidebar-theme-color, 4);
 
             &::before {
-                @extend .mr-8;
-                color: lighten(color('danger'),15);
+                @extend .mr-8, .text-danger;
+                // color: lighten(color('danger'), 15);
             }
         }
 
@@ -146,10 +150,11 @@
             @extend .py-8, .pr-8, .pl-16;
 
             position: relative;
-            color: darken(color("muted"),50);
-            background: lighten($sidebar-theme-color,2.6);
+            color: color("dark");
+            background: lighten($sidebar-theme-color, 2.6);
             border-bottom: 1px solid darken($sidebar-theme-color, 3);
 
+            // icon
             &::before {
                 color: darken(color("muted"), 10);
                 margin-right: 8px;
@@ -174,7 +179,7 @@
 
             &.in {
                 display: block;
-                border-right: 3px solid color();
+                border-right: 3px solid color("danger");
             }
 
             a {
@@ -182,7 +187,7 @@
                 padding: 7px 7px 7px $spacer*2.25;
                 color: darken(color("muted"),15);
                 font-size: em(15);
-                border-bottom: 1px dotted darken($sidebar-theme-color, 3);
+                border-bottom: 1px dotted darken($sidebar-theme-color, 4);
 
                 &:last-child {
                     border-bottom-style: solid;
@@ -194,20 +199,20 @@
                 // 選單左直虛線
                 &::before {
                     @include size(1px,100%);
-                    border-left: 1px dotted lighten(color(),20%);
+                    border-left: 1px dotted darken($sidebar-theme-color, 4);
                     top: 0; left: 18px;
                     z-index: z(sidebar) + 2;
                 }
                 // 選單左橫虛線
                 &::after {
                     @include size(7px, 1px);
-                    border-bottom: 1px dotted lighten(color(),20%);
+                    border-bottom: 1px dotted darken($sidebar-theme-color, 4);
                     top: 50%; left: 19px;
                 }
 
                 &:hover, &:active, &:focus, &.active {
                     @extend .text-primary;
-                    background: #F2F7FA;
+                    background: lighten(color('warning'), 39);
 
                     // 由左橫虛線變成三角形
                     &::after {

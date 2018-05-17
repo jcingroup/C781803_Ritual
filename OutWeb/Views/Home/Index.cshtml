@@ -1,62 +1,47 @@
-﻿@using OutWeb.Models.FrontEnd.NewsFrontEndModels
-@model List<NewsFrontEndDataModel>
-
-@{
-    ViewBag.Title = "首頁";
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "WELCOME";
+    ViewBag.IsFirstPage = true;
 }
 
-@section css {
-}
-@section scripts {
-}
-
-<section id="banner" class="swiper-container">
-    <main class="swiper-wrapper">
-        <div class="swiper-slide" style="background-image: url(/Content/images/index/banner.jpg);"></div>
-        <div class="swiper-slide" style="background-image: url(/Content/images/index/banner2.jpg);"></div>
-        <div class="swiper-slide" style="background-image: url(/Content/images/index/banner3.jpg);"></div>
-    </main>
-    <div class="swiper-pager"></div>
-    <article class="card">
-        <header class="underline font-sp b">
-            <small class="block text-right font-xxl mb-8">懷特博</small>
-            White Board
-        </header>
-        <main class="b">
-            一向秉持最專業及誠信負責的態度來<br>
-            服務每一位客戶，<br>
-            從原料製程、成品製程、產品製程，<br>
-            皆有專人監督，品質有保障，<br>
-            直接銷售服務更迅速
-        </main>
-        <footer class="font-sp font-tiny">White Board Industrial LTD., Co.</footer>
-    </article>
+<section class="s-about wrap">
+    <h3 class="title">關於儀禮科技</h3>
+    <p>儀禮科技致力於提升服務水準，注入溫馨、體貼與感性的理念，讓人生最後一場謝幕以莊嚴善待死亡，以消費者的立場為出發點，設計規劃出溫馨且莊嚴的生命告別儀式。</p>
+    <p><a href="~/AboutUs" class="btn">公司簡介</a></p>
 </section>
 
-<section class="news wrap">
-    <h3 class="title"><span class="underline">消息報報</span></h3>
+<section class="s-plan">
+    <div class="wrap">
+        <h3 class="title">平安，讓您心安</h3>
+        <p>本公司以消費者立場出發，設計出全台灣最優質且實惠的『<strong class="text-secondary">平安生前契約</strong>』。以儲蓄的概念達成臨終時的保障，不額外造成消費大眾的經濟負擔，提供完善、莊嚴的生命禮儀服務。</p>
+        <p>節省不必要花費，規劃簡明、莊嚴、完善之告別禮儀，避免親人在悲慟之餘忍受繁雜禮儀事務的二次傷害。</p>
+        <p><a href="~/Plan" class="btn">了解詳情</a></p>
+    </div>
+    <aside>
+        <img src="~/Content/images/Index/pic1.jpg" alt="">
+    </aside>
+</section>
 
-    @* 套程式 - 最多3則 *@
-    @* 圖片滿版時 class="pic-full" 寬度不超過450，高度不超過265 *@
-
-    @foreach (var data in Model)
-    {
-        string imgUrl = data.ImagesData == null ?string.Empty: data.ImagesData.FileUrl;
-
-        <figure class="newslist">
-            <div class="cut">
-                <img src="~/@imgUrl" alt="最新消息列表圖">
-            </div>
-            <a href="@Url.Content("~/News/Content?ID="+data.ID)"></a>
-            <figcaption>
-                <h4>@data.Title</h4>
-                <a href="@Url.Content("~/News/Content?ID="+data.ID)" class="more">more</a>
-                <small class="date">@data.PublishDateStr</small>
-            </figcaption>
-        </figure>
-    }
-
-    <footer class="text-right center">
-        <a href="~/News" class="news-more font-sp">more <i class="align-middle font-xxl">&#9656;</i></a>
-    </footer>
+<section class="s-service wrap">
+    <h3 class="sr-only">服務項目/公開資訊/全台服務團隊</h3>
+    <div class="row row-x0">
+        <article class="col-sm-4">
+            <a class="thumbnail" href="~/Service">
+                <img src="~/Content/images/Index/pic2.jpg" alt="">
+            </a>
+            <h4>服務項目</h4>
+        </article>
+        <article class="col-sm-4">
+            <a class="thumbnail" href="~/Public">
+                <img src="~/Content/images/Index/pic3.jpg" alt="">
+            </a>
+            <h4>公開資訊</h4>
+        </article>
+        <article class="col-sm-4">
+            <a class="thumbnail" href="~/Team">
+                <img src="~/Content/images/Index/pic4.jpg" alt="">
+            </a>
+            <h4>全台服務團隊</h4>
+        </article>
+    </div>
 </section>

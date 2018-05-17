@@ -86,13 +86,11 @@
 // ref: core/variables.scss $states: true
 @if $states {
     @each $type, $color in $colors {
-        .text-#{$type} { color: $color; }
-        .bg-#{$type}   { background: $color; }
+        .text-#{$type} { color: $color !important; }
+        .bg-#{$type}   { background: $color !important; }
         .hover-#{$type} {
             color: $color;
             &:hover, &:active { color: darken($color, 15); }
-
-
         }
     }
     [class*="hover-"] {
@@ -114,7 +112,8 @@
 // 本次專案才用到的樣式
 // ------------------------------------------------------------
 .underline {
-    border-bottom: 1px solid lighten(color("primary"),30);
+    // border-bottom: 1px solid lighten(color("primary"), 30);
+    border-bottom: 1px solid darken(color("light"), 10);
 }
 
 .title {
@@ -122,6 +121,11 @@
     line-height: 2;
 
     small {
-        @extend .ml-8, .text-muted;
+        @extend .ml-8;
+        color: darken(color('muted'), 12);
     }
+}
+
+.word-keep {
+    word-break: keep-all;
 }

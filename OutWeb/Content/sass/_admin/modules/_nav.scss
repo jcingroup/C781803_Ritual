@@ -25,10 +25,11 @@
         display: block;
         float: left;
         border-left: 1px solid #fff;
+        cursor: pointer;
 
-        &:last-child {
-            border-right: 1px solid #fff;
-        }
+        // &:last-child {
+        //     border-right: 1px solid #fff;
+        // }
 
         @each $class, $color in $nav-group {
             &.#{$class} {

@@ -3,60 +3,29 @@
 // == 主選單
 // ------------------------------------------------------------
 
-// body
-.js-mobile-body {
-    overflow-y: hidden;
-}
-
 #menu {
     z-index: z(menu);
 
-    // 本次專案
-    float: right;
-    margin-top: 26px;
-
-    .scrolled & {
-        margin-top: 0;
-    }
-
-    #{$nav-root} {
-        @extend .text-primary;
-
+    > a {
         display: inline-block;
-        vertical-align: middle;
+        height: 100%;
         position: relative;
-        letter-spacing: 1px;
+        padding: 0 18px;
+        letter-spacing: 0.05em;
+        line-height: 70px;
+        color: #fff;
+        @include rem('font-size', 20px);
+        font-weight: bold;
+        text-shadow: 0 0 3px rgba(#000, 0.5);
 
-        @include rem('font-size', 18px);
+        &:hover, &:active, &.current {
+            background: rgba($brand-primary, 0.8);
+        }
 
-        &:not(.fb-link) {
-            @extend .mx-12, .py-16;
-
-            @include el(after) {
-                @include center(x);
-                @include transition(width .8s, opacity .5s);
-
-                bottom: 0;
-                width: 0;
-                opacity: 0;
-
-                @if $isIndex {
-                    border-top: 3px solid #fff;
-
-                    .scrolled & {
-                        border-top-color: $brand-secondary;
-                    }
-                }
-                @if $isPage {
-                    border-top: 3px solid $brand-secondary;
-                }
-            }
-            &:hover, &:active, &.current {
-                &::after {
-                    opacity: 1;
-                    width: 100%;
-                }
-            }
+        @if $isIndex {
+            padding: 0 35px;
+            line-height: 60px;
+            text-shadow: 0 0 3px rgba(#000, 0.7);
         }
     }
 
@@ -118,75 +87,183 @@
         }
     }
 
-    // 行動版面
-    // @include mq-max(break($mobile-menu-bk,-1)) {
-    //     z-index: z(overlay);
+    // 本次專案
+    margin-bottom: $spacer*3;
 
-    //     @include fixed(bottom 0 top $header-height);
-    //     @if $mobile-menu-bg    { background: $mobile-menu-bg; }
-    //     @if $mobile-transition { @include transition($mobile-transition); }
-    //     overflow-y: auto;
-    //     width: $mobile-menu-width;
-    //     left: -$mobile-menu-width;
-    //     text-align: left;
+    @include mq($mobile-menu-bk) {
+        float: right;
 
-    //     .js-mobile-body & {
-    //         left: 0;
-    //     }
-    //     .scrolled & {
-    //         top: $header-mobile-height;
-    //     }
-    // }
-}
+        .mobile-show { display: none; }
 
-svg {
-    display: block;
-    height: 100%;
-    width: 100%;
-}
+        @if $isIndex {
+            height: 60px;
+            float: none;
+            background: rgba($brand-primary, 0.8);
+            box-shadow: -5px 5px 10px rgba(#000, 0.2);
+            border-radius: 30px;
+        }
+    }
 
-.fb-link {
-    $size: 35px;
+    @include mq-max(break(wider,-1)) {
+        > a {
+            padding: 0 15px;
 
-    @extend .circle, .ml-12, .bg-secondary, .p-4;
+            @if $isIndex {
+                padding: 0 25px;
+            }
+        }
+    }
 
-    // background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 262 266.895'><path id='path3087' fill='%23fff' d='M182.409,262.307v-99.803h33.499l5.016-38.895h-38.515V98.777c0-11.261,3.127-18.935,19.275-18.935 l20.596-0.009V45.045c-3.562-0.474-15.788-1.533-30.012-1.533c-29.695,0-50.025,18.126-50.025,51.413v28.684h-33.585v38.895h33.585 v99.803H182.409z'></path></svg>");
-    // background-size: cover;
-    // padding-bottom: $size;
+    @include mq-max(break(wide,-1)) {
+        margin-bottom: $spacer*2;
 
-    width: $size;
-    height: $size;
+        > a {
+            padding: 0 12px;
+            line-height: 60px;
+            @include rem('font-size', 17px);
 
-    color: #fff;
-    fill: #fff;
+            @if $isIndex {
+                padding: 0 18px;
+            }
+        }
+    }
 
-    &:hover {
-        background-color: #000;
+    @include mq-max(break(desktop,-1)) {
+        margin-bottom: 0;
+
+        > a {
+            padding: 0 10px;
+            line-height: 60px;
+            @include rem('font-size', 17px);
+
+            @if $isIndex {
+                padding: 0 18px;
+            }
+        }
+    }
+
+    // 行動版選單
+    @include mq-max(break($mobile-menu-bk,-1)) {
+        z-index: z(overlay);
+
+        @include fixed(bottom 0 top 0 left 0);
+        @if $mobile-menu-bg    { background: $mobile-menu-bg; }
+        @if $mobile-transition { @include transition($mobile-transition); }
+
+        overflow-y: auto;
+        width: $mobile-menu-width;
+        visibility: hidden;
+        opacity: 0;
+
+        // 本次專案
+        padding-top: $header-mobile-height + 12;
+
+        > a {
+            display: block;
+            width: 150px;
+            height: auto;
+            margin: 10px auto;
+            padding: $spacer*0.75 0;
+            line-height: 1;
+
+            &:hover, &:active, &.current {
+                background: none;
+                border: 1px solid;
+                border-width: 0 0 1px 0;
+            }
+        }
+
+        .js-mobile-body & {
+            opacity: 1;
+            visibility: visible;
+        }
     }
 }
 
-// == mobile-toggle
-// .mobile-toggle {
-//     display: none;
-//     background: none;
-//     position: relative;
-//     z-index: z(overlay) + 1;
-//     @include transition(.3s);
+@if $mobile-menu-has {
 
-//     // 本次專案
-//     @extend .pull-left;
-//     background: url(#{$img-path}/mobile-toggle.gif) center no-repeat;
-//     width: 45px;
-//     height: 37px;
-//     @include transform(translateY(45%));
+    // body
+    .js-mobile-body {
+        overflow-y: hidden;
+    }
 
-//     &:hover { opacity: .8; }
-//     &:active, &.active {
-//         background-image: url(#{$img-path}/mobile-close.gif);
-//     }
+    // == mobile-toggle
+    .mobile-toggle {
+        display: none;
+        background: none;
+        position: relative;
+        cursor: pointer;
+        z-index: z(overlay) + 1;
 
-//     @include mq-max(break($mobile-menu-bk,-1)) {
-//         display: block;
-//     }
-// }
+        @include transition(.3s);
+
+        @include mq-max(break($mobile-menu-bk,-1)) {
+            display: block;
+        }
+
+        // 本次專案
+        @extend .pull-left, .text-white;
+
+        height: $header-mobile-height;
+        margin: 0 $spacer*0.75 $spacer*1.75 0;
+        margin-top: 5px;
+        padding: 0 6px;
+        font-size: em(20px);
+        border: 1px solid;
+
+        &:focus { outline: none; }
+        &:active, &.active {
+            background: rgba(#000, 0.3);
+        }
+
+        @if $isIndex {
+            margin: 0;
+            padding: 0 12px;
+            position: absolute;
+            left: 50%;
+            top: 10px;
+            transform: translateX(-350px);
+            background: rgba($brand-primary, 0.8);
+            border: 0;
+            border-radius: 18px;
+
+            @include el(after, inline-block, "MENU") {
+                margin-left: 5px;
+            }
+        }
+    }
+
+    @include mq-max(break(tablet,-1)) {
+        .mobile-toggle {
+            @if $isIndex {
+                top: 8px;
+                transform: translateX(-310px);
+            }
+        }
+    }
+
+    @include mq-max(break(phone-plus,-1)) {
+        .mobile-toggle {
+            height: 30px;
+            margin-bottom: $spacer*1.5;
+            font-size: em(16px);
+
+            @if $isIndex {
+                top: 8px;
+                transform: translateX(-260px);
+                border-radius: 15px;
+            }
+        }
+    }
+
+    @include mq-max(break(phone,-1)) {
+        .mobile-toggle {
+
+            @if $isIndex {
+                top: 6px;
+                transform: translateX(-175px);
+            }
+        }
+    }
+}
 

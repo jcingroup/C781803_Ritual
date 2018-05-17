@@ -25,6 +25,7 @@
 
 .modal-close {
     background: none;
+    border: none;
     color: $modal-close-color;
     font-size: em($modal-close-size);
     line-height: 1;
@@ -40,7 +41,11 @@
         @include fixed(top 1% right 1%);
     }
     .modal-content & {
-        @include absolute(top -40px right -50px);
+        @include absolute(top -40px right 0);
+
+        @include mq(desktop) {
+            right: -50px;
+        }
     }
 }
 

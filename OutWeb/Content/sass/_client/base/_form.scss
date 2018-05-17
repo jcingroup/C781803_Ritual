@@ -46,9 +46,9 @@
     }
 
     // 移除預設樣式
-    appearance: none; // Removes awkward default styles on some inputs for iOS
-    -webkit-appearance: none;
     -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none; // Removes awkward default styles on some inputs for iOS
 
     // Unstyle the caret on `<select>`s in IE10+.
     &::-ms-expand {
@@ -72,7 +72,7 @@ select {
     background-image: str-replace(url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 14" width="32" height="14"><path fill="#{$select-caret-color}" d="M9.37727 3.625l5.08154 6.93523L19.54036 3.625"/></svg>'), '#', '%23');
     background-position: right center;
     background-repeat: no-repeat;
-    padding-right: 3.0rem !important;
+    padding-right: rem(32) !important;
 
     &:focus {
         background-image: str-replace(url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 14" width="32" height="14"><path fill="#{$select-caret-checked-color}" d="M9.37727 3.625l5.08154 6.93523L19.54036 3.625"/></svg>'), '#', '%23');
@@ -92,7 +92,11 @@ input[type='radio'] {
 .form-label {
     display: inline-block;
     font-weight: normal;
-    line-height: $input-height;
+    // line-height: $input-height;
+
+    line-height: $form-label-line-height;
+    padding-top: ($input-height - $form-label-line-height)/2;
+    padding-bottom: ($input-height - $form-label-line-height)/2;
 }
 
 legend { display: block; }

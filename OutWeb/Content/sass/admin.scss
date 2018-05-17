@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
-$enable-RWD:     false;
-$isAdmin:        true;
+$enable-RWD:        false;
+$isAdmin:           true;
 
-$blue-grey:      #607D8B;
+$blue-grey:         #607D8B;
 
 
 // import
@@ -40,6 +40,7 @@ $blue-grey:      #607D8B;
 @import "_admin/modules/alerts";
 @import "_admin/modules/loader";
 @import "_admin/modules/modal";
+@import "_admin/modules/tab";
 
 @import "_admin/util"; // 建議放置在最後一個
 
@@ -48,7 +49,7 @@ $blue-grey:      #607D8B;
 // ------------------------------------------------------------
 .breadcrumb {
     @extend %list-inline, .font-md, .text-secondary;
-    z-index: z(main) + 1;
+    z-index: z(main) + 2;
 
     background: lighten($sidebar-theme-color, 1.5);
     border-bottom: 1px solid $sidebar-theme-color;
@@ -97,7 +98,8 @@ $blue-grey:      #607D8B;
         font-size: em(19);
     }
     th {
-        @extend .bg-secondary, .text-white;
+        @extend .text-white;
+        background-color: darken(color('secondary'), 18);
         border-bottom: 2px solid $table-border-color;
         font-weight: normal;
         line-height: 1.4;
@@ -198,7 +200,7 @@ $blue-grey:      #607D8B;
         }
     }
 }
-// 按鈕bar
+// == 按鈕bar
 .submit-bar {
     @extend .py-12;
     border-top: 2px solid darken($table-border-color,3.5);
@@ -209,8 +211,54 @@ $blue-grey:      #607D8B;
         &:not(:last-child) { @extend .mr-8; }
     }
 }
+.fixed-bottom {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: $sidebar-width;
+}
 
-// 已上傳檔案樣式
+// == 檔案上傳
+.input-file {
+    @include clearfix;
+
+    &:not(:empty) {
+        @extend .p-2;
+        border: $input-border;
+        cursor: pointer;
+    }
+
+    &:hover, &:active {
+        border-color: $input-focus-color;
+    }
+
+    // components版的
+    div:nth-child(2) {
+        z-index: 2;
+        float: right;
+        position: relative;
+        margin-top: -24px;
+    }
+
+    // input {
+    //     @extend .font-sm, .m-2;
+    //     vertical-align: middle;
+    //     width: 100%;
+    //     max-height: 26px;
+
+    //     &:focus {
+    //         outline: 0;
+    //     }
+    // }
+    // .btn {
+    //     float: right;
+    //     margin-top: -29px;
+    //     position: relative;
+    //     z-index: 1;
+    // }
+}
+
+// 已上傳檔案
 .uploaded {
     @extend .pull-left, .font-tiny, .mr-4, .mt-8;
 
@@ -232,4 +280,9 @@ $blue-grey:      #607D8B;
         opacity: .7;
         text-shadow: 1px 1px 0 #fff;
     }
+}
+
+// == 日期元件
+.react-datepicker-popper {
+    z-index: 99;
 }

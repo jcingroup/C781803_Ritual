@@ -9,28 +9,40 @@
 
     @include clearfix;
 
-    & + & { margin-top: $fields-spacer; }
+    & + & { margin-top: rem($fields-spacer); }
 
     // label
     dt {
-        // @extend .form-label, .text-right;
-        @extend .pl-0;
+        @extend .form-label, .text-right, .pl-0;
         font-weight: normal;
     }
     dd {
         @extend .pr-0;
     }
 
-    input, select { vertical-align: middle; }
+    input, select {
+        vertical-align: middle;
+        min-width: 136px;
 
-    .btn {
-        // height: $input-height;
-        border-radius: 4px;
-        border: 1px solid darken($warning, 15);
-        @extend .px-48, .text-primary;
-
-        &:hover {
-            background-color: darken($warning, 8) !important;
+        @include mq-max(break(desktop, -1)) {
+            margin-bottom: 8px;
         }
+        @include mq-max(break(phone-plus, -1)) {
+            width: 100%;
+        }
+    }
+    .btn {
+        @extend .px-48;
+
+        @include mq-max(break(desktop, -1)) {
+            margin-bottom: 8px;
+        }
+        @include mq-max(break(phone-plus, -1)) {
+            width: 100%;
+        }
+    }
+    sup {
+        @extend .text-danger;
+        cursor: help;
     }
 }

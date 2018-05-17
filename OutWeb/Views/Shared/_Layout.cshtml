@@ -1,135 +1,144 @@
 ﻿<!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-tw">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>@ViewBag.Title - WTB 懷特博 WhiteBoard</title>
-    <link rel="stylesheet" href="~/Content/css/vendor/open-iconic.css">
+    <title>@ViewBag.Title - 儀禮科技</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i" rel="stylesheet">
     <link rel="stylesheet" href="~/Content/css/grid.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
-    <link rel="stylesheet" href="~/Content/css/vendor/swiper.min.css">
-@if (ViewBag.IsFirstPage)
-{
-    <link rel="stylesheet" href="~/Content/css/index.css">
-}
-else
-{
-    <link rel="stylesheet" href="~/Content/css/page.css">
-}
+    @if (ViewBag.IsFirstPage)
+    {
+        <link rel="stylesheet" href="~/Content/css/index.css">
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/Content/css/page.css">
+    }
     @RenderSection("css", false)
 </head>
 <body class="@ViewBag.BodyClass">
     <div id="wrapper">
         <header id="header">
             <div class="wrap">
-                <h1 class="logo" onclick="location.href='@Url.Content("~/Home")'" title="回首頁" tabindex="-1">
-                    WTB 懷特博 WhiteBoard
+                <button class="mobile-toggle"><i class="fas fa-bars fa-fw"></i></button>
+                <h1 class="logo" tabindex="-1">
+                    <a href="~/Home" title="回首頁">儀禮科技 Ritual Technology</a>
                 </h1>
                 <nav id="menu">
-                    <a href="~/Home/AboutUs" class="@(ViewBag.BodyClass == "AboutUs" ? "current" : "")">關於懷特博WTB</a>
-                    <a href="~/Products" class="@(ViewBag.BodyClass == "Products" ? "current" : "")">產品介紹</a>
-                    <a href="~/News" class="@(ViewBag.BodyClass == "News" ? "current" : "")">消息報報</a>
-                    <a href="~/Works" class="@(ViewBag.BodyClass == "Works" ? "current" : "")">案例分享</a>
-                    <a href="~/Home/ContactUs" class="@(ViewBag.BodyClass == "ContactUs" ? "current" : "")">聯絡我們</a>
-                    <a href="~/Agents" class="@(ViewBag.BodyClass == "Agents" ? "current" : "")">代理商</a>
-                    <a href="https://www.facebook.com/whiteboardcoltd" class="fb-link" title="WTB懷特博 Facebook粉絲團" target="_blank">
-                        <svg viewBox="0 0 512 512">
-                            <path d="M211.9 197.4h-36.7v59.9h36.7V433.1h70.5V256.5h49.2l5.2-59.1h-54.4c0 0 0-22.1 0-33.7 0-13.9 2.8-19.5 16.3-19.5 10.9 0 38.2 0 38.2 0V82.9c0 0-40.2 0-48.8 0 -52.5 0-76.1 23.1-76.1 67.3C211.9 188.8 211.9 197.4 211.9 197.4z"/>
-                        </svg>
-                    </a>
+                    <a href="~/AboutUs" class='@(ViewBag.BodyClass == "AboutUs" ? "current" : "")'>公司簡介</a>
+                    <a href="~/Service" class='@(ViewBag.BodyClass == "Service" ? "current" : "")'>服務項目</a>
+                    <a href="~/Plan" class='@(ViewBag.BodyClass == "Plan" ? "current" : "")'>生前契約</a>
+                    <a href="~/Trust" class='@(ViewBag.BodyClass == "Trust" ? "current" : "")'>合法信託查詢</a>
+                    <a href="~/ContactUs" class='@(ViewBag.BodyClass == "ContactUs" ? "current" : "")'>聯絡我們</a>
+                    <a href="~/Public" class='@(ViewBag.BodyClass == "Public" ? "current" : "")'>公開資訊</a>
+                    <a href="~/Team" class='@(ViewBag.BodyClass == "Team" ? "current" : "")'>全台服務團隊</a>
                 </nav>
+                @if (ViewBag.IsFirstPage)
+                {
+                    <h2 class="sr-only">專業 完善 親切 真誠 服務 用心 圓滿 關懷</h2>
+                }
+                else
+                {
+                    <h2>
+                        @ViewBag.Title
+                        <span>@ViewBag.TitleEn</span>
+                    </h2>
+                }
             </div>
         </header>
-
-        @if (!ViewBag.IsFirstPage) {
-            <section id="banner" class="swiper-container">
-                <main class="swiper-wrapper">
-                    <div class="swiper-slide" style="background-image: url(/Content/images/banner.jpg);"></div>
-                    <div class="swiper-slide" style="background-image: url(/Content/images/banner2.jpg);"></div>
-                    <div class="swiper-slide" style="background-image: url(/Content/images/banner3.jpg);"></div>
-                </main>
-            </section>
+        @if (ViewBag.IsFirstPage)
+        {
+            @RenderBody()
         }
-
-        @RenderBody()
-
+        else
+        {
+            <div id="main" class="wrap">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="~/Home"><i class="fas fa-home"></i> HOME</a>
+                    </li>
+                    @RenderSection("breadcrumb", false)
+                    <li>@ViewBag.Breadcrumb</li>
+                </ul>
+                <div id="content">
+                    @RenderBody()
+                </div><!-- content //-->
+            </div><!-- main //-->
+        }
     </div><!-- wrapper //-->
-
-    <a href="#header" class="goTop oi" data-glyph="chevron-top" title="TOP"></a>
-
     <footer id="footer">
-        <div class="wrap">
-            <div class="copyright pull-left">
-                <img class="mr-8" src="~/Content/images/logo-s.gif" alt="logo">
-                懷特博實業有限公司 &copy; 2017 White Board
-            </div>
-            <nav class="foot-nav pull-right">
-                <a href="~/Home/AboutUs" class="@(ViewBag.BodyClass == "AboutUs" ? "current" : "")">關於懷特博WTB</a>
-                <a href="~/Products" class="@(ViewBag.BodyClass == "Products" ? "current" : "")">產品介紹</a>
-                <a href="~/News" class="@(ViewBag.BodyClass == "News" ? "current" : "")">消息報報</a>
-                <a href="~/Works" class="@(ViewBag.BodyClass == "Works" ? "current" : "")">案例分享</a>
-                <a href="~/Home/ContactUs" class="@(ViewBag.BodyClass == "ContactUs" ? "current" : "")">聯絡我們</a>
-                <a href="~/Agents" class="@(ViewBag.BodyClass == "Agents" ? "current" : "")">代理商</a>
-            </nav>
-        </div>
+        <a href="#header" class="goTop" title="TOP">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <ul class="list-inline contact">
+            <li><i class="fas fa-map-marker-alt"></i> 320 桃園市中壢區民權路四段438號5F</li>
+            <li><i class="fas fa-phone"></i> (03) 287-2855</li>
+            <li><i class="fas fa-fax"></i> (03) 287-2811</li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:1zlife.corp@gmail.com">1zlife.corp@gmail.com</a></li>
+        </ul>
+        <p class="copyright">
+            <span class="hidden-xxs">Copyright &copy; 2018 Ritual Technology Co., Ltd. All Rights Reserved.</span>
+            <span class="hidden-xs">&copy; 2018 Ritual Technology Co., Ltd.</span>
+        </p>
     </footer><!-- footer //-->
 
-    <script src="//code.jquery.com/jquery-latest.min.js"></script>
-    <script src="~/Content/js/swiper.min.js"></script>
+    <script src="~/Scripts/cdn/jquery.min.js"></script>
     <script src="~/Content/js/jquery.waypoints.min.js"></script>
+    <script src="~/Content/js/fa-solid.min.js"></script>
+    <script src="~/Content/js/fontawesome.min.js"></script>
     <script>
-        // slider 輪播效果
-        var swiperBanner = new Swiper(document.getElementById('banner'), {
-            pagination: '.swiper-pager',
-            paginationClickable: true,
-            autoplay: 5000,
-            autoplayDisableOnInteraction: false,
-            speed: 1000,
-            // grabCursor: true,
-            effect: 'fade'
-        });
-
-        // 卷軸卷動效果
-        $('body').waypoint(function(direction) {
-            if( direction === 'down' ) {
-                $('body').addClass('scrolled');
+        var gb_approot = '@Url.Content("~")';
+        $('body').waypoint(function (direction) {
+            if (direction === 'down') {
+                // $('body').addClass('scrolled');
                 $('.goTop').fadeIn();
             }
-            else if( direction === 'up' ){
-                $('body').removeClass('scrolled');
+            else if (direction === 'up') {
+                // $('body').removeClass('scrolled');
                 $('.goTop').fadeOut();
             }
-        }, { offset: -1 } );
+        }, { offset: '-1px' });
 
         // 點選後跳到 href 指向的位置
-        $('.scroll').click(function () {
-            var scrollToAnchor = $(this).attr('href');
-            $('html, body').stop(true).animate({
-                scrollTop: $(scrollToAnchor).offset().top - 40
-            }, 750);
-            return false;
-        });
+        // $('.scroll').click(function () {
+        //     var scrollToAnchor = $(this).attr('href');
+        //     $('html, body').stop(true).animate({
+        //         scrollTop: $(scrollToAnchor).offset().top - 40
+        //     }, 750);
+        //     return false;
+        // });
         $('.goTop').click(function () {
             $('body, html').stop(true).animate({ scrollTop: 0 }, 800);
             return false;
         });
 
-        // dropdown
-        var $dropbtn = $(".dropdown-toggle"),
-            dropcontent = ".dropdown-content";
-        $dropbtn.click(function(event){
-            event.stopPropagation();
-            $(this).next(dropcontent).slideToggle("300");
-        });
-        $(window).click(function() {
-            //Hide the menus if visible
-            $(dropcontent).slideUp("500")
+        // 行動裝置的主選單
+        trigger = $('.mobile-toggle');
+        trigger.click(function () {
+            $(this).toggleClass('active');
+            $('body').toggleClass('js-mobile-body');
+
+            if ($(this).hasClass('active')) {
+                $(this).find('[class*="fa-"]').attr('data-icon','times');
+            }
+            else {
+                $(this).find('[class*="fa-"]').attr('data-icon','bars');
+            }
+            // 點 menu 空白處關閉
+            if ($('body').hasClass('js-mobile-body')) {
+                $("#menu").click(function () {
+                    $("body").removeClass("js-mobile-body");
+                    $(trigger).removeClass('active').find('[class*="fa-"]').attr('data-icon','bars');
+                });
+                $("#menu a").click(function (e) {
+                    e.stopPropagation();
+                });
+            }
         });
     </script>
-
     @RenderSection("scripts", required: false)
-
 </body>
 </html>

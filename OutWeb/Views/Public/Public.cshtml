@@ -1,0 +1,127 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.BodyClass = "Public";
+    ViewBag.Title = "公開資訊";
+    ViewBag.TitleEn = "Public Information";
+    ViewBag.Breadcrumb = ViewBag.Title;
+}
+
+@section css {
+    <link rel="stylesheet" href="~/Content/js/fancybox/jquery.fancybox.min.css">
+}
+
+@section scripts {
+    <script src="~/Content/js/fancybox/jquery.fancybox.min.js"></script>
+}
+
+<h3 class="title">
+    @ViewBag.Title
+    <span>@ViewBag.TitleEn</span>
+</h3>
+
+<section class="section">
+    <h4 class="title">
+        <em>1</em>
+        會計師簽證財務報表
+    </h4>
+    <ol class="gallery list-inline">
+        <li>
+            <a href="~/Content/images/Public/Account-104-105.pdf" target="new">
+                <i class="fas fa-search-plus"></i>
+                <figure>
+                    <img class="thumbnail" src="~/Content/images/Public/Account-104-105_s.jpg" alt="">
+                    <figcaption>104-105年會計查核報告書</figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="~/Content/images/Public/Account-104.pdf" target="new">
+                <i class="fas fa-search-plus"></i>
+                <figure>
+                    <img class="thumbnail" src="~/Content/images/Public/Account-104_s.jpg" alt="">
+                    <figcaption>104年會計查核報告書</figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="~/Content/images/Public/Account-102-103.pdf" target="new">
+                <i class="fas fa-search-plus"></i>
+                <figure>
+                    <img class="thumbnail" src="~/Content/images/Public/Account-102-103_s.jpg" alt="">
+                    <figcaption>102-103年會計查核報告書</figcaption>
+                </figure>
+            </a>
+        </li>
+    </ol>
+</section>
+
+<section class="section">
+    <h4 class="title">
+        <em>2</em>
+        銀行信託合約書
+    </h4>
+    <ol class="gallery list-inline">
+        <li>
+            <a href="~/Content/images/Public/Trust-106.pdf" target="new">
+                <i class="fas fa-search-plus"></i>
+                <figure>
+                    <img class="thumbnail" src="~/Content/images/Public/Trust-106_s.jpg" alt="">
+                    <figcaption>106年度信託結算報告書</figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a data-fancybox href="~/Content/images/Public/Trust-12-106.jpg">
+                <i class="fas fa-search-plus"></i>
+                <figure>
+                    <img class="thumbnail" src="~/Content/images/Public/Trust-12-106_s.jpg" alt="">
+                    <figcaption>106年 12月</figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a data-fancybox href="~/Content/images/Public/Trust-11-106.jpg">
+                <i class="fas fa-search-plus"></i>
+                <figure>
+                    <img class="thumbnail" src="~/Content/images/Public/Trust-11-106_s.jpg" alt="">
+                    <figcaption>106年 11月</figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a data-fancybox href="~/Content/images/Public/Trust-10-106.jpg">
+                <i class="fas fa-search-plus"></i>
+                <figure>
+                    <img class="thumbnail" src="~/Content/images/Public/Trust-10-106_s.jpg" alt="">
+                    <figcaption>106年 10月</figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="~/Content/images/Public/Trust-105.pdf" target="new">
+                <i class="fas fa-search-plus"></i>
+                <figure>
+                    <img class="thumbnail" src="~/Content/images/Public/Trust-105_s.jpg" alt="">
+                    <figcaption>105年度信託結算報告書</figcaption>
+                </figure>
+            </a>
+        </li>
+    </ol>
+</section>
+
+<section class="section">
+    <h4 class="title">
+        <em>3</em>
+        生前契約
+    </h4>
+    <ol class="gallery list-inline">
+        <li>
+            <a href="~/Content/images/Plan/Ritual_FuneralPlanning.pdf" target="new">
+                <i class="fas fa-search-plus"></i>
+                <figure>
+                    <img class="thumbnail" src="~/Content/images/Public/Plan_s.jpg" alt="">
+                </figure>
+            </a>
+        </li>
+    </ol>
+</section>

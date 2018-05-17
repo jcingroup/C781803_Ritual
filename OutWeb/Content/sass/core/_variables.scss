@@ -16,7 +16,7 @@ $isAdmin:                 false !default;     // 後台系統用
 // == RWD-break
 // ----------------------------------------------------------------------
 $mq-breakpoints: (
-    mobile:           375px,  // 380px,
+    mobile:           360px,  // 380px,
     phone:            568px,  // 480px,
     phone-plus:       667px,  // 640px,
     tablet:           768px,  // 768px,
@@ -29,12 +29,13 @@ $mq-breakpoints: (
 // == grid
 // ----------------------------------------------------------------------
 $grid-columns:            12 !default;     // grid 格數
-$grid-gutter-width:       16px !default;   // grid 間距
+$grid-gutter-width:       15px !default;   // grid 間距
 
 $grid-breakpoints: (
-    xs: phone,
-    sm: tablet,
-    md: desktop,
-    lg: wide,
-    xl: wider
+    xxs: mobile,
+    xs:  phone,
+    sm:  tablet,
+    md:  desktop,
+    lg:  wide,
+    xl:  wider
 ) !default;

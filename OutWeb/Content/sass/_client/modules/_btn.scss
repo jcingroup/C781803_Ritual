@@ -26,8 +26,8 @@
     letter-spacing: 1px;
 
     &:hover, &:active, &:focus, &.active {
-        @if $btn-hover-bg     { background: $btn-hover-bg }
-        @if $btn-hover-color  { color: $btn-hover-color }
+        @if $btn-hover-bg     { background: $btn-hover-bg; }
+        @if $btn-hover-color  { color: $btn-hover-color; }
     }
 
     &.disabled, &[disabled], fieldset[disabled] & {
@@ -57,6 +57,16 @@
                     background: lighten($color,8);
                 }
             }
+        }
+    }
+    &.warning {
+        @extend .text-primary;
+
+        border-radius: 4px;
+        border: 1px solid darken($warning, 15);
+
+        &:hover {
+            background-color: darken($warning, 8);
         }
     }
     &.white {

@@ -10,16 +10,16 @@
 .row {
     @include clearfix;
 
-    margin-right: -($grid-gutter-width / 2);
-    margin-left:  -($grid-gutter-width / 2);
-    // &.row-x0 {
-    //     > [class*="col-"] {
-    //         &:first-of-type { padding-left: 0; }
-    //         &:last-of-type  { padding-right: 0; }
-    //     }
-    // }
-
     & + & { margin-top: 0.5rem; }
+}
+
+.row-x0 {
+    // margin-right: ($grid-gutter-width / -2);
+    // margin-left:  ($grid-gutter-width / -2);
+    > [class*="col-"] {
+        &:first-child { padding-left: 0; }
+        &:last-child  { padding-right: 0; }
+    }
 }
 
 // helper> mixins> grid

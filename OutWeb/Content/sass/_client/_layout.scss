@@ -2,37 +2,126 @@
 
 /*      layout
 -----------------------------------------------------------------------*/
-// 置中(有最大寬度限制,非滿版才需要)
-.wrap {
-    // @include clearfix;
-    @include mq-max($max-width) {
-        @include rem('padding', 0 32px);
+body {
+    min-width: $min-width;
+
+    @include mq-max(break(wide,-1)) {
+        background-size: 1500px auto;
+    }
+    @include mq-max(break(desktop,-1)) {
+        background-size: 1150px auto;
+    }
+    @include mq-max(break(phone-plus,-1)) {
+        background-size: 900px auto;
     }
 
-    max-width: $max-width;
-    margin: 0 auto;
+    @if $isIndex {
+        background-image: url(#{$img-index}/banner.jpg);
+
+        @include mq-max(break(desktop,-1)) {
+            background-image: url(#{$img-index}/banner_sm.jpg);
+            background-size: auto;
+        }
+        @include mq-max(break(tablet,-1)) {
+            background-size: 900px auto;
+        }
+        @include mq-max(break(phone-plus,-1)) {
+            background-size: 760px auto;
+        }
+        @include mq-max(break(phone,-1)) {
+            background-image: url(#{$img-index}/banner_xs.jpg);
+            background-size: 567px auto;
+        }
+        @include mq-max(break(mobile,-1)) {
+            background-position: -110px top;
+        }
+    }
+}
+
+
+// 置中(有最大寬度限制,非滿版才需要)
+.wrap {
+    @include clearfix;
+
+    margin-left: auto;
+    margin-right: auto;
 
     @if $enable-RWD {
-        @include mq-max(phone) {
-            @include rem('padding',0 24px);
+        // make container
+        @each $breakpoint, $value in $mq-breakpoints {
+            @include mq($value) {
+                width: $value - $grid-gutter-width*2;
+
+            }
+        }
+        // min
+        @include mq-max(break(mobile,-1)) {
+            margin-left: $grid-gutter-width;
+            margin-right: $grid-gutter-width;
         }
     } @else {
-        min-width: $min-width;
+        width: $min-width;
     }
 }
 
 #wrapper {
     @if $wrapper-bg     { background: $wrapper-bg; }
     @if not $enable-RWD { min-width: $min-width; }
-    @if $lte7           { _height: 100%; }
-
+    @if $lte7 { _height: 100%; }
     min-height: 100%;
-    padding-bottom: $footer-height + $wrapper-b-spacing; // 內容與footer間距
+    padding-bottom: $wrapper-b-spacing; // 內容與footer間距
+
+    @include mq(desktop) {
+        padding-bottom: $footer-height + $wrapper-b-spacing + 34px; // 內容與footer間距
+    }
 
     // 本次專案
-    @if $isPage {
-        // padding-top: $header-height;
-        padding-top: 85px;
+    // min-width: $min-width;
+
+    // 避免背景重疊
+    @if $isIndex == false {
+        @media screen and (max-height: 500+400+34+70px) {
+            min-height: 500+400+34+70px; // bg1 + bg2 + bg2 bottom gap + bg1 & 2 gap
+        }
+        @include mq-max(break(wide,-1)) {
+            @media screen and (max-height: 390+400+34+70px) {
+                min-height: 390+400+34+70px;
+            }
+        }
+        @include mq-max(break(desktop,-1)) {
+            @media screen and (max-height: 300+400+28+30px) {
+                min-height: 300+400+28+30px;
+            }
+        }
+        @include mq-max(break(phone-plus,-1)) {
+            @media screen and (max-height: 235+400+28+70px) {
+                min-height: 235+400+28+70px;
+            }
+        }
+    }
+
+    @include mq-max(break(desktop,-1)) {
+        background-position: center bottom 28px;
+        padding-bottom: 70px + $wrapper-b-spacing + 28px;
+    }
+    @include mq-max(break(tablet,-1)) {
+        padding-bottom: 94px + $wrapper-b-spacing + 28px;
+    }
+
+    @if $isIndex {
+        background: none;
+        @include mq(desktop) {
+            padding-bottom: $footer-height;
+        }
+        @include mq-max(break(desktop, -1)) {
+            padding-bottom: 70px;
+        }
+        @include mq-max(break(tablet, -1)) {
+            padding-bottom: 94px;
+        }
+        @include mq-max(break(phone, -1)) {
+            padding-bottom: 145px;
+        }
     }
 }
 
@@ -44,61 +133,250 @@
     z-index: z(header);
 
     // 本次專案
-    @include fixed(top 0 left 0);
-    @include transition(.3s ease-in);
+    position: relative;
 
-    width: 100%;
+    @include el(before) {
+        width: 100%;
+        height: 70px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: rgba(#000,0.15);
+    }
 
     @if $isIndex {
-        .wrap {
-            position: relative;
-            height: 85px;
+        height: 700px;
+        padding-top: 575px;
 
-            @include el(after) {
-                @include absolute(bottom 0 left 32px right 8%);
+        &::before {
+            display: none;
+        }
+    }
 
-                border-bottom: 1px solid #fff;
+    .logo {
+        margin: 0;
+        position: relative;
+        z-index: 30;
 
-                @include mq(wider) {
-                    left: 0;
-                    right: 70px;
-                }
+        @if $isIndex {
+            position: absolute;
+            left: 50%;
+            top: 325px;
+            transform: translateX(-580px);
+        }
+
+        a {
+            display: block;
+            z-index: z(logo);
+    
+            @include text-pic(#{$logo-img}, nth($logo-size, 1), nth($logo-size, 2));
+    
+            // 本次專案
+            margin-top: 6px;
+            float: left;
+            background-size: contain;
+
+            @if $isIndex {
+                width: 335px;
+                height: 85px;
             }
         }
     }
 
-    .scrolled & {
-        background-color: rgba(#fff, .85);
+    h2 {
+        margin: $spacer*2 0;
+        letter-spacing: 0.05em;
+        color: #fff;
+        font-size: em(50px);
+        text-shadow: 0 0 5px rgba(#000,0.6);
+        clear: both;
 
-        &:hover {
-            background-color: #fff;
+        span {
+            display: block;
+            margin: $spacer auto;
+            padding: 7px 0;
+            font-size: em(28px, 50px);
+            font-weight: 300;
+            text-shadow: 0 0 5px rgba(#000,0.4);
+            text-transform: uppercase;
+            border: 1px solid;
+            border-width: 1px 0;
+            
+            .AboutUs &   { width: 180px; }
+            .Service &   { width: 240px; }
+            .Plan &      { width: 320px; }
+            .Trust &     { width: 120px; }
+            .ContactUs & { width: 220px; }
+            .Public &    { width: 360px; }
+            .Team &      { width: 260px; }
+        }
+    }
+
+    @include mq-max(break(wide,-1)) {
+        height: 250px;
+
+        &::before {
+            height: 60px;
         }
 
         @if $isIndex {
-            .wrap {
-                height: auto;
+            height: 560px;
+            padding-top: 450px;
+        }
 
-                &::after { display: none; }
+        .logo {
+            @if $isIndex {
+                top: 255px;
+                transform: translateX(-450px);
+            }
+
+            a {
+                width: 168px;
+                height: 52px;
+                margin-top: 4px;
+
+                @if $isIndex {
+                    width: 226px;
+                    height: 70px;
+                }
+            }
+        }
+
+        h2 {
+            margin: $spacer 0;
+            font-size: em(40px);
+
+            span {
+                .AboutUs &   { width: 150px; }
+                .Service &   { width: 200px; }
+                .Plan &      { width: 270px; }
+                .Trust &     { width: 100px; }
+                .ContactUs & { width: 180px; }
+                .Public &    { width: 290px; }
+                .Team &      { width: 215px; }
             }
         }
     }
-}
 
-.logo {
-    cursor: pointer; cursor: hand; // for ie
-    z-index: z(logo);
+    @include mq-max(break(desktop,-1)) {
+        height: 200px;
 
-    @include text-pic($logo-img, nth($logo-size,1), nth($logo-size,2));
-    @include transition(.3s);
+        &::before {
+            height: 46px;
+        }
 
-    // 本次專案
-    float: left;
-    margin-top: 20px;
+        @if $isIndex {
+            height: 390px;
+            padding-top: 0;
+        }
 
-    .scrolled & {
-        @extend .mt-8, .mb-0;
-        background-size: contain;
-        height: 44px;
+        .logo {
+            @if $isIndex {
+                top: 233px;
+                transform: translateX(-350px);
+            }
+
+            a {
+                width: 130px;
+                height: 40px;
+
+                @if $isIndex {
+                    width: 193px;
+                    height: 60px;
+                }
+            }
+        }
+
+        h2 {
+            font-size: em(34px);
+            span {
+                margin: $spacer*0.75 auto;
+                padding: 5px 0;
+                .AboutUs &   { width: 120px; }
+                .Service &   { width: 170px; }
+                .Plan &      { width: 225px; }
+                .Trust &     { width: 85px; }
+                .ContactUs & { width: 150px; }
+                .Public &    { width: 250px; }
+                .Team &      { width: 180px; }
+            }
+        }
+    }
+
+    @include mq-max(break(tablet,-1)) {
+        @if $isIndex {
+            height: 350px;
+        }
+
+        .logo {
+            @if $isIndex {
+                top: 201px;
+                transform: translateX(-310px);
+            }
+        }
+    }
+
+    @include mq-max(break(phone-plus,-1)) {
+        height: 165px;
+
+        &::before {
+            height: 40px;
+        }
+
+        @if $isIndex {
+            height: 300px;
+        }
+
+        .logo {
+            @if $isIndex {
+                top: 168px;
+                transform: translateX(-260px);
+            }
+
+            a {
+                width: 110px;
+                height: 34px;
+
+                @if $isIndex {
+                    width: 161px;
+                    height: 50px;
+                }
+            }
+        }
+
+        h2 {
+            font-size: em(28px);
+            span {
+                margin: $spacer*0.75 auto;
+                padding: 5px 0;
+                .AboutUs &   { width: 100px; }
+                .Service &   { width: 140px; }
+                .Plan &      { width: 185px; }
+                .Trust &     { width: 70px; }
+                .ContactUs & { width: 125px; }
+                .Public &    { width: 200px; }
+                .Team &      { width: 150px; }
+            }
+        }
+    }
+
+    @include mq-max(break(phone,-1)) {
+        @if $isIndex {
+            height: 288px;
+        }
+
+        .logo {
+            @if $isIndex {
+                top: 193px;
+                transform: translateX(-175px);
+            }
+
+            a {
+                @if $isIndex {
+                    height: 40px;
+                }
+            }
+        }
     }
 }
 
@@ -108,34 +386,84 @@
 #footer {
     @if $footer-bg { background: $footer-bg; }
     @if $footer-color { color: $footer-color; }
-    @if not $enable-RWD { min-width: $min-width; }
-    min-height: $footer-height;
-    margin-top: -($footer-height);
+    // min-width: $min-width;
     z-index: z(footer);
 
-    // 本次專案
-    @extend .text-left, .font-md;
-    padding-top: ($footer-height - 20)/2;
+    margin-top: -$footer-height;
+    text-align: center;
+    line-height: 1;
 
-}
+    @if $isIndex {
+        background: #4d4d4d;
+    }
 
-.foot-nav {
-    a {
-        @extend .px-8;
+    .contact {
+        margin: 0;
+        padding: 27px 0;
 
-        color: inherit;
-        line-height: 1;
+        li {
+            margin: 0 10px;
 
-        &:not(:first-child) {
-            border-left: 1px solid rgba(#000, .3);
-        }
+            a {
+                color: #fff;
+                &:hover, &:active {
+                    color: #e6d5c1;
+                }
+            }
 
-        &:hover, &:active, &.current {
-            color: $brand-secondary;
+            [class*="fa-"] {
+                margin-right: 6px;
+            }
         }
     }
-}
 
-.copyright {
-    margin-top: -2px;
+    .copyright {
+        padding: 11px 0;
+        color: #b3b3b3;
+        font-size: em(12px);
+        font-weight: 300;
+        text-transform: uppercase;
+        background: #444;
+    }
+
+    @include mq-max(break(desktop,-1)) {
+        margin-top: -70px;
+
+        .contact {
+            padding: 14px 0;
+            font-size: em(14px);
+            li {
+                margin: 0 6px;
+                [class*="fa-"] {
+                    margin-right: 3px;
+                }
+            }
+        }
+        .copyright {
+            padding: 8px 0;
+        }
+    }
+
+    @include mq-max(break(tablet,-1)) {
+        margin-top: -94.5px;
+        .contact {
+            li {
+                &:first-of-type {
+                    display: block;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+
+    @include mq-max(break(phone,-1)) {
+        margin-top: -145px;
+        .contact {
+            padding: 5px 0;
+            li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    }
 }

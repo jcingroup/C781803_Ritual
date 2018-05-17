@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.BodyClass = "Service";
+    ViewBag.Title = "服務項目";
+    ViewBag.TitleEn = "Our Services";
+    ViewBag.Breadcrumb = ViewBag.Title;
+}
+
+<h3 class="title">
+    @ViewBag.Title
+    <span>@ViewBag.TitleEn</span>
+</h3>
+
+<div class="row row-x0">
+    <div class="col-md-6">
+        <figure class="thumbnail">
+            <a href="~/Plan">
+                <img src="~/Content/images/Service/pic1.jpg" alt="">
+                <figcaption>銷售合法生前契約</figcaption>
+            </a>
+        </figure>
+    </div>
+    <div class="col-md-6">
+        <figure class="thumbnail">
+            <a href="~/Team">
+                <img src="~/Content/images/Service/pic2.jpg" alt="">
+                <figcaption>提供全台優質禮儀服務平台</figcaption>
+            </a>
+        </figure>
+    </div>
+</div>

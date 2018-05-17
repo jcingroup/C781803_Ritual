@@ -31,7 +31,7 @@ $sizes: (
     15: 15%,
     20: 20%,
     25: 25%,
-    // 75: 75%,
+    75: 75%,
     100: 100%
 ) !default;
 
@@ -152,9 +152,9 @@ $footer-bg:             false !default;
 $footer-color:          false !default; //#63889D;
 
 // sidebar
-$sidebar-width:         220px;
-$sidebar-title-height:  45px;
-$sidebar-theme-color:   #f2f2f2;
+$sidebar-width:         210px;
+$sidebar-title-height:  42px;
+$sidebar-theme-color:   darken(color('light'), 2.5); //#f2f2f2
 
 //
 // z-index
@@ -200,13 +200,14 @@ $btn-color:                    #fff !default;
 $btn-bg:                       color("primary") !default;
 $btn-hover-color:              #fff !default;
 $btn-hover-bg:                 darken($btn-bg, 6) !default;
-$btn-disabled-bg:              color("muted") !default;
+$btn-disabled-bg:              color("light") !default;
 
 $btn-theme: (
     success:      color("success"),
     info:         color("info"),
     warning:      color("warning"),
-    danger:       color("danger")
+    danger:       color("danger"),
+    muted:        color("muted")
 ) !default;
 
 // other

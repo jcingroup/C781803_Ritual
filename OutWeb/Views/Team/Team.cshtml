@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.BodyClass = "Team";
+    ViewBag.Title = "全台服務團隊";
+    ViewBag.TitleEn = "Team Members";
+    ViewBag.Breadcrumb = ViewBag.Title;
+}
+
+<h3 class="title">
+    @ViewBag.Title
+    <span>@ViewBag.TitleEn</span>
+</h3>
+
+<div class="table-rwd">
+    <table class="table-striped table-hover">
+        <colgroup>
+            <col style="width: 10%">
+            <col style="width: 10%">
+            <col style="width: 28%">
+            <col style="width: 22%">
+            <col style="width: 15%">
+            <col style="width: 15%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>縣市</th>
+                <th>鄉鎮市區</th>
+                <th class="text-left">地址</th>
+                <th>公司名稱</th>
+                <th>聯絡人</th>
+                <th>聯絡電話</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(var i = 0; i < 10; i++) {
+                <tr>
+                    <td>桃園市</td>
+                    <td>中壢區</td>
+                    <td class="text-left">民權路四段438號5F</td>
+                    <td>白蘭禮儀公司</td>
+                    <td>羅ＸＸ</td>
+                    <td>03-999999</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

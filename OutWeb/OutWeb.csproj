@@ -162,13 +162,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Authorize\AuthAttribute.cs" />
     <Compile Include="Authorize\ErrorHandlerAttribute.cs" />
-    <Compile Include="Controllers\AgentsController.cs" />
+    <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\ImgHandlerController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\SignInController.cs" />
-    <Compile Include="Controllers\WorksController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
+    <Compile Include="Controllers\PublicController.cs" />
+    <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\TrustController.cs" />
+    <Compile Include="Controllers\ContactUsController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\_SysAdmController.cs" />
     <Compile Include="Entities\WBAGENT.cs">
@@ -1480,30 +1482,52 @@
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\page.css" />
-    <Content Include="Content\css\vendor\lightbox.min.css" />
     <Content Include="Content\css\vendor\open-iconic.css" />
+    <Content Include="Content\css\vendor\quill.snow.css" />
+    <Content Include="Content\css\vendor\react-datepicker.css" />
+    <Content Include="Content\css\vendor\react-datetime.css" />
+    <Content Include="Content\css\vendor\react-draft-wysiwyg.css" />
     <Content Include="Content\css\vendor\swiper.min.css" />
+    <Content Include="Content\css\vendor\toastr.css" />
     <Content Include="Content\css\vendor\typeahead.css" />
     <Content Include="Content\font\open-iconic\open-iconic.svg" />
+    <Content Include="Content\images\AboutUs\pic1.jpg" />
     <Content Include="Content\images\banner.jpg" />
-    <Content Include="Content\images\banner2.jpg" />
-    <Content Include="Content\images\banner3.jpg" />
-    <Content Include="Content\images\bannerBg.gif" />
-    <Content Include="Content\images\icon-view.png" />
-    <Content Include="Content\images\icon-word.jpg" />
-    <Content Include="Content\images\index\banner.jpg" />
-    <Content Include="Content\images\index\banner2.jpg" />
-    <Content Include="Content\images\index\banner3.jpg" />
-    <Content Include="Content\images\logo-s.gif" />
+    <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\Index\banner.jpg" />
+    <Content Include="Content\images\Index\banner_sm.jpg" />
+    <Content Include="Content\images\Index\banner_xs.jpg" />
+    <Content Include="Content\images\Index\pic1.jpg" />
+    <Content Include="Content\images\Index\pic2.jpg" />
+    <Content Include="Content\images\Index\pic3.jpg" />
+    <Content Include="Content\images\Index\pic4.jpg" />
     <Content Include="Content\images\logo.png" />
-    <Content Include="Content\images\pic-temp.jpg" />
-    <Content Include="Content\images\pic-temp2.jpg" />
-    <Content Include="Content\images\pic-temp3.jpg" />
-    <Content Include="Content\images\piclistBg.gif" />
-    <Content Include="Content\images\piclistBg2.gif" />
+    <Content Include="Content\images\Plan\pic1.jpg" />
+    <Content Include="Content\images\Plan\pic2.jpg" />
+    <Content Include="Content\images\Public\Account-102-103_s.jpg" />
+    <Content Include="Content\images\Public\Account-104-105_s.jpg" />
+    <Content Include="Content\images\Public\Account-104_s.jpg" />
+    <Content Include="Content\images\Public\Plan_s.jpg" />
+    <Content Include="Content\images\Public\Trust-10-106.jpg" />
+    <Content Include="Content\images\Public\Trust-10-106_s.jpg" />
+    <Content Include="Content\images\Public\Trust-105_s.jpg" />
+    <Content Include="Content\images\Public\Trust-106_s.jpg" />
+    <Content Include="Content\images\Public\Trust-11-106.jpg" />
+    <Content Include="Content\images\Public\Trust-11-106_s.jpg" />
+    <Content Include="Content\images\Public\Trust-12-106.jpg" />
+    <Content Include="Content\images\Public\Trust-12-106_s.jpg" />
+    <Content Include="Content\images\Service\pic1.jpg" />
+    <Content Include="Content\images\Service\pic2.jpg" />
+    <Content Include="Content\images\Trust\pic1.jpg" />
+    <Content Include="Content\images\_SysAdm\login_logo%402x.png" />
+    <Content Include="Content\images\_SysAdm\sys_logo.png" />
+    <Content Include="Content\js\fa-solid.min.js" />
+    <Content Include="Content\js\fancybox\jquery.fancybox.min.css" />
+    <Content Include="Content\js\fancybox\jquery.fancybox.min.js" />
+    <Content Include="Content\js\fontawesome.min.js" />
     <Content Include="Content\js\jquery.waypoints.min.js" />
-    <Content Include="Content\js\lightbox.min.js" />
-    <Content Include="Content\js\swiper.min.js" />
+    <Content Include="Content\js\sorttable.js" />
+    <Content Include="Content\js\swiper.jquery.min.js" />
     <Content Include="Content\noIE\bg.gif" />
     <Content Include="Content\noIE\brow.gif" />
     <Content Include="Content\noIE\brow2.gif" />
@@ -1528,7 +1552,30 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\css\admin.map" />
+    <Content Include="Content\css\editor.map" />
+    <Content Include="Content\css\grid.map" />
+    <Content Include="Content\css\index.map" />
+    <Content Include="Content\css\login.map" />
+    <Content Include="Content\css\page.map" />
+    <Content Include="Content\css\vendor\open-iconic.map" />
+    <Content Include="Content\css\vendor\typeahead.map" />
+    <Content Include="Content\font\open-iconic\open-iconic.eot" />
+    <Content Include="Content\font\open-iconic\open-iconic.otf" />
+    <Content Include="Content\font\open-iconic\open-iconic.ttf" />
+    <Content Include="Content\font\open-iconic\open-iconic.woff" />
+    <Content Include="Content\images\Plan\Ritual_FuneralPlanning.pdf" />
+    <Content Include="Content\images\Public\Account-102-103.pdf" />
+    <Content Include="Content\images\Public\Account-104-105.pdf" />
+    <Content Include="Content\images\Public\Account-104.pdf" />
+    <Content Include="Content\images\Public\Trust-105.pdf" />
+    <Content Include="Content\images\Public\Trust-106.pdf" />
     <Content Include="Content\sass\admin.scss" />
+    <Content Include="Content\sass\base\_basic.scss" />
+    <Content Include="Content\sass\base\_form.scss" />
+    <Content Include="Content\sass\base\_link.scss" />
+    <Content Include="Content\sass\base\_table.scss" />
+    <Content Include="Content\sass\base\_type.scss" />
     <Content Include="Content\sass\core\mixins\_animation.scss" />
     <Content Include="Content\sass\core\mixins\_center.scss" />
     <Content Include="Content\sass\core\mixins\_font.scss" />
@@ -1544,6 +1591,7 @@
     <Content Include="Content\sass\core\mixins\_shape.scss" />
     <Content Include="Content\sass\core\mixins\_tab-focus.scss" />
     <Content Include="Content\sass\core\mixins\_text.scss" />
+    <Content Include="Content\sass\core\_basic.scss" />
     <Content Include="Content\sass\core\_function.scss" />
     <Content Include="Content\sass\core\_mixins.scss" />
     <Content Include="Content\sass\core\_variables.scss" />
@@ -1572,6 +1620,7 @@
     <Content Include="Content\sass\_admin\modules\_loader.scss" />
     <Content Include="Content\sass\_admin\modules\_modal.scss" />
     <Content Include="Content\sass\_admin\modules\_nav.scss" />
+    <Content Include="Content\sass\_admin\modules\_tab.scss" />
     <Content Include="Content\sass\_admin\_color.scss" />
     <Content Include="Content\sass\_admin\_layout.scss" />
     <Content Include="Content\sass\_admin\_util.scss" />
@@ -1609,7 +1658,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Views\SignIn\Login.cshtml" />
     <Content Include="Views\_SysAdm\ProductDataAdd.cshtml" />
     <Content Include="Views\_SysAdm\ProductKindList.cshtml" />
     <Content Include="Views\_SysAdm\ProductList.cshtml" />
@@ -1629,35 +1677,33 @@
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\AboutUs.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_SysAdm\NewsEdit.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_SysAdm\ProductDataEdit.cshtml" />
     <Content Include="Views\_SysAdm\_ProductKindDataPartial.cshtml" />
     <Content Include="Views\_SysAdm\ProductKindAdd.cshtml" />
     <Content Include="Views\_SysAdm\ProductKindEdit.cshtml" />
-    <Content Include="Views\Home\ContactUs.cshtml" />
-    <Content Include="Views\Products\List.cshtml" />
-    <Content Include="Views\Products\Content.cshtml" />
     <Content Include="Views\_SysAdm\_WorksDataPartial.cshtml" />
     <Content Include="Views\_SysAdm\WorksDataAdd.cshtml" />
     <Content Include="Views\_SysAdm\WorksDataEdit.cshtml" />
+    <Content Include="Views\AboutUs\AboutUs.cshtml" />
+    <Content Include="Views\ContactUs\ContactUs.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Plan\Plan.cshtml" />
+    <Content Include="Views\Public\Public.cshtml" />
+    <Content Include="Views\Service\Service.cshtml" />
+    <Content Include="Views\Team\Team.cshtml" />
+    <Content Include="Views\Trust\Trust.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\font\open-iconic\open-iconic.eot" />
-    <Content Include="Content\font\open-iconic\open-iconic.otf" />
-    <Content Include="Content\font\open-iconic\open-iconic.ttf" />
-    <Content Include="Content\font\open-iconic\open-iconic.woff" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Entities\WBDB.edmx">
@@ -1723,18 +1769,13 @@
     <None Include="Properties\PublishProfiles\Demo.pubxml" />
     <None Include="Properties\PublishProfiles\Server.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <Content Include="Views\Works\List.cshtml" />
-    <Content Include="Views\News\List.cshtml" />
     <Content Include="Views\_SysAdm\ChangePW.cshtml" />
     <Content Include="Views\_SysAdm\Login_old.cshtml" />
     <Content Include="Views\_SysAdm\NewsAdd.cshtml" />
     <Content Include="Views\_SysAdm\NewsList.cshtml" />
     <Content Include="Views\Shared\_MLayout.cshtml" />
-    <Content Include="Views\News\Content.cshtml" />
-    <Content Include="Views\Works\Content.cshtml" />
     <Content Include="Views\_SysAdm\WorksList.cshtml" />
     <Content Include="Views\_SysAdm\Agents.cshtml" />
-    <Content Include="Views\Agents\Agents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

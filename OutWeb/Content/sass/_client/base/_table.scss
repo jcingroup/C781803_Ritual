@@ -35,52 +35,13 @@ th, td {
     .table-line & {
         border-top: 1px solid $table-border-color;
     }
-
-    @extend .font-md;
 }
 
 // 本次專案
 th {
-    tr:not(.head-line) & {
+    thead & {
         @extend .text-white, .bg-primary;
     }
-
-    .head-line & {
-        border-bottom: 2px solid $danger;
-        border-top: none;
-    }
-
-    thead tr:not(:only-child) & {
-        padding: 3px 4px;
-        border-top: none;
-    }
-
-    word-break: keep-all;
-    font-weight: normal;
-}
-
-td {
-    // 本次專案
-    // .table-line & {
-    //     border-bottom: 1px solid $table-border-color;
-    // }
-    .table-border-middle &:not(:last-child) {
-        border-right: 1px solid $table-border-color;
-    }
-
-    &.item {
-        @if $table-bg-striped {
-            .table-striped tr:nth-child(even) & {
-                background-color: $table-bg-striped;
-            }
-        }
-    }
-}
-
-// 本次專案
-caption {
-    @extend .px-16, .pt-12, .pb-2, .font-xl;
-    background-color: lighten($muted, 6);
 }
 
 // 四邊框線
@@ -98,6 +59,10 @@ caption {
 .table-striped {
     tr:nth-child(#{$table-striped-list}) {
         background-color: $table-bg-striped;
+    }
+    // 本次專案
+    tr {
+        background-color: rgba(#fff, 0.3);
     }
 }
 

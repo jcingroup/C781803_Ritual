@@ -1,15 +1,10 @@
 @charset "UTF-8";
 
-// == 本次專案
-// ----------------------------------------------------------------------
-$enable-RWD: false;
-
-
 // == color
 // ----------------------------------------------------------------------
 // 抽象色
-$brand-primary:           #000;    // 主色
-$brand-secondary:         #54575a;    // 輔色
+$brand-primary:           #013d4d;    // 主色
+$brand-secondary:         #be4c54;    // 輔色
 $muted:                   #E3E3E4;    // 灰色
 $success:                 #88C200;    // 綠
 $info:                    #00A7B0;    // 藍
@@ -78,11 +73,11 @@ $sizes: (
 // ------------------------------------------------------------
 //
 // basic
-$body-bg:                    #fff !default;
-$body-color:                 #000 !default;
+$body-bg:                    #fff url(#{$img-path}/banner.jpg) center top no-repeat !default;
+$body-color:                 #444 !default;
 
-$font-family-base:           \5FAE\8EDF\6B63\9ED1\9AD4,"微軟正黑體","Microsoft JhengHei",'Helvetica Neue',Helvetica,Arial,sans-serif !default;
-$font-family-sp:             'Open Sans', sans-serif;
+$font-family-base:           'Open Sans','Helvetica Neue',Helvetica,Arial,\5FAE\8EDF\6B63\9ED1\9AD4,"微軟正黑體","Microsoft JhengHei",sans-serif !default;
+$font-family-sp:             'Anton', sans-serif;
 
 $font-size-base:             16px !default;                    // 1rem
 $line-height:                1.5 !default;
@@ -91,7 +86,7 @@ $line-height:                1.5 !default;
 // link
 $link-color:                 $brand-primary !default;                                // 連結文字色 color("primary")
 $link-decoration:            none !default;                                // 連結底線樣式
-$link-hover-color:           lighten($brand-primary, 40) !default;         // 移過後顏色
+$link-hover-color:           $brand-secondary !default;         // 移過後顏色
 $link-hover-decoration:      false !default;                               // 移過後底線樣式
 $link-transition:            color .35s, background .3s !default;          // 滑鼠移過動態特效
 
@@ -111,13 +106,13 @@ $headings-line-height:       1.1 !default;
 $headings-letter-spacing:    false !default;
 $headings-margin-bottom:     $spacer*0.95 !default;
 
-$p-spacer:                   spacing(4) !default;  // $spacer*0.375
+$p-spacer:                   spacing(8) !default;  // $spacer*0.375
 $abbr-border-color:          color("muted") !default;
 $hr-border:                  1px solid $abbr-border-color !default;
 
 //
 // common
-$border-radius:              4px !default;
+$border-radius:              5px !default;
 $prefixes:                   webkit !default;                  // all: webkit moz o ms
 $cursor-disabled:            not-allowed;                      // 表單元素(停用)上的滑鼠樣式
 
@@ -125,14 +120,15 @@ $cursor-disabled:            not-allowed;                      // 表單元素(�
 // table
 // 共用樣式
 $table-borderY-has:      true !default;
-$table-border-color:     #EDEBE8 !default;
-$table-pd:               8px 4px !default; // 5px 8px
+$table-border-color:     #fff !default;
+$table-pd:               8px !default; // 5px 8px
+$table-mb:               false !default;
 
 // 滑鼠移過變色
-$table-bg-hover:         #fffFD7 !default;
+$table-bg-hover:         rgba(#fffFD7, 0.7) !default;
 
 // 斑馬紋條列式表格
-$table-bg-striped:       #fff !default; // #f9f9f9
+$table-bg-striped:       rgba(#666, 0.15) !default; // #f9f9f9
 $table-bg-active:        false !default;
 $table-striped-list:     'even' !default;   // even, odd
 
@@ -143,18 +139,20 @@ $table-rwd:              true !default;
 // form
 $cursor-disabled:                not-allowed !default;             // 表單元素(停用)上的滑鼠樣式
 $input-font-size:                15px !default;
-$input-height:                   38px !default;                    //$input-font-size * 1.8
+$input-height:                   false !default;                    //$input-font-size * 1.8
 $input-pd:                       0 12px !default;
 
 $input-bg:                       $brand-primary !default;          // #fff
-$input-color:                    #fff !default;                    // $brand-primary
 $input-border-color:             lighten($muted, 8) !default;
-$input-border:                   1px solid $input-border-color !default;
+$input-color:                    #fff !default;                    // $brand-primary
 $input-focus-color:              $warning !default; //lighten($brand-primary, 15%)
+$input-border:                   1px solid $input-border-color !default;
 $input-radius:                   false !default; // 5px
 $input-shadow:                   inset 0 1px 1px rgba(0,0,0,.075) !default;
 $input-transition:               border-color ease-in-out .15s, box-shadow ease-in-out .15s !default;
-$input-placeholder-color:        rgba(#fff, .3);
+$input-placeholder-color:        rgba(#fff, .3) !default;
+
+$form-label-line-height:         ($input-font-size + 4) !default;
 
 // select
 $select-caret-color:             $warning !default;
@@ -162,7 +160,7 @@ $select-caret-checked-color:     $brand-secondary !default;
 
 // checkbox style
 $choice-box-color:               $input-focus-color !default;
-$checkbox-height:                $input-height - 5 !default; // 同input算法
+$checkbox-height:                if($input-height, $input-height - 5, 33px) !default; // 同input算法
 $checkbox-size:                  if($input-height, $input-height, $checkbox-height) !default;
 $checkbox-icon-size:             $checkbox-size*.7 !default;
 $checkbox-radius:                $input-radius !default;
@@ -170,25 +168,26 @@ $checkbox-radius:                $input-radius !default;
 
 // == layout
 // ----------------------------------------------------------------------
-$min-width:             1200px;     // 網頁最小尺寸 1008
-$max-width:             1400px;     // 網頁最寬尺寸: .wrap
+$min-width:             360px;     // 網頁最小尺寸 1008
+$max-width:             1460px;     // 網頁最寬尺寸: .wrap
+$menu-item:             false;
 
-$wrapper-bg:            false !default;
-$wrapper-b-spacing:     50px !default;
+$wrapper-bg:            url(#{$img-path}/bg.jpg) center bottom 34px no-repeat !default;
+$wrapper-b-spacing:     145px !default;
 
 // header
-$header-height:         false !default; // for page
+$header-height:         335px !default;
 $header-bg:             false !default;
-$header-mobile-height:  60px; // 本次專案
+$header-mobile-height:  36px; // 本次專案
 
 // logo
 $logo-img:              'logo.png' !default; // 'logo.gif' or false
-$logo-size:             100px 49px !default;
+$logo-size:             200px 62px !default;
 
 // footer
-$footer-height:         124px !default;
-$footer-bg:             #c4c4c4 !default;
-$footer-color:          inherit !default;
+$footer-height:         104px !default;
+$footer-bg:             rgba(#4d4d4d, 0.9) !default;
+$footer-color:          #fff;
 
 // z-index
 $z-index: (
@@ -212,25 +211,26 @@ $sub-nav-has:           false !default;         // 子選單
 $nav-root:              if($sub-nav-has, 'li > a', 'a') !default;
 
 // 行動版
+$mobile-menu-has:       true !default;
 $mobile-menu-bk:        'desktop' !default;     // 從()螢幕寬度以下開始出現行動版選單
-$mobile-menu-bg:        #fff !default;          // rgba(#fff,.95)
-$mobile-menu-width:     250px !default;
-$mobile-transition:     'left .3s' !default;    // push - left .35s; overlay - opacity 1s
+$mobile-menu-bg:        desaturate(rgba($brand-primary, .8), 50) !default;          // rgba(#fff,.95)
+$mobile-menu-width:     100% !default;
+$mobile-transition:     '.3s' !default;    // push - left .35s; overlay - opacity 1s
 
 //
 // btn
 // 下為基本樣式(屬性固定)
 // height = btn-font-size(18) * btn-line-height(1.2) + (btn-pd-y * 2) = 34.56
 // size
-$btn-font-size:                18px !default;
+$btn-font-size:                16px !default;
 $btn-line-height:              if($input-height, $input-height, 1.2) !default;
-$btn-pd:                       if($input-height, $input-pd, 8px 20px) !default; // $spacer*0.8 $spacer*2 $spacer*.8 $spacer*2.6
+$btn-pd:                       if($input-height, $input-pd, $spacer $spacer*2) !default; // $spacer*0.8 $spacer*2 $spacer*.8 $spacer*2.6
 
 // color
 $btn-color:                    #fff !default;
-$btn-bg:                       $brand-primary !default;
+$btn-bg:                       #6cb1c4 !default;
 $btn-hover-color:              #fff !default;
-$btn-hover-bg:                 $brand-secondary !default; //darken($btn-bg, 6)
+$btn-hover-bg:                 darken($btn-bg, 6) !default;
 $btn-disabled-bg:              $muted !default;
 
 $btn-theme: (
@@ -246,7 +246,7 @@ $btn-effect:                   'background .35s, color .5s' !default;
 
 //
 // field
-$fields-spacer:                  20px !default; //20px
+$fields-spacer:                  16px !default;
 
 //
 // input-group

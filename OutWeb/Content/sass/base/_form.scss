@@ -1,0 +1,152 @@
+@charset "UTF-8";
+
+// var in core/ variables
+
+// Forms
+// -----------------------------------------------------------------
+
+//
+// == form element default
+
+%remove-default {
+    // 移除預設樣式
+    appearance: none; // Removes awkward default styles on some inputs for iOS
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    // Unstyle the caret on `<select>`s in IE10+.
+    &::-ms-expand {
+        background-color: transparent;
+        border: 0;
+    }
+}
+
+// example:
+// <input class="form-element">
+//
+.form-element {
+    @extend %remove-default;
+
+    width: 100%;
+
+    // $input-height = button (line-height + padding)
+    padding: $input-pd;
+    line-height: $input-height;
+    min-height: $input-height;
+
+    @if $input-color      { color: $input-color; }
+    @if $input-bg         { background-color: $input-bg; }
+    @if $input-font-size  { font-size: rem($input-font-size); }
+    @if $input-border     { border: $input-border; }
+    @if $input-radius     { border-radius: $input-radius; }
+    @if $input-shadow     { box-shadow: $input-shadow; }
+    @if $input-transition { @include transition($input-transition); }
+
+    &:disabled,
+    &[readonly] {
+        background-color: $input-border-color;
+        opacity: 1;
+    }
+    &:disabled {
+        cursor: $cursor-disabled;
+    }
+    &:focus {
+        border-color: $input-focus-color;
+        outline: 0;
+    }
+    &.inline, .form-inline & {
+        display: inline;
+        width: auto;
+
+        &:not(:last-child) {
+            margin-right: $spacer*0.3;
+        }
+    }
+
+    &::placeholder {
+        color: $input-placeholder-color;
+        opacity: 1;
+    }
+}
+
+select {
+    @extend %remove-default;
+
+    background-image: str-replace(url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 14" width="32" height="14"><path fill="#{$select-caret-color}" d="M9.37727 3.625l5.08154 6.93523L19.54036 3.625"/></svg>'), '#', '%23');
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding-right: 3.0rem !important;
+
+    &:focus {
+        background-image: str-replace(url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 14" width="32" height="14"><path fill="#{$select-caret-checked-color}" d="M9.37727 3.625l5.08154 6.93523L19.54036 3.625"/></svg>'), '#', '%23');
+    }
+}
+
+input[type='number'] {
+    padding-right: 0;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+    display: inline;
+}
+
+button, [role="button"] {
+    cursor: pointer;
+    border: none;
+    &:active, &:focus { outline: 0; }
+}
+
+//
+// == other
+// example:
+// <label class="form-label"></label>
+// <label class="form-label block"></label>
+
+// .block in classes
+legend,
+.form-label.block {
+    margin-bottom: $spacer/2;
+}
+
+.form-label {
+    display: inline-block;
+    font-weight: normal;
+    line-height: $input-height;
+}
+
+legend { width: 100%; }
+
+
+fieldset {
+    border-width: 0;
+    padding: 0;
+    min-width: 0;
+}
+
+body:not(:-moz-handler-blocked) fieldset {
+    display: table-cell;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 6.5rem;
+}
+
+output {
+    display: inline-block;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+// iOS 的時間欄位垂直對齊 - safari
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    input[type='date'],
+    input[type='time'],
+    input[type='datetime-local'],
+    input[type='month'] {
+        line-height: $input-height;
+    }
+}

@@ -37,12 +37,12 @@ $pale-yellow:  #fffFD7 !default;
 $pale-red:     #FFE7E7 !default;
 
 $colors: (
-    primary:     #438EB9, // $blue,
+    primary:     #111, // $blue,
     secondary:   $gray-600,
-    success:     #5CB85C, // $green,
-    info:        #5BC0DE, // $cyan,
-    warning:     #F0AD4E, // $yellow,
-    danger:      #C4272D, // $red,
+    success:     #88C200, // $green, #5CB85C
+    info:        #00A7B0, // $cyan, #5BC0DE
+    warning:     #F7BE21, // $yellow, #F0AD4E
+    danger:      #E96520, // $red, #C4272D
     light:       $gray-100,
     dark:        $gray-800,
     muted:       $gray-400

@@ -17,7 +17,7 @@
 .circle        { border-radius: 50%; } // 圓形
 .img-center    { display: block; margin: auto; }
 
-.center {
+.mx-a {
     margin-right: auto;
     margin-left:  auto;
 }
@@ -46,6 +46,26 @@
     }
 }
 
+// responsive visibility
+// ------------------------------------------------------------
+@include mq-max(break(phone, -1)) {
+    .hidden-xxs { display: none; }
+}
+@include mq(phone) {
+    .hidden-xs { display: none; }
+}
+@include mq(tablet) {
+    .hidden-sm { display: none; }
+}
+@include mq(desktop) {
+    .hidden-md { display: none; }
+}
+@include mq(wide) {
+    .hidden-lg { display: none; }
+}
+@include mq(wider) {
+    .hidden-xl { display: none; }
+}
 
 // vertical align
 // inline, inline-block, inline-table, and table cell elements.
@@ -60,7 +80,8 @@
 .text-left   { text-align: left; }
 .text-right  { text-align: right; }
 .text-center { text-align: center; }
-
+.text-nowrap   { white-space: nowrap; }
+.text-overflow { @include text-overflow(null); }
 .text-hide   { @include text-hide; }
 
 @if $font-family-sp {
@@ -104,6 +125,7 @@
 }
 .w-auto { width: auto; }
 
+
 // goTop
 // ------------------------------------------------------------
 .goTop {
@@ -127,25 +149,21 @@
 
 // 本次專案才用到的樣式
 // ------------------------------------------------------------
-.underline {
-    border-bottom: 1px solid;
+h3 {
+    letter-spacing: 0.05em;
 }
-
-.title {
+.btn {
+    letter-spacing: 0.05em;
     font-weight: bold;
-
-    @if $isPage {
-        @include rem('font-size', 28);
-        font-weight: bold;
-        margin-bottom: 42px;
+}
+.list-underline {
+    li {
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+        border-bottom: 1px dotted #ddd;
     }
-
-    .underline {
-        @extend .px-12, .pb-4;
-        border-width: 3px;
-
-        @if $isPage {
-            border-color: lighten($muted, 1);
-        }
-    }
+}
+ol.list-underline {
+    padding-left: 2em;
+    text-indent: -2em;
 }
