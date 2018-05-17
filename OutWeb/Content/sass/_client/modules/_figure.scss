@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+$height: 300px;
+$top:    $height/2;
+$bottom: 35px;
+
+figcaption {
+    @include prefix(backface-visibility, hidden);
+    &::before, &::after { pointer-events: none; }
+}
+figure {
+    position: relative;
+    // overflow: hidden;
+    cursor: pointer;
+
+    > a {
+        z-index: z(figure);
+        opacity: 0;
+        background: #fff; // for IE10 bugfix
+        top: 0;
+
+        @include size(100%);
+        @include absolute(left 0 top 0);
+    }
+
+    // 本次專案
+    display: inline-block;
+    vertical-align: top;
+
+    @include transition(.5s ease-in);
+
+    .cut {
+        position: relative;
+        overflow: hidden;
+    }
+    img {
+        @include transition(.5s ease-in-out);
+        @include center;
+    }
+    h4 {
+        @extend .mt-0;
+
+        @include transition(.5s ease);
+        @include text-overflow;
+    }
+    .more {
+        @extend .text-white;
+        @include transition(.7s);
+        @include absolute(left 0 right 0);
+
+        letter-spacing: .1em;
+        opacity: 0;
+        top: $top - 40;
+        z-index: 2;
+
+        &:hover, &:active {
+            color: $warning;
+        }
+    }
+    &:hover {
+        background-color: rgba(#000, .55);
+
+        img {
+            z-index: -1;
+            @include prefix(filter, saturate(2) blur(3px));
+        }
+    }
+}
+
+.newslist {
+    $height: 260px;
+    $bottom: 37px;
+    $top:    $height/2;
+
+    width: 31%;
+    height: $height + $bottom;
+    background: url(#{$img-path}/piclistBg.gif?v2) 0 bottom repeat-x;
+
+    @if $isIndex {
+        margin: 0 0.3%;
+    }
+    @if $isPage {
+        margin: 24px 1.16%;
+        float: left;
+    }
+
+    .cut {
+        height: $height;
+    }
+    img {
+        min-width: 100%;
+        min-height: 100%;
+        max-width: 100%;
+    }
+    h4 {
+        @extend .text-white, .py-8, .mb-0;
+        @include absolute(left 2%);
+
+        width: 96%;
+        bottom: $bottom + 10px;
+        text-shadow: 1px 1px 1px rgba(#000, .75);
+    }
+    .date {
+        @extend .text-left, .mt-8, .pl-12;
+
+        color: lighten(#000, 20);
+        display: block;
+        letter-spacing: .2em;
+    }
+
+    &:hover {
+        background-color: rgba(#000, .55);
+        h4 {
+            @include transform(translateY(-($top)));
+            border-bottom: 1px solid;
+        }
+        .more {
+            opacity: 1;
+            top: $top - 5;
+        }
+    }
+}
+
+@if $isPage {
+.piclist {
+    $height: 300px;
+    $top:    $height/2;
+    $bottom: 35px;
+
+    width: (100% / 3);
+    height: $height + $bottom;
+    margin: 24px 0;
+    float: left;
+
+    &:nth-child(odd) {
+        background-color: lighten($muted, 5);
+    }
+    &:nth-child(even) {
+        background-color: lighten($muted, 1);
+    }
+    .cut {
+        height: $height;
+    }
+
+    img {
+        max-width: 320px;
+        max-height: 220px;
+    }
+
+    h4 {
+        @extend .font-lg, .bg-white;
+        border-top: 1px solid #fff;
+        line-height: $bottom;
+        background-repeat: repeat-x;
+        background-position: 0 -20px;
+    }
+    .more {
+        @extend .font-lg;
+        background: url(#{$img-path}/icon-view.png) center 0 no-repeat;
+    }
+
+    &:hover {
+        background-color: rgba(#000, .7);
+        img {
+            opacity: .45;
+        }
+        h4 {
+            background-image: url(#{$img-path}/piclistBg2.gif);
+            background-position: 0 0;
+        }
+        .more {
+            opacity: .7;
+            padding-top: 65px;
+            top: $top - 60;
+        }
+    }
+}
+}

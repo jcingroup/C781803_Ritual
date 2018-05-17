@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+// == 主選單
+// ------------------------------------------------------------
+
+// body
+.js-mobile-body {
+    overflow-y: hidden;
+}
+
+#menu {
+    z-index: z(menu);
+
+    // 本次專案
+    float: right;
+    margin-top: 26px;
+
+    .scrolled & {
+        margin-top: 0;
+    }
+
+    #{$nav-root} {
+        @extend .text-primary;
+
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        letter-spacing: 1px;
+
+        @include rem('font-size', 18px);
+
+        &:not(.fb-link) {
+            @extend .mx-12, .py-16;
+
+            @include el(after) {
+                @include center(x);
+                @include transition(width .8s, opacity .5s);
+
+                bottom: 0;
+                width: 0;
+                opacity: 0;
+
+                @if $isIndex {
+                    border-top: 3px solid #fff;
+
+                    .scrolled & {
+                        border-top-color: $brand-secondary;
+                    }
+                }
+                @if $isPage {
+                    border-top: 3px solid $brand-secondary;
+                }
+            }
+            &:hover, &:active, &.current {
+                &::after {
+                    opacity: 1;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    // 子選單
+    @if $sub-nav-has {
+        @extend %list-unstyled;
+
+        li {
+            @include mq($mobile-menu-bk) {
+                display: inline-block;
+                vertical-align: top;
+            }
+            // 子選單顯示
+            &:hover, &:active {
+                .sub-nav {
+                    opacity: 1;
+                    visibility: visible;
+
+                    // 本次專案
+                    @include mq($mobile-menu-bk) {
+                        top: 100%;
+                    }
+                    @include mq-max(break($mobile-menu-bk,-1)) {
+                        height: auto;
+                    }
+                }
+            }
+        }
+        .sub-nav {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+
+            // 本次專案
+            @extend .bg-muted, .pt-32, .py-48;
+            @include transition(opacity .5s, top .35s);
+
+            @include mq($mobile-menu-bk) {
+                @include absolute(top 50px left 0 right 0);
+            }
+            @include mq-max(break($mobile-menu-bk,-1)) {
+                height: 0;
+                margin-left: 36px;
+            }
+
+            a {
+                line-height: 1.25;
+
+                display: block;
+                float: left;
+                width: 48%;
+                border-bottom: 1px solid darken($muted,5);
+
+                @extend .mb-4, .pb-4;
+                @include rem('font-size', 17px);
+
+                &:hover, &:active, &.current { text-decoration: underline; }
+            }
+        }
+    }
+
+    // 行動版面
+    // @include mq-max(break($mobile-menu-bk,-1)) {
+    //     z-index: z(overlay);
+
+    //     @include fixed(bottom 0 top $header-height);
+    //     @if $mobile-menu-bg    { background: $mobile-menu-bg; }
+    //     @if $mobile-transition { @include transition($mobile-transition); }
+    //     overflow-y: auto;
+    //     width: $mobile-menu-width;
+    //     left: -$mobile-menu-width;
+    //     text-align: left;
+
+    //     .js-mobile-body & {
+    //         left: 0;
+    //     }
+    //     .scrolled & {
+    //         top: $header-mobile-height;
+    //     }
+    // }
+}
+
+svg {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.fb-link {
+    $size: 35px;
+
+    @extend .circle, .ml-12, .bg-secondary, .p-4;
+
+    // background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 262 266.895'><path id='path3087' fill='%23fff' d='M182.409,262.307v-99.803h33.499l5.016-38.895h-38.515V98.777c0-11.261,3.127-18.935,19.275-18.935 l20.596-0.009V45.045c-3.562-0.474-15.788-1.533-30.012-1.533c-29.695,0-50.025,18.126-50.025,51.413v28.684h-33.585v38.895h33.585 v99.803H182.409z'></path></svg>");
+    // background-size: cover;
+    // padding-bottom: $size;
+
+    width: $size;
+    height: $size;
+
+    color: #fff;
+    fill: #fff;
+
+    &:hover {
+        background-color: #000;
+    }
+}
+
+// == mobile-toggle
+// .mobile-toggle {
+//     display: none;
+//     background: none;
+//     position: relative;
+//     z-index: z(overlay) + 1;
+//     @include transition(.3s);
+
+//     // 本次專案
+//     @extend .pull-left;
+//     background: url(#{$img-path}/mobile-toggle.gif) center no-repeat;
+//     width: 45px;
+//     height: 37px;
+//     @include transform(translateY(45%));
+
+//     &:hover { opacity: .8; }
+//     &:active, &.active {
+//         background-image: url(#{$img-path}/mobile-close.gif);
+//     }
+
+//     @include mq-max(break($mobile-menu-bk,-1)) {
+//         display: block;
+//     }
+// }
+

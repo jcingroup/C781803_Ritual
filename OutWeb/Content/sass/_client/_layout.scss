@@ -1,0 +1,141 @@
+@charset "UTF-8";
+
+/*      layout
+-----------------------------------------------------------------------*/
+// 置中(有最大寬度限制,非滿版才需要)
+.wrap {
+    // @include clearfix;
+    @include mq-max($max-width) {
+        @include rem('padding', 0 32px);
+    }
+
+    max-width: $max-width;
+    margin: 0 auto;
+
+    @if $enable-RWD {
+        @include mq-max(phone) {
+            @include rem('padding',0 24px);
+        }
+    } @else {
+        min-width: $min-width;
+    }
+}
+
+#wrapper {
+    @if $wrapper-bg     { background: $wrapper-bg; }
+    @if not $enable-RWD { min-width: $min-width; }
+    @if $lte7           { _height: 100%; }
+
+    min-height: 100%;
+    padding-bottom: $footer-height + $wrapper-b-spacing; // 內容與footer間距
+
+    // 本次專案
+    @if $isPage {
+        // padding-top: $header-height;
+        padding-top: 85px;
+    }
+}
+
+// header
+// ----------------------------------------------------------------------
+#header {
+    @if $header-bg     { background: $header-bg; }
+    @if $header-height { height: $header-height; }
+    z-index: z(header);
+
+    // 本次專案
+    @include fixed(top 0 left 0);
+    @include transition(.3s ease-in);
+
+    width: 100%;
+
+    @if $isIndex {
+        .wrap {
+            position: relative;
+            height: 85px;
+
+            @include el(after) {
+                @include absolute(bottom 0 left 32px right 8%);
+
+                border-bottom: 1px solid #fff;
+
+                @include mq(wider) {
+                    left: 0;
+                    right: 70px;
+                }
+            }
+        }
+    }
+
+    .scrolled & {
+        background-color: rgba(#fff, .85);
+
+        &:hover {
+            background-color: #fff;
+        }
+
+        @if $isIndex {
+            .wrap {
+                height: auto;
+
+                &::after { display: none; }
+            }
+        }
+    }
+}
+
+.logo {
+    cursor: pointer; cursor: hand; // for ie
+    z-index: z(logo);
+
+    @include text-pic($logo-img, nth($logo-size,1), nth($logo-size,2));
+    @include transition(.3s);
+
+    // 本次專案
+    float: left;
+    margin-top: 20px;
+
+    .scrolled & {
+        @extend .mt-8, .mb-0;
+        background-size: contain;
+        height: 44px;
+    }
+}
+
+
+// footer 頁腳
+// ----------------------------------------------------------------------
+#footer {
+    @if $footer-bg { background: $footer-bg; }
+    @if $footer-color { color: $footer-color; }
+    @if not $enable-RWD { min-width: $min-width; }
+    min-height: $footer-height;
+    margin-top: -($footer-height);
+    z-index: z(footer);
+
+    // 本次專案
+    @extend .text-left, .font-md;
+    padding-top: ($footer-height - 20)/2;
+
+}
+
+.foot-nav {
+    a {
+        @extend .px-8;
+
+        color: inherit;
+        line-height: 1;
+
+        &:not(:first-child) {
+            border-left: 1px solid rgba(#000, .3);
+        }
+
+        &:hover, &:active, &.current {
+            color: $brand-secondary;
+        }
+    }
+}
+
+.copyright {
+    margin-top: -2px;
+}

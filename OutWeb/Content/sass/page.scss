@@ -1,0 +1,188 @@
+@charset "UTF-8";
+
+// 本頁專用變數(覆蓋)
+// ------------------------------------------------------------
+$isPage:                 true;
+
+$headings-line-height:   1.2;
+$link-transition:        '.35s';
+
+$font-size-h1:           46px;
+$font-size-h2:           42px;
+$font-size-h3:           27px;
+
+// import
+// ------------------------------------------------------------
+@import "_client/variables"; // 前台用變數(置頂)
+
+@import "core/function";
+@import "core/variables";
+@import "core/mixins";
+
+// 由此 output css
+@import "vendor/normalize";  // 重置樣式
+@import "vendor/print";      // 列印樣式
+
+@import "_client/base/basic";
+@import "_client/base/link";
+@import "_client/base/type";
+@import "_client/base/table";
+@import "_client/base/form";
+
+@import "_client/layout";
+@import "_client/modules/nav";
+@import "_client/modules/btn";
+// @import "_client/modules/btn-group";
+@import "_client/modules/field";
+@import "_client/modules/figure";
+
+@import "_client/util"; // 建議放置在最後一個
+
+
+// main
+// ------------------------------------------------------------
+
+// == banner
+#banner {
+    width: 100%;
+    height: 356px;
+    background: lighten($muted, 1) url(#{$img-path}/bannerBg.gif) center 0 no-repeat;
+    background-size: cover;
+    margin-bottom: 36px;
+
+    .swiper-slide {
+        background-position: center 0;
+        background-repeat: no-repeat;
+    }
+}
+
+// == breadcrumb
+.breadcrumb {
+    @extend %list-unstyled, .my-12, .font-md, .text-primary;
+
+    line-height: 1.4;
+    letter-spacing: .5px;
+
+    li {
+        float: left;
+
+        &:not(:last-child) {
+            @extend .mr-8;
+
+            @include el(after, false, '/') {
+                @extend .ml-4;
+                color: $muted;
+            }
+        }
+    }
+}
+
+// == products
+.product-intro {
+    @include rem('font-size', 20);
+}
+.product-img, .work-img {
+    .swiper-container {
+        @extend .center;
+        width: 100%;
+    }
+    .swiper-slide {
+        background-color: lighten($muted, 1);
+    }
+    img {
+        @include center;
+    }
+}
+.gallery {
+    width: 100%;
+
+    img {
+        max-width: 80%;
+    }
+
+    .product-img & {
+
+        $height: 360px;
+
+        height: $height;
+
+        img {
+            max-height: ($height - (50*2));
+        }
+    }
+    .work-img & {
+
+        $height: 420px;
+
+        height: $height;
+
+        img {
+            max-height: ($height - (50*2));
+        }
+    }
+}
+.thumbs {
+    @extend .mt-12;
+    height: 62px;
+    box-sizing: border-box;
+
+    .swiper-slide {
+        @include transition(.5s ease-in);
+        width: 80px;
+        height: 60px;
+        opacity: .65;
+        cursor: pointer;
+        border: 1px solid #fff;
+
+        &-active {
+            opacity: 1;
+            border: 1px solid $warning;
+        }
+    }
+    img {
+        width: 100%;
+        min-height: 100%;
+    }
+}
+
+// == news
+.news-post {
+    header {
+        @extend .font-xxl, .py-8, .mt-4, .mb-16;
+        border-top: 1px solid lighten($brand-primary, 85);
+        border-bottom: 1px solid lighten($brand-primary, 85);
+    }
+    .date {
+        @extend .text-secondary;
+    }
+}
+
+// == contact
+.map {
+    border-bottom: 3px solid lighten($muted, 8);
+    height: 480px;
+}
+
+// == about
+.text-list {
+    @extend .ml-32;
+
+    list-style-type: circle;
+
+    li {
+        @extend .py-4;
+
+        border-bottom: 1px solid lighten($muted, 8);
+    }
+}
+
+// == editor
+.editor {
+    @extend .mt-32;
+    word-wrap: normal;
+    word-break: break-all;
+
+    img {
+        max-width: 100% !important;
+    }
+}

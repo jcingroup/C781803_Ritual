@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+// 本頁專用變數(覆蓋)
+// ------------------------------------------------------------
+$isIndex:                true;
+$img-index:              '../images/index';
+
+$header-height:          false;
+$modal-top:              false;
+$modal-close-size:       60px;
+// $table-pd:               8px 20px;
+
+
+// import
+// ------------------------------------------------------------
+@import "_client/variables"; // 前台用變數(置頂)
+
+@import "core/function";
+@import "core/variables";
+@import "core/mixins";
+
+// 由此 output css
+@import "vendor/normalize";  // 重置樣式
+@import "vendor/print";      // 列印樣式
+
+@import "_client/base/basic";
+@import "_client/base/link";
+@import "_client/base/type";
+
+@import "_client/layout";
+@import "_client/modules/nav";
+@import "_client/modules/btn";
+@import "_client/modules/figure";
+
+@import "_client/util"; // 建議置底
+
+
+// main
+// ------------------------------------------------------------
+
+// == banner
+#banner {
+    width: 100%;
+    height: 820px;
+}
+.swiper-slide {
+    background-position: center 0;
+    background-repeat: no-repeat;
+}
+// 分頁
+.swiper-pager {
+    position: absolute;
+    bottom: 220px !important;
+    right: 0;
+    z-index: 2;
+    text-align: right;
+    max-width: $max-width;
+    margin: auto;
+    padding-right: 101px;
+
+    @include mq(wider) {
+        padding-right: 65px;
+    }
+}
+.swiper-pagination-bullet {
+    width: 12px !important;
+    height: 12px !important;
+    background: #fff !important;
+    opacity: .7 !important;
+
+    &-active {
+        // opacity: 1 !important;
+        background: #000 !important;
+    }
+}
+
+.card {
+    @extend .py-24, .px-32, .text-left;
+
+    @include absolute(top 197px left 50%);
+    @include mq(wider) {
+        margin-left: 210px;
+    }
+
+    margin-left: 110px;
+    background-color: rgba(#fff, .5);
+    width: 420px;
+    z-index: 2;
+    box-shadow: 20px 20px 30px rgba(#000, .20);
+
+    header {
+        @include rem('font-size', 57);
+        letter-spacing: 2px;
+        line-height: 1;
+        text-align: justify;
+    }
+    main {
+        @extend .mt-12, .mb-16;
+        @include rem('font-size', 20);
+        line-height: 1.8;
+    }
+}
+
+$light-gray: lighten($brand-primary,78);
+
+.news {
+    margin-top: -180px;
+    position: relative;
+    z-index: z(main);
+
+    .title {
+        @extend .text-secondary, .mb-32;
+    }
+    .underline {
+        border-color: #fff;
+    }
+
+    footer {
+        width: 94.8%;
+        position: relative;
+
+        @include el(before) {
+            @include center($height:y);
+            left: 0;
+            right: 86px;
+            border-top: 5px solid $light-gray;
+        }
+    }
+}
+.news-more {
+    @extend .font-lg;
+
+    i {
+        font-style: normal;
+        color: $light-gray;
+        line-height: 1;
+    }
+}

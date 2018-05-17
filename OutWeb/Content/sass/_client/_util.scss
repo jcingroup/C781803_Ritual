@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+// common ref: core/mixins
+// ------------------------------------------------------------
+// 常用樣式
+.clearfix      { @include clearfix; }
+.sr-only       { @include sr-only; }
+
+// 偶爾用到
+.pull-left     { float: left; }
+.pull-right    { float: right; }
+.block         { display: block; }
+.inline-block  { display: inline-block; }
+.inline        { display: inline; }
+.clear         { clear: both; }
+.hidden        { display: none; }
+.circle        { border-radius: 50%; } // 圓形
+.img-center    { display: block; margin: auto; }
+
+.center {
+    margin-right: auto;
+    margin-left:  auto;
+}
+
+// spacing (ref: core/_variables.scss)
+// src: https://gist.github.com/MatthewRDodds/8f171914ee6b826db29393f33229d509
+// ex. mt-6, p-12
+@each $prop, $abbrev in (margin: m, padding: p) {
+    @each $size, $value in $spacing {
+
+        .#{$abbrev}-#{$size}  { #{$prop}:        $value; } // All sides
+        .#{$abbrev}t-#{$size} { #{$prop}-top:    $value; }
+        .#{$abbrev}r-#{$size} { #{$prop}-right:  $value; }
+        .#{$abbrev}b-#{$size} { #{$prop}-bottom: $value; }
+        .#{$abbrev}l-#{$size} { #{$prop}-left:   $value; }
+
+        // Axes
+        .#{$abbrev}x-#{$size} {
+            #{$prop}-right:  $value;
+            #{$prop}-left:   $value;
+        }
+        .#{$abbrev}y-#{$size} {
+            #{$prop}-top:    $value;
+            #{$prop}-bottom: $value;
+        }
+    }
+}
+
+
+// vertical align
+// inline, inline-block, inline-table, and table cell elements.
+// ------------------------------------------------------------
+.align-top    { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+
+
+// text
+// ------------------------------------------------------------
+.text-left   { text-align: left; }
+.text-right  { text-align: right; }
+.text-center { text-align: center; }
+
+.text-hide   { @include text-hide; }
+
+@if $font-family-sp {
+    .font-sp { font-family: $font-family-sp; }
+}
+
+// src: w3.css v4
+.font-tiny   { @include rem('font-size',13); }  // 10px
+.font-sm     { @include rem('font-size',14); }  // 12px
+.font-md     { @include rem('font-size',15); }  // 15px
+.font-lg     { @include rem('font-size',18); }  // 18px
+.font-xl     { @include rem('font-size',24); }  // 24px
+.font-xxl    { @include rem('font-size',32); }  // 36px
+.font-xxxl   { @include rem('font-size',48); }  // 48px
+.font-jumbo  { @include rem('font-size',64); }  // 64px
+
+
+// 情境
+// ------------------------------------------------------------
+.text-white { color: #fff; }
+.bg-white   { background-color: #fff; }
+.bg-black   { background-color: #000; }
+
+// ref: core/variables.scss $states: true
+@if $states {
+    @each $type, $color in $colors {
+        .text-#{$type}  { color: $color; }
+        .bg-#{$type}    { background-color: $color; }
+        .hover-#{$type} {
+            color: $color;
+            &:hover, &:active { color: darken($color, 15);}
+        }
+    }
+}
+
+
+// sizing
+// ------------------------------------------------------------
+@each $size, $value in $sizes {
+    .w-#{$size} { width: $value; }
+}
+.w-auto { width: auto; }
+
+// goTop
+// ------------------------------------------------------------
+.goTop {
+    z-index: z(goTop);
+
+    @extend .text-white;
+    @include fixed(bottom 45px right 1%);
+    @include transition(.4s);
+    @include circle(50px, center, rgba(#000,.35));
+
+    display: none;
+    font-size: em(18);
+
+    &:hover, &:active {
+        @extend .text-white;
+        background: rgba(#000,.7);
+    }
+    &::before { top: 0 !important; }
+}
+
+
+// 本次專案才用到的樣式
+// ------------------------------------------------------------
+.underline {
+    border-bottom: 1px solid;
+}
+
+.title {
+    font-weight: bold;
+
+    @if $isPage {
+        @include rem('font-size', 28);
+        font-weight: bold;
+        margin-bottom: 42px;
+    }
+
+    .underline {
+        @extend .px-12, .pb-4;
+        border-width: 3px;
+
+        @if $isPage {
+            border-color: lighten($muted, 1);
+        }
+    }
+}
