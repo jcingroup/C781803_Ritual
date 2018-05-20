@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.mainName = "WTB 懷特博管理系統";
+    ViewBag.mainName = "儀禮科技管理系統";
 }
 
 <!DOCTYPE html>
@@ -68,17 +68,7 @@
                 <aside id="sidebar">
                     <h6 class="oi" data-glyph="menu">功能選單 MENU</h6>
 
-                    <header class='collapse-toggle oi @(ViewBag.subnav == "Products" ? "active" : "")' data-glyph="beaker">產品管理</header>
-                    <nav class='collapse-content @(ViewBag.subnav == "Products" ? "in" : "")'>
-                        <a href="~/_SysAdm/ProductKindList" class='@(ViewBag.subnav2 == "ProductKind" ? "active" : "")'>分類維護</a>
-                        <a href="~/_SysAdm/ProductList" class='@(ViewBag.subnav2 == "Product" ? "active" : "")'>產品資料維護</a>
-                    </nav>
-
-                    <a href="~/_SysAdm/NewsList" class='collapse-toggle oi @(ViewBag.subnav == "News" ? "active" : "")' data-glyph="bell">消息報報管理</a>
-
-                    <a href="~/_SysAdm/WorksList" class='collapse-toggle oi @(ViewBag.subnav == "Works" ? "active" : "")' data-glyph="flag">案例分享管理</a>
-
-                    <a href="~/_SysAdm/Agents" class='collapse-toggle oi @(ViewBag.subnav == "Agents" ? "active" : "")' data-glyph="clipboard">代理商管理</a>
+                    <a href="~/_SysAdm/TeamList" class='collapse-toggle oi @(ViewBag.subnav == "Team" ? "active" : "")' data-glyph="flag">全台服務團隊管理</a>
 
                     <header class='collapse-toggle oi @(ViewBag.subnav == "Cog" ? "active" : "")' data-glyph="cog">系統設定</header>
                     <nav class='collapse-content @(ViewBag.subnav == "Cog" ? "in" : "")'>

@@ -20,7 +20,7 @@ using System.Web.Mvc;
 
 namespace OutWeb.Controllers
 {
-    [Auth]
+    // [Auth]
     [ErrorHandler]
     public class _SysAdmController : Controller
     {
@@ -30,6 +30,20 @@ namespace OutWeb.Controllers
             ViewBag.IsFirstPage = false;
         }
 
+        #region 全台服務團隊
+        public ActionResult TeamList()
+        {
+            return View("TeamList");
+        }
+        public ActionResult TeamDataAdd()
+        {
+            return View("TeamDataAdd");
+        }
+        public ActionResult TeamDataEdit()
+        {
+            return View("TeamDataEdit");
+        }
+        #endregion 全台服務團隊
 
         #region 產品管理 分類
         /// <summary>

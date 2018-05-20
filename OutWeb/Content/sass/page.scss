@@ -511,9 +511,30 @@ h3.title {
 
 // == Team
 .Team {
+
+    .form-inline {
+        input[type="text"] {
+            width: 300px;
+        }
+    }
+
     table {
         border-spacing: 1px;
         border-collapse: separate;
+    }
+
+    @include mq-max(break(phone-plus,-1)) {
+        .form-inline {
+            select, input[type="text"] {
+                display: block;
+                width: 100%;
+                margin-bottom: $spacer;
+            }
+            .btn {
+                display: block;
+                margin: 0 auto;
+            }
+        }
     }
 }
 

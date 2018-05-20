@@ -140,23 +140,23 @@ $table-rwd:              true !default;
 $cursor-disabled:                not-allowed !default;             // 表單元素(停用)上的滑鼠樣式
 $input-font-size:                15px !default;
 $input-height:                   false !default;                    //$input-font-size * 1.8
-$input-pd:                       0 12px !default;
+$input-pd:                       12px 12px !default;
 
-$input-bg:                       $brand-primary !default;          // #fff
-$input-border-color:             lighten($muted, 8) !default;
-$input-color:                    #fff !default;                    // $brand-primary
+$input-bg:                       #fff !default;          // #fff
+$input-border-color:             #6cb1c4 !default;
+$input-color:                    $body-color !default;                    // $brand-primary
 $input-focus-color:              $warning !default; //lighten($brand-primary, 15%)
 $input-border:                   1px solid $input-border-color !default;
 $input-radius:                   false !default; // 5px
 $input-shadow:                   inset 0 1px 1px rgba(0,0,0,.075) !default;
 $input-transition:               border-color ease-in-out .15s, box-shadow ease-in-out .15s !default;
-$input-placeholder-color:        rgba(#fff, .3) !default;
+$input-placeholder-color:        #ccc !default;
 
 $form-label-line-height:         ($input-font-size + 4) !default;
 
 // select
 $select-caret-color:             $warning !default;
-$select-caret-checked-color:     $brand-secondary !default;
+$select-caret-checked-color:     $brand-primary !default;
 
 // checkbox style
 $choice-box-color:               $input-focus-color !default;

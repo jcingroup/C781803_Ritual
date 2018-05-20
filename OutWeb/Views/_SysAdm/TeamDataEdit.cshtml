@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    ViewBag.Crumb = "全台服務團隊管理";
+    ViewBag.subnav = "Team";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>@ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
+@*
+using (Html.BeginForm("WorksDataAdd", "_SysAdm", FormMethod.Post, new { id = "formManageWorksData", @class = "form-list", @enctype = "multipart/form-data" }))
+{
+    Html.RenderPartial("_WorksDataPartial", Model);
+}
+*@
+
+<section class="row row-x0">
+    <div class="col-6">
+        <dl class="field">
+            <dt class="col-2"><sup title="必填">*</sup> 縣市</dt>
+            <dd class="col-10">
+                <select name="" id="">
+                    <option value="">請選擇縣市</option>
+                    <option value="" selected>桃園市</option>
+                </select>
+            </dd>
+        </dl>
+        <dl class="field">
+            <dt class="col-2"><sup title="必填">*</sup> 鄉鎮市區</dt>
+            <dd class="col-10">
+                <select name="" id="">
+                    <option value="">請選擇鄉鎮市區</option>
+                    <option value="" selected>中壢區</option>
+                </select>
+            </dd>
+        </dl>
+        <dl class="field">
+            <dt class="col-2"><sup title="必填">*</sup> 地址</dt>
+            <dd class="col-10">
+                <input type="text" placeholder="請輸入地址" required value="培英路276號">
+            </dd>
+        </dl>
+        <dl class="field">
+            <dt class="col-2"><sup title="必填">*</sup> 公司名稱</dt>
+            <dd class="col-10">
+                <input type="text" placeholder="請輸入公司名稱" required value="新天堂生命">
+            </dd>
+        </dl>
+        <dl class="field">
+            <dt class="col-2"><sup title="必填">*</sup> 聯絡人</dt>
+            <dd class="col-10">
+                <input type="text" placeholder="請輸入聯絡人" required value="黃任遠">
+            </dd>
+        </dl>
+        <dl class="field">
+            <dt class="col-2"><sup title="必填">*</sup> 電話</dt>
+            <dd class="col-10">
+                <input type="text" placeholder="請輸入電話" required value="0925-298-881">
+            </dd>
+        </dl>
+        <dl class="field">
+            <dt class="col-2">排序</dt>
+            <dd class="col-10">
+                <input type="number" class="inline" name="sortIndex" value="100">
+                <small>數字愈大愈前面</small>
+            </dd>
+        </dl>
+        <dl class="field">
+            <dt class="col-2">前台顯示</dt>
+            <dd class="col-10">
+                <label class="switch">
+                    <input type="checkbox" name="fSt" checked>
+                    <div class="slider round"></div>
+                </label>
+            </dd>
+        </dl>
+    </div>
+</section>
+<footer class="submit-bar clear mt-24">
+    <button type="button" id="submitBtn" class="btn success oi" data-glyph="circle-check">
+        確認儲存
+    </button>
+    <button type="button" class="btn warning oi" data-glyph="circle-x" onclick="location.href='TeamList'">
+        回列表
+    </button>
+</footer>

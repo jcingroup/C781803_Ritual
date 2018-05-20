@@ -449,11 +449,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Views\_SysAdm\ProductDataAdd.cshtml" />
-    <Content Include="Views\_SysAdm\ProductKindList.cshtml" />
-    <Content Include="Views\_SysAdm\ProductList.cshtml" />
-    <Content Include="Views\_SysAdm\_NewsDataPartial.cshtml" />
-    <Content Include="Views\_SysAdm\_ProductDataPartial.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -468,15 +463,7 @@
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\_SysAdm\NewsEdit.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\_SysAdm\ProductDataEdit.cshtml" />
-    <Content Include="Views\_SysAdm\_ProductKindDataPartial.cshtml" />
-    <Content Include="Views\_SysAdm\ProductKindAdd.cshtml" />
-    <Content Include="Views\_SysAdm\ProductKindEdit.cshtml" />
-    <Content Include="Views\_SysAdm\_WorksDataPartial.cshtml" />
-    <Content Include="Views\_SysAdm\WorksDataAdd.cshtml" />
-    <Content Include="Views\_SysAdm\WorksDataEdit.cshtml" />
     <Content Include="Views\AboutUs\AboutUs.cshtml" />
     <Content Include="Views\ContactUs\ContactUs.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -485,6 +472,10 @@
     <Content Include="Views\Services\Services.cshtml" />
     <Content Include="Views\Team\Team.cshtml" />
     <Content Include="Views\Trust\Trust.cshtml" />
+    <Content Include="Views\SignIn\Login.cshtml" />
+    <Content Include="Views\_SysAdm\TeamDataAdd.cshtml" />
+    <Content Include="Views\_SysAdm\TeamDataEdit.cshtml" />
+    <Content Include="Views\_SysAdm\TeamList.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -507,12 +498,7 @@
     <None Include="Properties\PublishProfiles\Server.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\_SysAdm\ChangePW.cshtml" />
-    <Content Include="Views\_SysAdm\Login_old.cshtml" />
-    <Content Include="Views\_SysAdm\NewsAdd.cshtml" />
-    <Content Include="Views\_SysAdm\NewsList.cshtml" />
     <Content Include="Views\Shared\_MLayout.cshtml" />
-    <Content Include="Views\_SysAdm\WorksList.cshtml" />
-    <Content Include="Views\_SysAdm\Agents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
