@@ -58,6 +58,9 @@ namespace OutWeb.Enums
         [Description("使用者")]
         ADMIN,
 
+        [Description("超級管理者")]
+        SUPERADMIN,
+
         [Description("管理者")]
         USER,
     }

@@ -10,9 +10,6 @@ namespace OutWeb.Service
             ListModuleService listManageModule;
             switch (methodType)
             {
-                case ListMethodType.NEWS:
-                    listManageModule = new NewsModule();
-                    break;
 
                 case ListMethodType.PRODUCT:
                     listManageModule = new ProductModule();

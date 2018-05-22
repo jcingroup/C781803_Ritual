@@ -47,13 +47,15 @@
 <h6 class="sub-copyright">White Board &copy; 2017</h6>
 
 @using (Html.BeginForm("Login", "SignIn", FormMethod.Post, new { id = "formSignIn", @class = "text-left", autocomplete = "off" }))
-{
+{   
+     @Html.AntiForgeryToken()
+
     <header class="title font-sp">System Login</header>
 
     <main>
         <label>帳號 Username</label>
-        <input type="text" class="mb-12" tabindex="1" name="AccountName" id="account" placeholder="請輸入帳號" required>
-        @Html.ValidationMessageFor(m => m.AccountName, "", new { @class = "text-danger" })
+        <input type="text" class="mb-12" tabindex="1" name="Account" id="account" placeholder="請輸入帳號" required>
+        @Html.ValidationMessageFor(m => m.Account, "", new { @class = "text-danger" })
 
 
         <label>密碼 Password</label>

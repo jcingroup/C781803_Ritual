@@ -46,11 +46,14 @@ namespace OutWeb.Provider
             m_user = module.GetUserBySignID(user);
             if (m_user == null)
                 throw new Exception("請輸入正確帳號或密碼");
-            if (m_user.UserAccountName == "manager")
+            if (m_user.UserAccount == "manager")
+                m_user.Role = UserRoleEnum.SUPERADMIN;
+            else if (m_user.UserAccount == "admin")
                 m_user.Role = UserRoleEnum.ADMIN;
             else
                 m_user.Role = UserRoleEnum.USER;
             Context.Session["UserInfo"] = m_user;
+
         }
 
         /// <summary>
