@@ -163,7 +163,6 @@
     <Compile Include="Authorize\AuthAttribute.cs" />
     <Compile Include="Authorize\ErrorHandlerAttribute.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
-    <Compile Include="Controllers\ImgHandlerController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\PublicController.cs" />
@@ -200,45 +199,6 @@
     </Compile>
     <Compile Include="Entities\USER.cs">
       <DependentUpon>RITUAL.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBAGENT.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WBDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WBDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WBDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBLOGERR.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBNEWS.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBPIC.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBPRODUCT.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBPRODUCTTYPE.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBUSR.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\WBWORKS.cs">
-      <DependentUpon>WBDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Enums\ManageEnums.cs" />
     <Compile Include="Enums\ModelInitProperty.cs" />
@@ -282,20 +242,12 @@
     <Compile Include="Models\UserInfo\LoginUserInfoModel.cs" />
     <Compile Include="Models\UserInfo\SignInModel.cs" />
     <Compile Include="Models\WebUser.Controller.cs" />
-    <Compile Include="Modules\FontEnd\FontEndModule.cs" />
-    <Compile Include="Modules\Manage\AgentModule.cs" />
     <Compile Include="Modules\Manage\DBService.cs" />
-    <Compile Include="Modules\Manage\ImgModule.cs" />
-    <Compile Include="Modules\Manage\ProductModule.cs" />
-    <Compile Include="Modules\Manage\ProductKindModule.cs" />
     <Compile Include="Modules\Manage\SignInModule.cs" />
     <Compile Include="Modules\Manage\TeamModule.cs" />
-    <Compile Include="Modules\Manage\WorksModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\UserProvider.cs" />
-    <Compile Include="Repositories\ImageRepository.cs" />
     <Compile Include="Repositories\PublicMethodRepository.cs" />
-    <Compile Include="Service\ListFactoryService.cs" />
     <Compile Include="Service\ListModuleService.cs" />
     <Compile Include="Service\ValidateCode.cs" />
   </ItemGroup>
@@ -371,16 +323,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RITUAL.edmx</DependentUpon>
       <LastGenOutput>RITUAL.cs</LastGenOutput>
-    </Content>
-    <Content Include="Entities\WBDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WBDB.edmx</DependentUpon>
-      <LastGenOutput>WBDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Entities\WBDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WBDB.edmx</DependentUpon>
-      <LastGenOutput>WBDB.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -537,13 +479,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Entities\WBDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WBDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Entities\WBDB.edmx.diagram">
-      <DependentUpon>WBDB.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\Demo.pubxml" />
     <None Include="Properties\PublishProfiles\Server.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
