@@ -277,38 +277,35 @@
                     }
 
 <script>
-        $("#area").on("change",function () {
-                $('form')[0].submit();
-        })
 
-        $("#cities").on("change",function () {
-            var cityId =$(this).val();
-            var url = "@Url.Content("~/_SysAdm/GetCityArea")";
-            $.ajax({
-                async: false,
-                url: url,
-                data: { ID: cityId },
-                type: 'POST',
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        var result = {};
-                        if(typeof response.data === 'string')
-                        {
-                            result = JSON.parse(response.data);
-                        }
-                        $("#area").empty();
-                        for (var key in result.Area) {
-                            var areaName = result.Area[key];
-                            var optionElementReference = new Option(areaName, key, true, true);
-                            $("#area").append(optionElementReference);
-                        }
+    $("#cities").on("change",function () {
+        var cityId =$(this).val();
+        var url = "@Url.Content("~/_SysAdm/GetCityArea")";
+        $.ajax({
+            async: false,
+            url: url,
+            data: { ID: cityId },
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    var result = {};
+                    if(typeof response.data === 'string')
+                    {
+                        result = JSON.parse(response.data);
                     }
-                }, error: function (error) {
-                    console.log(error);
-                    alert(error.messages);
+                    $("#area").empty();
+                    $("#area").append(new Option("請選擇鄉鎮市區", "@null", true, false));
+                    for (var key in result.Area) {
+                        var areaName = result.Area[key];
+                        var optionElementReference = new Option(areaName, key, true, false);
+                        $("#area").append(optionElementReference);
+                    }
                 }
-            });
-            $('form')[0].submit();
-        })
+            }, error: function (error) {
+                console.log(error);
+                alert(error.messages);
+            }
+        });
+    })
 </script>

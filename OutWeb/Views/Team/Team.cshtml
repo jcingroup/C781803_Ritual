@@ -1,27 +1,66 @@
-﻿@{
+﻿@using OutWeb.Models.Manage.TeamModels
+@using OutWeb.Modules.Manage
+@model TeamListViewModel
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BodyClass = "Team";
     ViewBag.Title = "全台服務團隊";
     ViewBag.TitleEn = "Team Members";
     ViewBag.Breadcrumb = ViewBag.Title;
+    List<CityModel> cities = TempData["CityData"] as List<CityModel>;
+    int citySelectID = 0;
+    Dictionary<int, string> areaBind = new Dictionary<int, string>();
+
 }
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
 
 <h3 class="title">
     @ViewBag.Title
     <span>@ViewBag.TitleEn</span>
 </h3>
 
-<form action="" class="form-inline mb-24">
-    <select name="" id="" class="form-element">
-        <option value="">縣市</option>
-    </select>
-    <select name="" id="" class="form-element">
-        <option value="">鄉鎮市區</option>
-    </select>
-    <input type="text" class="form-element" placeholder="請輸入地址、公司名稱或聯絡人關鍵字">
-    <button class="btn"><i class="fas fa-search"></i> 搜尋</button>
-</form>
+@using (Html.BeginForm("Index", "Team", FormMethod.Get, new { id = "frmTeamList", @class = "form-inline mb-24" }))
+{
+    <select name="city" id="cities" class="form-element">
+        <option value="@null">縣市</option>
 
+        @foreach (var item in cities.OrderBy(s => s.ID).ToList())
+        {
+            string selected = string.Empty;
+            if (item.ID == Model.Filter.CityID)
+            {
+                selected = "selected";
+                citySelectID = item.ID;
+            }
+            <option value="@item.ID" @selected>@item.Name</option>
+        }
+    </select>
+
+    {
+        if (citySelectID > 0)
+        {
+            areaBind = cities.Where(s => s.ID == citySelectID).First().Area.ToDictionary(d => d.Key, d => d.Value);
+        }
+    }
+    <select name="area" id="area" class="form-element">
+        <option value="@null">鄉鎮市區</option>
+        @if (citySelectID > 0)
+        {
+            areaBind = cities.Where(s => s.ID == citySelectID).First().Area.ToDictionary(d => d.Key, d => d.Value);
+            foreach (var item in areaBind)
+            {
+                string selected = item.Key == Model.Filter.AreaID ? "selected" : "";
+                <option value="@item.Key" @selected>@item.Value</option>
+            }
+        }
+    </select>
+
+    <input type="text" class="form-element" name="qry" placeholder="請輸入地址、公司名稱或聯絡人關鍵字" value="@Model.Filter.QueryString">
+
+    <button class="btn"><i class="fas fa-search"></i> 搜尋</button>
+}
 <div class="table-rwd">
     <table class="table-striped table-hover">
         <colgroup>
@@ -43,182 +82,73 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>桃園市</td>
-                <td>中壢區</td>
-                <td class="text-left">培英路276號</td>
-                <td>新天堂生命</td>
-                <td>黃任遠</td>
-                <td>0925-298-881</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>中壢區</td>
-                <td class="text-left">培英路152號</td>
-                <td>合善園生命科技有限公司</td>
-                <td>鍾宜蓁</td>
-                <td>0967-113-399</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>平鎮區</td>
-                <td class="text-left">中豐路山頂段興峰巷4弄10號</td>
-                <td>靜心</td>
-                <td>徐瑞康</td>
-                <td>0926-268-883</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>桃園區</td>
-                <td class="text-left">大有路956巷26號</td>
-                <td>桃殯豐有限公司</td>
-                <td>游淑美</td>
-                <td>0915-155-075</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>平鎮區</td>
-                <td class="text-left">大仁街56號</td>
-                <td>白蘭禮儀</td>
-                <td>羅彥如</td>
-                <td>0919-369-562</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>中壢區</td>
-                <td class="text-left">合圳北路二段95巷30弄13號</td>
-                <td>慈蓮禮儀公司</td>
-                <td>張富誠</td>
-                <td>0928-158-413</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>中壢區</td>
-                <td class="text-left">實踐路225號3樓17</td>
-                <td>凱御生命禮儀有限公司</td>
-                <td>江明煊</td>
-                <td>0989-383-581</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>八德區</td>
-                <td class="text-left">介壽路二段1202巷14號</td>
-                <td>凱御生命禮儀有限公司</td>
-                <td>黃緯誠</td>
-                <td>0926-764-171</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>平鎮區</td>
-                <td class="text-left">興安路39巷39號</td>
-                <td>恩緣生命事業有限公司</td>
-                <td>鍾芷茜</td>
-                <td>0975-392-027</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>桃園區</td>
-                <td class="text-left">樹仁三街131巷26弄2號4樓</td>
-                <td>福沅生命科技有限公司</td>
-                <td>黃獻輝</td>
-                <td>0958-173-032</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>中壢區</td>
-                <td class="text-left">培英路256-1號</td>
-                <td>梵天禮儀社</td>
-                <td>林允中</td>
-                <td>0936-561-291</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>中壢區</td>
-                <td class="text-left">培英路256-1號</td>
-                <td>梵天禮儀社</td>
-                <td>張峻銘</td>
-                <td>0925-300-769</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>中壢區</td>
-                <td class="text-left">培英路256-1號</td>
-                <td>梵天禮儀社</td>
-                <td>李明坤</td>
-                <td>0955-228-629</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>大溪區</td>
-                <td class="text-left">康莊路236號</td>
-                <td>仰德禮儀企業社</td>
-                <td>吳念庠</td>
-                <td>0989-191-516</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>平鎮區</td>
-                <td class="text-left">新城路38號</td>
-                <td>愛心關懷生命事業</td>
-                <td>李寬容</td>
-                <td>0911-779-830</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>平鎮區</td>
-                <td class="text-left">育達路107號</td>
-                <td>閻航生命</td>
-                <td>劉廷輝</td>
-                <td>0986-483-511</td>
-            </tr>
-            <tr>
-                <td>新竹縣</td>
-                <td>湖口鄉</td>
-                <td class="text-left">民生街3巷18弄13號</td>
-                <td>千代</td>
-                <td>劉昌演</td>
-                <td>0958-718-525</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>桃園區</td>
-                <td class="text-left">力行路102號11樓之4</td>
-                <td>登仙</td>
-                <td>林榮信</td>
-                <td>0932-092-578</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>平鎮區</td>
-                <td class="text-left">榮興街20號2樓</td>
-                <td>登仙</td>
-                <td>楊世宗</td>
-                <td>0933-671-726</td>
-            </tr>
-            <tr>
-                <td>嘉義市</td>
-                <td>西區</td>
-                <td class="text-left">德安路75號</td>
-                <td>至臻生命</td>
-                <td>陳昱臻</td>
-                <td>0982-770-075</td>
-            </tr>
-            <tr>
-                <td>高雄市</td>
-                <td>仁武區</td>
-                <td class="text-left">八德南路398巷2號13樓之2</td>
-                <td>福亨禮儀企業社</td>
-                <td>林勇志</td>
-                <td>0910-889-091</td>
-            </tr>
-            <tr>
-                <td>桃園市</td>
-                <td>龍潭區</td>
-                <td class="text-left">中興路九龍段81號</td>
-                <td>華欣生命禮儀</td>
-                <td>黃偉華</td>
-                <td>0958-972-549</td>
-            </tr>
+            @foreach (var data in Model.Result.Data)
+            {
+                string cityName = cities.Where(s => s.ID == data.MAP_CITY_ID).First().Name;
+                string areaName = string.Empty;
+                foreach (var item in cities)
+                {
+                    foreach (var area in item.Area)
+                    {
+                        if (area.Key == data.MAP_AREA_ID)
+                        {
+                            areaName = area.Value;
+                            break;
+                        }
+
+                    }
+                }
+                <tr>
+                    <td>@cityName</td>
+                    <td>@areaName</td>
+                    <td class="text-left">@data.ADDR</td>
+                    <td>@data.CONTACT</td>
+                    <td>@data.CONTACT</td>
+                    <td>@data.PHONE</td>
+                </tr>
+
+            }
+            @*<tr>
+                    <td>桃園市</td>
+                    <td>中壢區</td>
+                    <td class="text-left">培英路276號</td>
+                    <td>新天堂生命</td>
+                    <td>黃任遠</td>
+                    <td>0925-298-881</td>
+                </tr>*@
         </tbody>
     </table>
 </div>
+
+<script>
+
+    $("#cities").on("change", function () {
+        var cityId = $(this).val();
+        var url = "@Url.Content("~/Team/GetCityArea")";
+        $.ajax({
+            async: false,
+            url: url,
+            data: { ID: cityId },
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    var result = {};
+                    if (typeof response.data === 'string') {
+                        result = JSON.parse(response.data);
+                    }
+                    $("#area").empty();
+                    $("#area").append(new Option("請選擇鄉鎮市區", "@null", true, false));
+                    for (var key in result.Area) {
+                        var areaName = result.Area[key];
+                        var optionElementReference = new Option(areaName, key, true, false);
+                        $("#area").append(optionElementReference);
+                    }
+                }
+            }, error: function (error) {
+                console.log(error);
+                alert(error.messages);
+            }
+        });
+    })
+</script>
