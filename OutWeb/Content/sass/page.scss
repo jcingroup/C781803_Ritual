@@ -216,14 +216,14 @@ h3.title {
 }
 
 //== AboutUs
-.AboutUs, .ContactUs {
+.AboutUs {
     #content p {
-        @extend .font-lg;
+        font-size: em(20px);
     }
 
     @include mq-max(break(desktop,-1)) {
         #content p {
-            font-size: em(16px);
+            font-size: em(18px);
         }
     }
 }
@@ -378,7 +378,7 @@ h3.title {
     }
 
     #content li {
-        @extend .font-lg;
+        font-size: em(20px);
     }
 
     @include mq-max(break(desktop,-1)) {
@@ -389,7 +389,7 @@ h3.title {
 
     @include mq-max(break(tablet,-1)) {
         #content li {
-            font-size: em(16px);
+            font-size: em(18px);
         }
     }
 
