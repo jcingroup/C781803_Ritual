@@ -2,6 +2,7 @@
 using OutWeb.Entities;
 using OutWeb.Models.UserInfo;
 using OutWeb.Provider;
+using OutWeb.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,9 +15,9 @@ namespace OutWeb.Modules.Manage
 
     public class SignInModule
     {
-        private WBDBEntities m_DB = new WBDBEntities();
+        private RITUAL m_DB = new RITUAL();
 
-        private WBDBEntities DB
+        private RITUAL DB
         { get { return this.m_DB; } set { this.m_DB = value; } }
         /// <summary>
         /// 取得使用者資訊
@@ -26,19 +27,17 @@ namespace OutWeb.Modules.Manage
         public LoginUserInfoModel GetUserBySignID(SignInModel userModel)
         {
             LoginUserInfoModel userInfo =
-            this.DB.WBUSR
-                .Where(s => s.SIGNIN_ID == userModel.AccountName && s.SIGNIN_PWD == userModel.Password)
+            this.DB.USER
+                .Where(s => s.USR_ID == userModel.Account && s.USR_PWD == userModel.Password)
                          .Select(s => new LoginUserInfoModel()
                          {
                              ID = s.ID,
-                             UserAccountName = s.SIGNIN_ID,
+                             UserAccount = s.USR_ID,
                              UserName = s.USR_NM,
-                             UserEngName = s.USR_ENM,
-                             Email = s.USR_EML,
-                             CreateDate = s.BUD_DTM,
-                             GUID = s.USR_GUID
+                             IsDisabled = s.DISABLE,
                          })
                          .FirstOrDefault();
+            PublicMethodRepository.HtmlDecode(userInfo);
             return userInfo;
         }
 
@@ -52,13 +51,19 @@ namespace OutWeb.Modules.Manage
             var oldPwd = form["oldPw"];
             var newPwd = form["newPw"];
             var rePwd = form["rePw"];
-            var entityUser = this.DB.WBUSR.Where(o => o.SIGNIN_ID == UserProvider.Instance.User.UserAccountName).First();
-            bool isTruePw = (oldPwd + UserProvider.Instance.User.GUID == entityUser.SIGNIN_PWD + UserProvider.Instance.User.GUID);
+            var entityUser = this.DB.USER
+                .Where(o => o.ID == UserProvider.Instance.User.ID &&
+            o.USR_ID == UserProvider.Instance.User.UserAccount).First();
+            PublicMethodRepository.HtmlDecode(entityUser);
+
+
+            bool isTruePw = (oldPwd == entityUser.USR_PWD);
             if (isTruePw)
             {
                 if (newPwd.Equals(rePwd))
                 {
-                    entityUser.SIGNIN_PWD = rePwd;
+                    PublicMethodRepository.FilterXss(entityUser);
+                    entityUser.USR_PWD = rePwd;
                     this.DB.Entry(entityUser).State = EntityState.Modified;
                     this.DB.SaveChanges();
                 }
@@ -68,6 +73,16 @@ namespace OutWeb.Modules.Manage
             else
                 throw new Exception("原密碼輸入錯誤.");
             return true;
+        }
+
+        public void Dispose()
+        {
+            if (this.DB.Database.Connection.State == System.Data.ConnectionState.Open)
+            {
+                this.DB.Database.Connection.Close();
+            }
+            this.DB.Dispose();
+            this.DB = null;
         }
     }
 }

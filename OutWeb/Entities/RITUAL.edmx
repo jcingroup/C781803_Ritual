@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RITUALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AREA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MAP_CITY_ID" Type="int" Nullable="false" />
+          <Property Name="AREA_NM" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'RITUAL.dbo.CITY' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="CITY">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CITY_NM" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CITY_NM" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TEAM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MAP_CITY_ID" Type="int" Nullable="false" />
+          <Property Name="MAP_AREA_ID" Type="int" Nullable="false" />
+          <Property Name="ADDR" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="COMPANY_NM" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CONTACT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PHONE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UP_DT" Type="datetime" Nullable="false" />
+          <Property Name="UP_ID" Type="int" Nullable="false" />
+          <Property Name="BUD_DT" Type="datetime" Nullable="false" />
+          <Property Name="BUD_ID" Type="int" Nullable="false" />
+          <Property Name="SQ" Type="int" />
+          <Property Name="DISABLED" Type="bit" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USR_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="USR_PWD" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BUD_DT" Type="datetime" Nullable="false" />
+          <Property Name="BUD_ID" Type="int" Nullable="false" />
+          <Property Name="UPD_DT" Type="datetime" Nullable="false" />
+          <Property Name="UPD_ID" Type="int" Nullable="false" />
+          <Property Name="USR_NM" Type="nvarchar" MaxLength="50" />
+          <Property Name="DISABLE" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="RITUALModelStoreContainer">
+          <EntitySet Name="AREA" EntityType="Self.AREA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEAM" EntityType="Self.TEAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CITY" EntityType="Self.CITY" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CITY].[ID] AS [ID], 
+    [CITY].[CITY_NM] AS [CITY_NM]
+    FROM [dbo].[CITY] AS [CITY]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RITUALModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AREA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MAP_CITY_ID" Type="Int32" Nullable="false" />
+          <Property Name="AREA_NM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USR_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="USR_PWD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BUD_DT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BUD_ID" Type="Int32" Nullable="false" />
+          <Property Name="UPD_DT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UPD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USR_NM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DISABLE" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CITY">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CITY_NM" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CITY_NM" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="RITUAL" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AREA" EntityType="Self.AREA" />
+          <EntitySet Name="USER" EntityType="Self.USER" />
+          <EntitySet Name="CITY" EntityType="Self.CITY" />
+          <EntitySet Name="TEAM" EntityType="RITUALModel.TEAM" />
+        </EntityContainer>
+        <EntityType Name="TEAM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MAP_CITY_ID" Type="Int32" Nullable="false" />
+          <Property Name="MAP_AREA_ID" Type="Int32" Nullable="false" />
+          <Property Name="ADDR" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="COMPANY_NM" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CONTACT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PHONE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UP_DT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UP_ID" Type="Int32" Nullable="false" />
+          <Property Name="BUD_DT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BUD_ID" Type="Int32" Nullable="false" />
+          <Property Name="SQ" Type="Int32" />
+          <Property Name="DISABLED" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RITUALModelStoreContainer" CdmEntityContainer="RITUAL">
+          <EntitySetMapping Name="AREA">
+            <EntityTypeMapping TypeName="RITUALModel.AREA">
+              <MappingFragment StoreEntitySet="AREA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MAP_CITY_ID" ColumnName="MAP_CITY_ID" />
+                <ScalarProperty Name="AREA_NM" ColumnName="AREA_NM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER">
+            <EntityTypeMapping TypeName="RITUALModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USR_ID" ColumnName="USR_ID" />
+                <ScalarProperty Name="USR_PWD" ColumnName="USR_PWD" />
+                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
+                <ScalarProperty Name="BUD_ID" ColumnName="BUD_ID" />
+                <ScalarProperty Name="UPD_DT" ColumnName="UPD_DT" />
+                <ScalarProperty Name="UPD_ID" ColumnName="UPD_ID" />
+                <ScalarProperty Name="USR_NM" ColumnName="USR_NM" />
+                <ScalarProperty Name="DISABLE" ColumnName="DISABLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CITY">
+            <EntityTypeMapping TypeName="RITUALModel.CITY">
+              <MappingFragment StoreEntitySet="CITY">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CITY_NM" ColumnName="CITY_NM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEAM">
+            <EntityTypeMapping TypeName="RITUALModel.TEAM">
+              <MappingFragment StoreEntitySet="TEAM">
+                <ScalarProperty Name="DISABLED" ColumnName="DISABLED" />
+                <ScalarProperty Name="SQ" ColumnName="SQ" />
+                <ScalarProperty Name="BUD_ID" ColumnName="BUD_ID" />
+                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
+                <ScalarProperty Name="UP_ID" ColumnName="UP_ID" />
+                <ScalarProperty Name="UP_DT" ColumnName="UP_DT" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="CONTACT" ColumnName="CONTACT" />
+                <ScalarProperty Name="COMPANY_NM" ColumnName="COMPANY_NM" />
+                <ScalarProperty Name="ADDR" ColumnName="ADDR" />
+                <ScalarProperty Name="MAP_AREA_ID" ColumnName="MAP_AREA_ID" />
+                <ScalarProperty Name="MAP_CITY_ID" ColumnName="MAP_CITY_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,7 +1,13 @@
-﻿@{
+﻿@using OutWeb.Models.Manage.TeamModels
+@using OutWeb.Modules.Manage
+@model TeamDetailsDataModel
+
+@{
     Layout = "~/Views/Shared/_MLayout.cshtml";
     ViewBag.Crumb = "全台服務團隊管理";
     ViewBag.subnav = "Team";
+    List<CityModel> cities = TempData["cities"] as List<CityModel>;
+    int citySelectID = 0;
 }
 
 @section Breadcrumb {
@@ -11,80 +17,135 @@
 }
 
 <h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
-@*
-using (Html.BeginForm("WorksDataAdd", "_SysAdm", FormMethod.Post, new { id = "formManageWorksData", @class = "form-list", @enctype = "multipart/form-data" }))
-{
-    Html.RenderPartial("_WorksDataPartial", Model);
-}
-*@
 
-<section class="row row-x0">
-    <div class="col-6">
-        <dl class="field">
-            <dt class="col-2"><sup title="必填">*</sup> 縣市</dt>
-            <dd class="col-10">
-                <select name="" id="">
-                    <option value="">請選擇縣市</option>
-                    <option value="" selected>桃園市</option>
-                </select>
-            </dd>
-        </dl>
-        <dl class="field">
-            <dt class="col-2"><sup title="必填">*</sup> 鄉鎮市區</dt>
-            <dd class="col-10">
-                <select name="" id="">
-                    <option value="">請選擇鄉鎮市區</option>
-                    <option value="" selected>中壢區</option>
-                </select>
-            </dd>
-        </dl>
-        <dl class="field">
-            <dt class="col-2"><sup title="必填">*</sup> 地址</dt>
-            <dd class="col-10">
-                <input type="text" placeholder="請輸入地址" required value="培英路276號">
-            </dd>
-        </dl>
-        <dl class="field">
-            <dt class="col-2"><sup title="必填">*</sup> 公司名稱</dt>
-            <dd class="col-10">
-                <input type="text" placeholder="請輸入公司名稱" required value="新天堂生命">
-            </dd>
-        </dl>
-        <dl class="field">
-            <dt class="col-2"><sup title="必填">*</sup> 聯絡人</dt>
-            <dd class="col-10">
-                <input type="text" placeholder="請輸入聯絡人" required value="黃任遠">
-            </dd>
-        </dl>
-        <dl class="field">
-            <dt class="col-2"><sup title="必填">*</sup> 電話</dt>
-            <dd class="col-10">
-                <input type="text" placeholder="請輸入電話" required value="0925-298-881">
-            </dd>
-        </dl>
-        <dl class="field">
-            <dt class="col-2">排序</dt>
-            <dd class="col-10">
-                <input type="number" class="inline" name="sortIndex" value="100">
-                <small>數字愈大愈前面</small>
-            </dd>
-        </dl>
-        <dl class="field">
-            <dt class="col-2">前台顯示</dt>
-            <dd class="col-10">
-                <label class="switch">
-                    <input type="checkbox" name="fSt" checked>
-                    <div class="slider round"></div>
-                </label>
-            </dd>
-        </dl>
-    </div>
-</section>
-<footer class="submit-bar clear mt-24">
-    <button type="button" id="submitBtn" class="btn success oi" data-glyph="circle-check">
-        確認儲存
-    </button>
-    <button type="button" class="btn warning oi" data-glyph="circle-x" onclick="location.href='TeamList'">
-        回列表
-    </button>
-</footer>
+@using (Html.BeginForm("TeamDataSave", "_SysAdm", FormMethod.Post, new { id = "formManageTeamData", @class = "form-list", enctype = "multipart/form-data" }))
+{
+    <input type="hidden" name="pageId" value="@Model.Data.ID" />
+    <section class="row row-x0">
+        <div class="col-6">
+            <dl class="field">
+                <dt class="col-2"><sup title="必填">*</sup> 縣市</dt>
+                <dd class="col-10">
+                    <select name="city" id="cities">
+                        @foreach (var item in cities.OrderBy(s => s.ID).ToList())
+                        {
+                            string selected = string.Empty;
+                            if (item.ID == Model.Data.MAP_CITY_ID)
+                            {
+                                selected = "selected";
+                                citySelectID = item.ID;
+                            }
+                            <option value="@item.ID" @selected>@item.Name</option>
+                        }
+                    </select>
+                </dd>
+            </dl>
+            @{
+                var area = cities.Where(s => s.ID == citySelectID).First().Area.ToDictionary(d => d.Key, d => d.Value);
+            }
+            <dl class="field">
+                <dt class="col-2"><sup title="必填">*</sup> 鄉鎮市區</dt>
+                <dd class="col-10">
+                    <select name="area" id="area">
+                        @foreach (var item in area)
+                        {
+                            string selected = item.Key == Model.Data.MAP_AREA_ID ? "selected" : "";
+                            <option value="@item.Key" @selected>@item.Value</option>
+                        }
+                    </select>
+                </dd>
+            </dl>
+            <dl class="field">
+                <dt class="col-2"><sup title="必填">*</sup> 地址</dt>
+                <dd class="col-10">
+                    <input type="text" placeholder="請輸入地址" name="addr" required value="@Model.Data.ADDR">
+                </dd>
+            </dl>
+            <dl class="field">
+                <dt class="col-2"><sup title="必填">*</sup> 公司名稱</dt>
+                <dd class="col-10">
+                    <input type="text" placeholder="請輸入公司名稱" name="companyName" required value="@Model.Data.COMPANY_NM">
+                </dd>
+            </dl>
+            <dl class="field">
+                <dt class="col-2"><sup title="必填">*</sup> 聯絡人</dt>
+                <dd class="col-10">
+                    <input type="text" placeholder="請輸入聯絡人" required name="contact" value="@Model.Data.CONTACT">
+                </dd>
+            </dl>
+            <dl class="field">
+                <dt class="col-2"><sup title="必填">*</sup> 電話</dt>
+                <dd class="col-10">
+                    <input type="text" placeholder="請輸入電話" required name="phone" value="@Model.Data.PHONE">
+                </dd>
+            </dl>
+            <dl class="field">
+                <dt class="col-2">排序</dt>
+                <dd class="col-10">
+                    <input type="number" class="inline" name="sq" value="@Model.Data.SQ">
+                    <small>數字愈大愈前面</small>
+                </dd>
+            </dl>
+            <dl class="field">
+                <dt class="col-2">前台顯示</dt>
+                <dd class="col-10">
+                    <label class="switch">
+                        @if ((bool)Model.Data.DISABLED)
+                        {
+                            <input type="checkbox" name="fSt" value="false">
+                        }
+                        else
+
+                        {
+                            <input type="checkbox" name="fSt" value="false" checked>
+                        }
+                        <div class="slider round"></div>
+                    </label>
+                </dd>
+            </dl>
+        </div>
+    </section>
+    <footer class="submit-bar clear mt-24">
+        <button type="submit" id="submitBtn" class="btn success oi" data-glyph="circle-check">
+            確認儲存
+        </button>
+        <button type="button" class="btn warning oi" data-glyph="circle-x" onclick="location.href='/_SysAdm/TeamList'">
+            回列表
+        </button>
+    </footer>
+                }
+
+@section IncludeScript{
+    <script>
+            $("#cities").on("change", function () {
+                var cityId = $(this).val();
+                var url = "@Url.Content("~/_SysAdm/GetCityArea")";
+                $.ajax({
+                    async: false,
+                    url: url,
+                    data: { ID: cityId },
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            var result = {};
+                            if (typeof response.data === 'string') {
+                                result = JSON.parse(response.data);
+                            }
+                            $("#area").empty();
+                            for (var key in result.Area) {
+                                var areaName = result.Area[key];
+                                var optionElementReference = new Option(areaName, key, true, true);
+                                $("#area").append(optionElementReference);
+                            }
+                        }
+                    }, error: function (error) {
+                        console.log(error);
+                        alert(error.messages);
+                    }
+                });
+            })
+    </script>
+
+
+}

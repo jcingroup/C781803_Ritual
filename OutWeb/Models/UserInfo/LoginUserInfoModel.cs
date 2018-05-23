@@ -14,7 +14,7 @@ namespace OutWeb.Models.UserInfo
         /// <summary>
         /// 使用者帳號
         /// </summary>
-        public string UserAccountName { get; set; }
+        public string UserAccount { get; set; }
 
         /// <summary>
         /// 使用者名稱
@@ -30,6 +30,10 @@ namespace OutWeb.Models.UserInfo
         /// EMAIL
         /// </summary>
         public string Email { get; set; }
+        /// <summary>
+        /// 停權
+        /// </summary>
+        public bool IsDisabled { get; set; }
 
         /// <summary>
         /// GUID
@@ -42,5 +46,10 @@ namespace OutWeb.Models.UserInfo
         /// 角色
         /// </summary>
         public UserRoleEnum Role { get; set; }
+
+        /// <summary>
+        /// 單位代碼
+        /// </summary>
+        public int UnitCode { get; set; }
     }
 }

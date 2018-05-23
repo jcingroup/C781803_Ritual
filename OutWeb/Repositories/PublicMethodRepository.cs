@@ -1,9 +1,11 @@
 ﻿using OutWeb.Enums;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace OutWeb.Repositories
@@ -13,7 +15,61 @@ namespace OutWeb.Repositories
         private static string m_customLanguageCode = string.Empty;
 
         private static Language m_language = Language.NotSet;
-
+        public static void FilterXss<T>(T obj)
+        {
+            // Get type.
+            Type type = typeof(T);
+            if (typeof(IEnumerable).IsAssignableFrom(type))
+            {
+                foreach (var str in obj as List<string>)
+                    HttpUtility.HtmlEncode(str);
+            }
+            else
+            {
+                // Loop over properties.
+                foreach (PropertyInfo propertyInfo in type.GetProperties())
+                {
+                    string name = propertyInfo.Name;
+                    object value = propertyInfo.GetValue(obj, null);
+                    if (value is string)
+                    {
+                        if (!propertyInfo.CanWrite)
+                            continue;
+                        //value = Sanitizer.GetSafeHtmlFragment(value.ToString());
+                        value = HttpUtility.HtmlEncode(value.ToString());
+                        propertyInfo.SetValue(obj, value);
+                    }
+                }
+            }
+        }
+        public static void HtmlDecode<T>(T obj)
+        {
+            if (obj == null)
+                return;
+            // Get type.
+            Type type = typeof(T);
+            if (typeof(IEnumerable).IsAssignableFrom(type))
+            {
+                foreach (var str in obj as List<string>)
+                    HttpUtility.HtmlDecode(str);
+            }
+            else
+            {
+                // Loop over properties.
+                foreach (PropertyInfo propertyInfo in type.GetProperties())
+                {
+                    string name = propertyInfo.Name;
+                    object value = propertyInfo.GetValue(obj, null);
+                    if (value is string)
+                    {
+                        if (!propertyInfo.CanWrite)
+                            continue;
+                        value = HttpUtility.HtmlDecode(value.ToString());
+                        propertyInfo.SetValue(obj, value);
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// 使用者自訂語系
