@@ -3,7 +3,9 @@
 @model SignInModel
 @{
     Layout = "~/Views/Shared/_MLayout.cshtml";
-    ViewBag.Title = "JCIN後台管理系統";
+    ViewBag.mainName = "儀禮科技管理系統";
+    ViewBag.mainNameEn = "Ritual Technology";
+    ViewBag.year = "2018";
     ViewBag.BodyClass = "Login";
     ViewBag.IsFirstPage = true;
 }
@@ -41,10 +43,10 @@
     </script>
 }
 
-<h1 class="site-title">
-    WTB 懷特博管理系統<small class="text-muted ml-8 font-sp">Web Manager</small>
+<h1 class="site-title text-danger">
+    @ViewBag.mainName <small class="text-muted ml-8 font-sp">Web Manager</small>
 </h1>
-<h6 class="sub-copyright">White Board &copy; 2017</h6>
+<h6 class="sub-copyright">@ViewBag.mainNameEn &copy; @ViewBag.Year</h6>
 
 @using (Html.BeginForm("Login", "SignIn", FormMethod.Post, new { id = "formSignIn", @class = "text-left", autocomplete = "off" }))
 {   

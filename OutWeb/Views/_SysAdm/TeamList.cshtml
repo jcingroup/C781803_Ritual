@@ -128,6 +128,8 @@
     </script>
 }
 
+<h3 class="title">@ViewBag.Crumb</h3>
+
 @section Breadcrumb {
     <ul class="breadcrumb">
         <li>@ViewBag.Crumb</li>
@@ -135,6 +137,10 @@
 }
 @using (Html.BeginForm("TeamList", "_SysAdm", FormMethod.Get, new { id = "frmNewsList" }))
 {
+    <div class="alert-warning mb-16">
+        <strong>前台排序：</strong> 數字愈大愈前面。
+    </div>
+
     <div class="btn-group mb-8">
         <button type="button" class="btn success oi" data-glyph="plus" onclick="location.href='@Url.Content("/_SysAdm/TeamDataAdd")'">新增</button>
     </div>
@@ -142,7 +148,7 @@
     <header class="table-head form-inline">
         <label>縣市</label>
         <select name="city" id="cities">
-            <option value="@null">請選擇縣市</option>
+            <option value="@null">全部縣市</option>
 
             @foreach (var item in cities.OrderBy(s => s.ID).ToList())
             {
@@ -164,7 +170,7 @@
         }
         <label>鄉鎮市區</label>
         <select name="area" id="area">
-            <option value="@null">請選擇鄉鎮市區</option>
+            <option value="@null">全部鄉鎮市區</option>
             @if (citySelectID > 0)
             {
                 areaBind = cities.Where(s => s.ID == citySelectID).First().Area.ToDictionary(d => d.Key, d => d.Value);
@@ -180,10 +186,16 @@
     </header>
     <table class="table-list table-hover table-striped">
         <colgroup>
-            <col span="2">
-            <col style="width: 13.5%">
-            <col>
-            <col span="3" style="width: 11%">
+            <col style="width: 5%">
+            <col style="width: 7%">
+            <col style="width: 7%">
+            <col style="width: 23%">
+            <col style="width: 20%">
+            <col style="width: 7%">
+            <col style="width: 12%">
+            <col style="width: 7%">
+            <col style="width: 7%">
+            <col style="width: 5%">
         </colgroup>
         <tr>
             @* 點選排序功能 (點一下遞增, 點兩下遞減)
