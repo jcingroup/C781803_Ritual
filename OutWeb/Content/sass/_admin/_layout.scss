@@ -71,7 +71,7 @@
         line-height: $header-height;
     }
     @if $isLogin {
-        @extend .font-xxl, .text-danger;
+        @extend .font-xxl;
     }
 }
 
