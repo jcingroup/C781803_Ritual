@@ -269,7 +269,7 @@ namespace OutWeb.Modules.Manage
                 DataCount = data.Count,
                 PageSize = pageSize,
                 FirstPage = 1,
-                LastPage = Convert.ToInt32(Math.Ceiling((decimal)data.Count / pageSize))
+                LastPage = 1//Convert.ToInt32(Math.Ceiling((decimal)data.Count / pageSize))
             };
             pagination = paginationResult;
             var query = data.Skip(startRow).Take(pageSize).ToList();

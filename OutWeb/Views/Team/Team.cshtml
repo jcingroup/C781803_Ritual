@@ -108,6 +108,12 @@
                 </tr>
 
             }
+            @if (Model.Result.Data.Count() == 0)
+            {
+                <tr>
+                    <td colspan="6">查無資料</td>
+                </tr>
+            }
             @*<tr>
                     <td>桃園市</td>
                     <td>中壢區</td>
