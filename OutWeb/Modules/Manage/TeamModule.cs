@@ -263,13 +263,14 @@ namespace OutWeb.Modules.Manage
         {
             int pageSize = doPagination ? (int)PageSizeConfig.SIZE10 : data.Count();
             int startRow = (currentPage - 1) * pageSize;
+            int lastPage = doPagination ? Convert.ToInt32(Math.Ceiling((decimal)data.Count / pageSize)) : 1;
             PaginationResult paginationResult = new PaginationResult()
             {
                 CurrentPage = currentPage,
                 DataCount = data.Count,
                 PageSize = pageSize,
                 FirstPage = 1,
-                LastPage = Convert.ToInt32(Math.Ceiling((decimal)data.Count / pageSize))
+                LastPage = lastPage
             };
             pagination = paginationResult;
             var query = data.Skip(startRow).Take(pageSize).ToList();
