@@ -325,6 +325,7 @@
       <LastGenOutput>RITUAL.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
