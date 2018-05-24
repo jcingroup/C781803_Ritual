@@ -261,7 +261,7 @@ namespace OutWeb.Modules.Manage
         /// <param name="data"></param>
         private void ListPageList(int currentPage, ref List<TEAM> data, out PaginationResult pagination)
         {
-            int pageSize = (int)PageSizeConfig.SIZE10;
+            int pageSize = data.Count();
             int startRow = (currentPage - 1) * pageSize;
             PaginationResult paginationResult = new PaginationResult()
             {
