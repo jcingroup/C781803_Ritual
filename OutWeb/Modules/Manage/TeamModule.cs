@@ -128,7 +128,7 @@ namespace OutWeb.Modules.Manage
                     this.ListSort(filterModel.SortColumn, ref data);
                     PaginationResult pagination;
                     //分頁
-                    this.ListPageList(filterModel.CurrentPage, ref data, out pagination);
+                    this.ListPageList(filterModel.CurrentPage, ref data, out pagination, filterModel.DoPagination);
                     result.Pagination = pagination;
                     foreach (var d in data)
                         PublicMethodRepository.HtmlDecode(d);
@@ -259,9 +259,9 @@ namespace OutWeb.Modules.Manage
         /// </summary>
         /// <param name="currentPage"></param>
         /// <param name="data"></param>
-        private void ListPageList(int currentPage, ref List<TEAM> data, out PaginationResult pagination)
+        private void ListPageList(int currentPage, ref List<TEAM> data, out PaginationResult pagination, bool doPagination)
         {
-            int pageSize = data.Count();
+            int pageSize = doPagination ? (int)PageSizeConfig.SIZE10 : data.Count();
             int startRow = (currentPage - 1) * pageSize;
             PaginationResult paginationResult = new PaginationResult()
             {
@@ -269,7 +269,7 @@ namespace OutWeb.Modules.Manage
                 DataCount = data.Count,
                 PageSize = pageSize,
                 FirstPage = 1,
-                LastPage = 1//Convert.ToInt32(Math.Ceiling((decimal)data.Count / pageSize))
+                LastPage = Convert.ToInt32(Math.Ceiling((decimal)data.Count / pageSize))
             };
             pagination = paginationResult;
             var query = data.Skip(startRow).Take(pageSize).ToList();

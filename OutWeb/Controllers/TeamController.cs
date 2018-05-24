@@ -20,8 +20,8 @@ namespace OutWeb.Controllers
             model.Filter.Disable = disable ?? string.Empty;
             model.Filter.CityID = city;
             model.Filter.AreaID = area;
-
-            TeamModule mdu = new TeamModule();
+            model.Filter.DoPagination = false;
+           TeamModule mdu = new TeamModule();
             model.Result = mdu.DoGetList(model.Filter);
 
             TempData["CityData"] = mdu.GetCityData();
