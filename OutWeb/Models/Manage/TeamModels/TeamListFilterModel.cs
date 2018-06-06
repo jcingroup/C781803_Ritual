@@ -5,6 +5,7 @@
     /// </summary>
     public class TeamListFilterModel
     {
+        public bool DoPagination { get; set; }
         public int? CityID { get; set; }
         public int? AreaID { get; set; }
 

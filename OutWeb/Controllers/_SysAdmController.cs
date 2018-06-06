@@ -30,6 +30,7 @@ namespace OutWeb.Controllers
             model.Filter.Disable = disable ?? string.Empty;
             model.Filter.CityID = city ;
             model.Filter.AreaID = area;
+            model.Filter.DoPagination = true;
 
             TeamModule mdu = new TeamModule();
             model.Result = mdu.DoGetList(model.Filter);
