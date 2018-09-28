@@ -37,6 +37,7 @@ $font-size-h3:           27px;
 @import "_client/modules/field";
 @import "_client/modules/figure";
 @import "_client/modules/loader";
+@import "_client/modules/tooltip";
 
 @import "_client/util"; // 建議放置在最後一個
 
@@ -151,7 +152,7 @@ h3.title {
         vertical-align: middle;
         font-size: em(24px);
         font-weight: bold;
-        
+
         em {
             display: block;
             @include circle(54px, center);
@@ -274,7 +275,7 @@ h3.title {
                 font-size: em(30px);
                 text-shadow: 0 0 7px rgba(#000, 0.7);
                 transition: top 0.5s;
-    
+
                 @include el(after) {
                     height: 1px;
                     margin-top: $spacer*0.5;
@@ -445,7 +446,7 @@ h3.title {
             transform: translate(-50%, -50%);
             z-index: 2;
         }
-        
+
         .thumbnail {
             width: 100%;
             height: 250px;
@@ -537,6 +538,290 @@ h3.title {
         }
     }
 }
+
+// == Flow 服務流程介紹
+
+$flow-item-w:        160px;
+$flow-item-bd:       3px;
+$flow-line-rs:       12px;
+$flow-line-h:        72px;
+$flow-item-space:    $flow-item-w/1.6;
+$flow-shadow:        2px 2px 4px rgba(#000, .3);
+
+// 流程圖-線段樣式
+%round-corner {
+    @include el(before) {
+        position: absolute;
+        left: 50%;
+
+        border: 0 solid #fff;
+        border-color: #ddd\0; // ie fix
+        height: $flow-line-h;
+
+        @include prefix(filter, drop-shadow(1px 1px 2.5px rgba(#000,.5)), webkit);
+    }
+}
+
+// 流程圖
+.process {
+    // sheet 階段
+    .sheet {
+        position: relative;
+        min-height: $flow-line-h + 30;
+    }
+
+    // 1 to 2
+    .one-two {
+        @extend %round-corner;
+
+        &::before {
+            @include mq(tablet) {
+
+                width: ($flow-item-space + $flow-item-bd)*2 + $flow-item-w;
+                top: 35px;
+                // top right left
+                border-width: $flow-item-bd $flow-item-bd 0 $flow-item-bd;
+                border-top-right-radius: $flow-line-rs;
+                border-top-left-radius: $flow-line-rs;
+
+                @include transform(translateX(-50%));
+            }
+
+            @include mq-max(break(tablet, -1)) {
+                top: 100.5%;
+                border-left-width: $flow-item-bd;
+            }
+        }
+    }
+    .two-one {
+        @include mq-max(break(tablet, -1)) {
+            display: none;
+        }
+    }
+}
+
+// 仿顏體
+@font-face {
+    font-family: 'I Ngaan';
+    src: url(../font/I.Ngaan.ttf) format('truetype');
+}
+.sheet-item {
+    @extend .text-white, %round-corner;
+
+    display: inline-block;
+    min-width: $flow-item-w;
+    position: relative;
+    z-index: 2;
+
+    border-radius: em(24);
+    border: $flow-item-bd solid #fff;
+    box-shadow: $flow-shadow;
+    background-color: #003856;
+
+    font: normal #{em(30)}/1.5 'I Ngaan', '明暸體', 'Meiryo', Georgia, sans-serif;
+
+    // 按鈕類
+    @at-root button#{&} {
+        &:hover, &:active {
+            @extend .bg-secondary;
+        }
+    }
+
+    // 1 to 1
+    .one-one & {
+        &::before {
+            top: 100.5%;
+            border-left-width: $flow-item-bd;
+        }
+    }
+
+    @include mq(tablet) {
+        // 2 to 1
+        .two-one & {
+            margin: 0 $flow-item-space;
+
+            &::before {
+                width: $flow-item-space + ($flow-item-bd*2);
+                top: 100.5%;
+            }
+            &.first::before {
+                // left bottom
+                border-width: 0 0 $flow-item-bd $flow-item-bd;
+                border-bottom-left-radius: $flow-line-rs;
+            }
+            &.last::before {
+                // bottom right
+                border-width: 0 $flow-item-bd $flow-item-bd 0;
+                border-bottom-right-radius: $flow-line-rs;
+                margin-left: -($flow-item-space + $flow-item-bd);
+            }
+        }
+    }
+}
+
+// sheet按鈕
+button.sheet-item,
+[data-dropdown="btn"] {
+    @include transition(.35s);
+}
+
+// sheet按鈕-下拉選單
+[data-dropdown="btn"] {
+    @include mq-max(break(desktop, -1)) {
+        cursor: pointer;
+
+        &:hover, &:active {
+            background: color(secondary);
+        }
+    }
+}
+
+// 說明的線段
+.line {
+    @include absolute(left 50% top 26.5px);
+
+    @include mq(desktop) {
+        border-top: $flow-item-bd solid #fff;
+        border-color: #ddd\0; // ie fix
+        z-index: 1;
+
+        @include prefix(filter, drop-shadow(1px 1px 2.5px rgba(#000,.5)), webkit);
+
+        // 右邊說明文字
+        .note.right + & {
+            @include transform(translateX($flow-item-w/2));
+        }
+        .two-one .note.right + & {
+            @include transform(translateX( $flow-item-space*1.8 + ($flow-item-w/2) ));
+        }
+
+        // 左邊說明文字
+        .note.left + & {
+            @include transform(translateX(-120%));
+        }
+        .two-one .note.left + & {
+            @include transform(translateX(-210%));
+        }
+    }
+}
+
+@include mq-max(break(desktop, -1)) {
+    .contact-free, .note{
+        display: none;
+
+        top: 74px;
+
+        transform: translateX(-50%);
+        z-index: 88;
+
+        @include el(before) {
+            transform: translateX(-50%);
+
+            @include caret(up, 12px, $color: #eee);
+            @include absolute(top -12px left 50%);
+        }
+    }
+}
+
+// 右邊的說明
+.note {
+    @extend .font-md;
+
+    color: #222;
+    font-weight: bold;
+    line-height: 1.6;
+    white-space: nowrap;
+
+    list-style-position: inside;
+
+    @include absolute(left 50%);
+
+    @include mq(desktop) {
+        top: -5%;
+
+        // 右邊的說明
+        &.right {
+            margin-left: $flow-item-space*2.5;
+
+            .two-one & {
+                margin-left: ($flow-item-space*2.5) + $flow-item-space;
+            }
+        }
+        // 左邊的說明
+        &.left {
+            margin-left: -($flow-item-space*4.5);
+        }
+    }
+
+    @include mq-max(break(desktop, -1)) {
+        padding: 8px 16px;
+
+        background-color: #eee;
+        border-radius: 12px;
+        box-shadow: $flow-shadow;
+    }
+    @include mq(tablet, break(desktop, -1)) {
+        .two-one &.right {
+            margin-left: ($flow-item-space*1.85);
+        }
+    }
+}
+
+// 24小時服務
+.contact-free {
+    $bg: #fadce9;
+
+    @extend .font-xl, .text-left;
+
+    padding: 12px 12px 12px 72px;
+
+    border-radius: 8px;
+    box-shadow: $flow-shadow;
+    background: $bg url(#{$img-path}/flow-icon.gif) 10px center no-repeat;
+    color: #b6003d;
+    line-height: 1.35;
+    letter-spacing: .05em;
+
+    @include absolute(left 50%);
+
+    // 行動版時指引箭頭
+    &::before {
+        border-bottom-color: $bg;
+    }
+
+    dt { @extend .font-lg; }
+    dd { font-weight: bold; }
+
+    + .line {
+        border-color: $bg;
+
+        @include transform(translateX(-120%));
+    }
+
+    @include mq(desktop) {
+        margin-left: -($flow-item-space*4.5);
+        top: -5%;
+    }
+}
+
+.modal {
+    width: 80%;
+    max-width: 1020px;
+
+    img {
+        max-width: 100%;
+    }
+
+    // footer
+    &-footer {
+        @extend .py-12, .mt-32, .text-center;
+
+        border-top: 1px solid rgba(#fff, .2);
+
+        @include fixed(left 0 bottom 0 right 0);
+    }
+}
+
 
 // == editor
 .editor {

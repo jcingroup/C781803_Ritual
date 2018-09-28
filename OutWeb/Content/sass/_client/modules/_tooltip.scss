@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+$tooltip-bg: rgba(#000, .85) !default;
+
 //
 // tooltip
 // --------------------------------------------------
@@ -10,30 +12,33 @@
     display: inline-block;
 
     .tips {
+        @extend .text-white, .px-8, .py-4;
+
         z-index: z(tooltip);
         display: block;
         visibility: hidden;
         opacity: 0;
-        width: 100%;
+        min-width: 100%;
 
-        @extend .text-white;
-        background-color: rgba(#000, .85);
+        background-color: $tooltip-bg;
+        font-weight: normal;
 
-        @include absolute(top 90% left 0);
-        @include transition(opacity 1s, top .35s);
+        @include absolute(bottom 100% left 50%);
+        @include transition(.35s ease-out);
+        @include transform(translateX(-51.5%));
 
         @include el(after) {
-            @include absolute(bottom 100% left 22%);
-            @include arrow(up, 18px, 10px, rgba(#000, .85));
+            @include absolute(top 100% left 50%);
+            @include arrow(down, 18px, 10px, $tooltip-bg);
             margin-left: -5px;
         }
     }
 
-    &:hover {
+    &:hover, &:active, &:focus {
         .tips {
             visibility: visible;
             opacity: 1;
-            top: 100%;
+            bottom: 105%;
         }
     }
 }

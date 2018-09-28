@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.BodyClass = "Flow";
+    ViewBag.Title = "服務流程介紹";
+    ViewBag.TitleEn = "Process Introduction";
+    ViewBag.Breadcrumb = ViewBag.Title;
+}
+
+@section css {
+    <link rel="stylesheet" href="~/Content/js/fancybox/jquery.fancybox.min.css">
+}
+
+@section scripts {
+    <script src="~/Content/js/fancybox/jquery.fancybox.min.js"></script>
+    <script>
+        // dropdown效果
+        var $dropBtn = $("[data-dropdown='btn']");
+        var dropContent = "[data-dropdown='content']";
+
+        $dropBtn.click(function(e) {
+            if (window.innerWidth < 1024) {
+                $dropBtn.not(this).removeClass('active').siblings(dropContent).fadeOut('fast');
+                $(this).toggleClass('active').siblings(dropContent).fadeToggle('fast');
+                event.preventDefault();
+            }
+        });
+
+        $(window).resize(function () {
+            if (window.innerWidth >= 1024) {
+                $dropBtn.removeClass('active');
+                $(dropContent).show();
+            }
+        });
+    </script>
+}
+
+<h3 class="title">
+    @ViewBag.Title
+    <span>@ViewBag.TitleEn</span>
+</h3>
+
+<article class="flow-chart text-center">
+    <header class="font-xxl mb-48">
+        <img src="~/Content/images/logo_s.gif" alt="">
+        <small class="text-primary font-lg">平安生前契約 ( 家用型 )</small><br>
+        流 程 圖
+    </header>
+    <ul class="process list-unstyled">
+        <li class="sheet two-one">
+            <strong class="sheet-item first">住院臨終</strong>
+            <strong class="sheet-item last">自宅臨終</strong>
+        </li>
+        <li class="sheet one-one hidden-sm">
+            <strong class="sheet-item">住院/自宅臨終</strong>
+        </li>
+        <li class="sheet one-one">
+            <strong class="sheet-item" data-dropdown="btn">通知</strong>
+            <dl class="contact-free" data-dropdown="content">
+                <dt>24小時服務專線</dt>
+                <dd>0800-000-575</dd>
+            </dl>
+            <div class="line" style="width: 166px"></div>
+        </li>
+        <li class="sheet one-two">
+            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-ransfer.jpg" data-caption="【大體接送】 1.安排接體車及接體人員、2.接送大體回自宅或殯儀館安置">大體接送</a>
+            <ol class="text-left note right">
+                <li>安排接體車及接體人員</li>
+                <li>接送大體回自宅或殯儀館安置</li>
+            </ol>
+            <div class="line" style="width: 140px"></div>
+        </li>
+        <li class="sheet two-one">
+            <strong class="sheet-item first tooltip">殯儀館<span class="tips font-md text-nowrap">協助辦理殯儀館手續，將逝者大體安置於館內冰庫中</span></strong>
+            <strong class="sheet-item last" data-dropdown="btn">自宅</strong>
+            <ol class="text-left note right" data-dropdown="content">
+                <li>拜腳尾飯</li>
+                <li>燒腳尾錢</li>
+                <li>淨身更衣</li>
+            </ol>
+            <div class="line" style="width: 60px"></div>
+        </li>
+        <li class="sheet one-one hidden-sm">
+            <strong class="sheet-item" data-dropdown="btn">殯儀館/自宅</strong>
+            <ol class="text-left note right" data-dropdown="content">
+                <li>拜腳尾飯</li>
+                <li>燒腳尾錢</li>
+                <li>淨身更衣</li>
+            </ol>
+        </li>
+        <li class="sheet one-one">
+            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-ceremony.jpg" data-caption="【豎靈】 1.安靈誦經、2.家屬拜飯事宜告知">豎靈</a>
+            <ol class="text-left note right">
+                <li>安靈誦經</li>
+                <li>家屬拜飯事宜告知</li>
+            </ol>
+            <div class="line" style="width: 140px"></div>
+        </li>
+        <li class="sheet one-one">
+            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-plan.jpg" data-caption="【協調】 1.服務流程說明與溝通、2.擇日及確定出殯日期、3.確定宗教別以便安排儀式、4.印製訃聞、5.相關事宜安排">協調</a>
+            <ol class="text-left note left">
+                <li>服務流程說明與溝通</li>
+                <li>擇日及確定出殯日期</li>
+                <li>確定宗教別以便安排儀式</li>
+                <li>印製訃聞</li>
+                <li>相關事宜安排</li>
+            </ol>
+            <div class="line" style="width: 240px"></div>
+        </li>
+        <li class="sheet one-one">
+            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-contact.jpg" data-caption="【聯繫】 1.相關人員、用品之聯繫與準備、2.訂廳、爐及相關之手續、3.與家屬保持聯絡">聯繫</a>
+            <ol class="text-left note right">
+                <li>相關人員、用品之聯繫與準備</li>
+                <li>訂廳、爐及相關之手續</li>
+                <li>與家屬保持聯絡</li>
+            </ol>
+            <div class="line" style="width: 140px"></div>
+        </li>
+        <li class="sheet one-two">
+            <a data-fancybox class="sheet-item" title="按我看更多說明" data-options='{"src": "#modal-funeral", "touch": false, "smallBtn" : false}' href="javascript:;">奠禮</a>
+            <ol class="text-left note left">
+                <li>式場佈置</li>
+                <li>相關人員、用品之安排</li>
+                <li>移靈、法事、家奠、公奠、起靈</li>
+            </ol>
+            <div class="line" style="width: 230px"></div>
+        </li>
+        <li class="sheet two-one">
+            <a data-fancybox class="sheet-item first" title="按我看更多說明" href="~/Content/images/Flow/step-cremation.jpg" data-caption="【火化】 1.火化儀式、2.撿骨、封罐">火化</a>
+            <ol class="text-left note left">
+                <li>火化儀式</li>
+                <li>撿骨、封罐</li>
+            </ol>
+            <div class="line" style="width: 170px"></div>
+            <a data-fancybox class="sheet-item last" title="按我看更多說明" href="~/Content/images/Flow/step-cremation.jpg" data-caption="【安葬】 土葬儀式">安葬</a>
+            <p class="text-left note right">土葬儀式</p>
+            <div class="line" style="width: 155px"></div>
+        </li>
+        <li class="sheet one-one hidden-sm">
+            <strong class="sheet-item" data-dropdown="btn">火化/安葬</strong>
+            <ol class="text-left note right" data-dropdown="content">
+                <li>火化儀式 >> 撿骨、封罐</li>
+                <li>土葬儀式</li>
+            </ol>
+        </li>
+        <li class="sheet one-one">
+            <strong class="sheet-item tooltip">返主安靈<span class="tips font-md text-nowrap">由誦經人員至喪家進行返主安靈儀式</span></strong>
+        </li>
+        <li class="sheet one-one">
+            <strong class="sheet-item tooltip">晉塔<span class="tips font-md text-nowrap">依實際各項費用，由專案禮儀師說明</span></strong>
+        </li>
+        <li class="sheet">
+            <strong class="sheet-item" data-dropdown="btn">後續關懷</strong>
+            <p class="text-left note right" data-dropdown="content">滿七、百日、對年忌日通知聯繫</p>
+            <div class="line" style="width: 385px"></div>
+        </li>
+    </ul>
+</article>
+
+<article id="modal-funeral" class="hidden modal">
+    <section class="row">
+        <div class="col-md-6"><img src="~/Content/images/Flow/step-funeral.jpg" alt="奠禮1"></div>
+        <div class="col-md-6"><img src="~/Content/images/Flow/step-funeral2.jpg" alt="奠禮2"></div>
+    </section>
+    <footer class="modal-footer text-white">
+        【奠禮】 1.式場佈置。 2.相關人員、用品之安排。 3.移靈、法事、家奠、公奠、起靈
+    </footer>
+</article>

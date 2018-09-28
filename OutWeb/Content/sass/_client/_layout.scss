@@ -168,9 +168,9 @@ body {
         a {
             display: block;
             z-index: z(logo);
-    
+
             @include text-pic(#{$logo-img}, nth($logo-size, 1), nth($logo-size, 2));
-    
+
             // 本次專案
             margin-top: 6px;
             float: left;
@@ -192,23 +192,25 @@ body {
         clear: both;
 
         span {
-            display: block;
+            // display: block;
+            display: inline-block;
             margin: $spacer auto;
-            padding: 7px 0;
+            padding: 7px 12px;
+
             font-size: em(28px, 50px);
             font-weight: 300;
             text-shadow: 0 0 5px rgba(#000,0.4);
             text-transform: uppercase;
             border: 1px solid;
             border-width: 1px 0;
-            
-            .AboutUs &   { width: 180px; }
-            .Service &   { width: 240px; }
-            .Plan &      { width: 320px; }
-            .Trust &     { width: 120px; }
-            .ContactUs & { width: 220px; }
-            .Public &    { width: 360px; }
-            .Team &      { width: 260px; }
+
+            // .AboutUs &   { width: 180px; }
+            // .Service &   { width: 240px; }
+            // .Plan &      { width: 320px; }
+            // .Trust &     { width: 120px; }
+            // .ContactUs & { width: 220px; }
+            // .Public &    { width: 360px; }
+            // .Team &      { width: 260px; }
         }
     }
 

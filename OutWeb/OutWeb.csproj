@@ -168,6 +168,7 @@
     <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\FlowController.cs" />
     <Compile Include="Controllers\TrustController.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
@@ -270,6 +271,14 @@
     <Content Include="Content\images\AboutUs\pic1.jpg" />
     <Content Include="Content\images\banner.jpg" />
     <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\flow-icon.gif" />
+    <Content Include="Content\images\Flow\step-ceremony.jpg" />
+    <Content Include="Content\images\Flow\step-contact.jpg" />
+    <Content Include="Content\images\Flow\step-cremation.jpg" />
+    <Content Include="Content\images\Flow\step-funeral.jpg" />
+    <Content Include="Content\images\Flow\step-funeral2.jpg" />
+    <Content Include="Content\images\Flow\step-plan.jpg" />
+    <Content Include="Content\images\Flow\step-ransfer.jpg" />
     <Content Include="Content\images\Index\banner.jpg" />
     <Content Include="Content\images\Index\banner_sm.jpg" />
     <Content Include="Content\images\Index\banner_xs.jpg" />
@@ -278,6 +287,7 @@
     <Content Include="Content\images\Index\pic3.jpg" />
     <Content Include="Content\images\Index\pic4.jpg" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logo_s.gif" />
     <Content Include="Content\images\Plan\pic1.jpg" />
     <Content Include="Content\images\Plan\pic2.jpg" />
     <Content Include="Content\images\Public\Account-102-103_s.jpg" />
@@ -329,14 +339,6 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\css\admin.map" />
-    <Content Include="Content\css\editor.map" />
-    <Content Include="Content\css\grid.map" />
-    <Content Include="Content\css\index.map" />
-    <Content Include="Content\css\login.map" />
-    <Content Include="Content\css\page.map" />
-    <Content Include="Content\css\vendor\open-iconic.map" />
-    <Content Include="Content\css\vendor\typeahead.map" />
     <Content Include="Content\font\open-iconic\open-iconic.eot" />
     <Content Include="Content\font\open-iconic\open-iconic.otf" />
     <Content Include="Content\font\open-iconic\open-iconic.ttf" />
@@ -469,6 +471,7 @@
     <Content Include="Views\_SysAdm\TeamDataAdd.cshtml" />
     <Content Include="Views\_SysAdm\TeamDataEdit.cshtml" />
     <Content Include="Views\_SysAdm\TeamList.cshtml" />
+    <Content Include="Views\Flow\Flow.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

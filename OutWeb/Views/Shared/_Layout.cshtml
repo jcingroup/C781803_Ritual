@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="zh-tw">
+<html lang="zh">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,7 +34,8 @@
                     <a href="~/Trust" class='@(ViewBag.BodyClass == "Trust" ? "current" : "")'>合法信託查詢</a>
                     <a href="~/ContactUs" class='@(ViewBag.BodyClass == "ContactUs" ? "current" : "")'>聯絡我們</a>
                     <a href="~/Public" class='@(ViewBag.BodyClass == "Public" ? "current" : "")'>公開資訊</a>
-                    <a href="~/Team" class='@(ViewBag.BodyClass == "Team" ? "current" : "")'>全台服務團隊</a>
+                    @* <a href="~/Team" class='@(ViewBag.BodyClass == "Team" ? "current" : "")'>全台服務團隊</a> *@
+                    <a href="~/Flow" class='@(ViewBag.BodyClass == "Flow" ? "current" : "")'>服務流程介紹</a>
                 </nav>
                 @if (ViewBag.IsFirstPage)
                 {
@@ -43,7 +44,7 @@
                 else
                 {
                     <h2>
-                        @ViewBag.Title
+                        @ViewBag.Title<br>
                         <span>@ViewBag.TitleEn</span>
                     </h2>
                 }
