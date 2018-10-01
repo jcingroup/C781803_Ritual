@@ -1421,7 +1421,7 @@ figure {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem; }
 
-.p-12 {
+.p-12, .modal-text {
   padding: 0.75rem; }
 
 .pt-12 {
@@ -1436,7 +1436,7 @@ figure {
 .pl-12 {
   padding-left: 0.75rem; }
 
-.px-12, .btn.sm {
+.px-12, .btn.sm, .sheet-item {
   padding-right: 0.75rem;
   padding-left: 0.75rem; }
 
@@ -1614,7 +1614,7 @@ figure {
   font-size: 14;
   font-size: 0.875rem; }
 
-.font-md, .btn.sm, .note {
+.font-md, .btn.sm, .note, .modal-text {
   font-size: 15;
   font-size: 0.9375rem; }
 
@@ -1638,7 +1638,7 @@ figure {
   font-size: 64;
   font-size: 4rem; }
 
-.text-white, thead th, .mobile-toggle, .btn.white:hover, .btn.white:active, .btn.white.active, [class*="label-"], .tooltip .tips, .goTop, .goTop:hover, .goTop:active, .sheet-item {
+.text-white, thead th, .mobile-toggle, .btn.white:hover, .btn.white:active, .btn.white.active, [class*="label-"], .tooltip .tips, .goTop, .goTop:hover, .goTop:active, .sheet-item, a.sheet-item:hover, a.sheet-item:active, .modal-text {
   color: #fff; }
 
 .bg-white, .btn.white {
@@ -1661,7 +1661,7 @@ figure {
 .text-secondary {
   color: #be4c54; }
 
-.bg-secondary, button.sheet-item:hover, button.sheet-item:active {
+.bg-secondary, a.sheet-item:hover, a.sheet-item:active {
   background-color: #be4c54; }
 
 .hover-secondary {
@@ -2125,7 +2125,7 @@ h3.title {
     transform: translateX(-50%); } }
 @media (max-width: 767px) {
   .process .one-two::before {
-    top: 100.5%;
+    top: 51px;
     border-left-width: 3px; } }
 @media (max-width: 767px) {
   .process .two-one {
@@ -2214,7 +2214,7 @@ button.sheet-item,
       height: 0;
       display: inline-block;
       border: 12px solid transparent;
-      border-bottom-color: #eee;
+      border-bottom-color: #222;
       border-bottom-width: 6px;
       border-top-width: 6px;
       position: absolute;
@@ -2240,9 +2240,8 @@ button.sheet-item,
   @media (max-width: 1023px) {
     .note {
       padding: 8px 16px;
-      background-color: #eee;
-      border-radius: 12px;
-      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); } }
+      background-color: #222;
+      color: #fff; } }
   @media (min-width: 768px) and (max-width: 1023px) {
     .two-one .note.right {
       margin-left: 185px; } }
@@ -2282,6 +2281,8 @@ button.sheet-item,
     right: 0;
     bottom: 0;
     left: 0; }
+  .modal-text {
+    background: #222 !important; }
 
 .editor {
   word-wrap: normal;

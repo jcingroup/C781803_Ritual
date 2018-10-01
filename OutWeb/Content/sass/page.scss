@@ -588,7 +588,7 @@ $flow-shadow:        2px 2px 4px rgba(#000, .3);
             }
 
             @include mq-max(break(tablet, -1)) {
-                top: 100.5%;
+                top: 51px;
                 border-left-width: $flow-item-bd;
             }
         }
@@ -606,7 +606,7 @@ $flow-shadow:        2px 2px 4px rgba(#000, .3);
     src: url(../font/I.Ngaan.ttf) format('truetype');
 }
 .sheet-item {
-    @extend .text-white, %round-corner;
+    @extend .text-white, %round-corner, .px-12;
 
     display: inline-block;
     min-width: $flow-item-w;
@@ -621,9 +621,9 @@ $flow-shadow:        2px 2px 4px rgba(#000, .3);
     font: normal #{em(30)}/1.5 'I Ngaan', '明暸體', 'Meiryo', Georgia, sans-serif;
 
     // 按鈕類
-    @at-root button#{&} {
+    @at-root a#{&} {
         &:hover, &:active {
-            @extend .bg-secondary;
+            @extend .bg-secondary, .text-white;
         }
     }
 
@@ -717,7 +717,7 @@ button.sheet-item,
         @include el(before) {
             transform: translateX(-50%);
 
-            @include caret(up, 12px, $color: #eee);
+            @include caret(up, 12px, $color: #222);
             @include absolute(top -12px left 50%);
         }
     }
@@ -756,9 +756,10 @@ button.sheet-item,
     @include mq-max(break(desktop, -1)) {
         padding: 8px 16px;
 
-        background-color: #eee;
-        border-radius: 12px;
-        box-shadow: $flow-shadow;
+        background-color: #222;
+        // border-radius: 12px;
+        // box-shadow: $flow-shadow;
+        color: #fff;
     }
     @include mq(tablet, break(desktop, -1)) {
         .two-one &.right {
@@ -819,6 +820,12 @@ button.sheet-item,
         border-top: 1px solid rgba(#fff, .2);
 
         @include fixed(left 0 bottom 0 right 0);
+    }
+
+    &-text {
+        @extend .text-white, .font-md, .p-12;
+
+        background: #222 !important;
     }
 }
 

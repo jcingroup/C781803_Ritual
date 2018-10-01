@@ -21,14 +21,25 @@
             if (window.innerWidth < 1024) {
                 $dropBtn.not(this).removeClass('active').siblings(dropContent).fadeOut('fast');
                 $(this).toggleClass('active').siblings(dropContent).fadeToggle('fast');
-                event.preventDefault();
+                e.preventDefault();
             }
+        });
+        // 點空白處會收回dropdown
+        $(document).click(function() {
+            if (window.innerWidth < 1024) {
+                $(dropContent).fadeOut();
+            }
+        }).on('click', "[data-dropdown='btn']", function (e) {
+            e.stopPropagation();
         });
 
         $(window).resize(function () {
             if (window.innerWidth >= 1024) {
                 $dropBtn.removeClass('active');
                 $(dropContent).show();
+            }
+            else {
+                $(dropContent).hide();
             }
         });
     </script>
@@ -57,7 +68,7 @@
             <strong class="sheet-item" data-dropdown="btn">通知</strong>
             <dl class="contact-free" data-dropdown="content">
                 <dt>24小時服務專線</dt>
-                <dd>0800-000-575</dd>
+                <dd class="text-nowrap">0800-000-575</dd>
             </dl>
             <div class="line" style="width: 166px"></div>
         </li>
@@ -70,7 +81,8 @@
             <div class="line" style="width: 140px"></div>
         </li>
         <li class="sheet two-one">
-            <strong class="sheet-item first tooltip">殯儀館<span class="tips font-md text-nowrap">協助辦理殯儀館手續，將逝者大體安置於館內冰庫中</span></strong>
+            <a class="sheet-item first" data-fancybox data-animation-duration="500" data-src="#modalFuneral" href="javascript:;" title="按我看更多說明">殯儀館</a>
+            <div id="modalFuneral" class="hidden modal-text">協助辦理殯儀館手續，將逝者大體安置於館內冰庫中。</div>
             <strong class="sheet-item last" data-dropdown="btn">自宅</strong>
             <ol class="text-left note right" data-dropdown="content">
                 <li>拜腳尾飯</li>
@@ -138,15 +150,21 @@
         <li class="sheet one-one hidden-sm">
             <strong class="sheet-item" data-dropdown="btn">火化/安葬</strong>
             <ol class="text-left note right" data-dropdown="content">
-                <li>火化儀式 >> 撿骨、封罐</li>
+                <li>火化儀式、撿骨、封罐</li>
                 <li>土葬儀式</li>
             </ol>
         </li>
         <li class="sheet one-one">
-            <strong class="sheet-item tooltip">返主安靈<span class="tips font-md text-nowrap">由誦經人員至喪家進行返主安靈儀式</span></strong>
+            @* <strong class="sheet-item tooltip">返主安靈<span class="tips font-md text-nowrap">由誦經人員至喪家進行返主安靈儀式</span></strong> *@
+
+            <a class="sheet-item" data-fancybox data-animation-duration="500" data-src="#modalCeremony" href="javascript:;" title="按我看更多說明">返主安靈</a>
+            <div id="modalCeremony" class="hidden modal-text">由誦經人員至喪家進行返主安靈儀式。</div>
         </li>
         <li class="sheet one-one">
-            <strong class="sheet-item tooltip">晉塔<span class="tips font-md text-nowrap">依實際各項費用，由專案禮儀師說明</span></strong>
+            @* <strong class="sheet-item tooltip">晉塔<span class="tips font-md text-nowrap">依實際各項費用，由專案禮儀師說明</span></strong> *@
+
+            <a class="sheet-item" data-fancybox data-animation-duration="500" data-src="#modalCompleted" href="javascript:;" title="按我看更多說明">晉塔</a>
+            <div id="modalCompleted" class="hidden modal-text">依實際各項費用，由專案禮儀師說明。</div>
         </li>
         <li class="sheet">
             <strong class="sheet-item" data-dropdown="btn">後續關懷</strong>
