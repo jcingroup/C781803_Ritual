@@ -73,7 +73,7 @@
             <div class="line" style="width: 166px"></div>
         </li>
         <li class="sheet one-two">
-            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-ransfer.jpg" data-caption="【大體接送】 1.安排接體車及接體人員、2.接送大體回自宅或殯儀館安置">大體接送</a>
+            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-ransfer.jpg" data-caption="【大體接送】 <br><ol class='inline-block text-left'><li>安排接體車及接體人員</li><li>接送大體回自宅或殯儀館安置</li></ol>">大體接送</a>
             <ol class="text-left note right">
                 <li>安排接體車及接體人員</li>
                 <li>接送大體回自宅或殯儀館安置</li>
@@ -81,10 +81,10 @@
             <div class="line" style="width: 140px"></div>
         </li>
         <li class="sheet two-one">
-            <a class="sheet-item first" data-fancybox data-animation-duration="500" data-src="#modalFuneral" href="javascript:;" title="按我看更多說明">殯儀館</a>
+            <a class="sheet-item first" data-fancybox data-src="#modalFuneral" href="javascript:;" title="按我看更多說明">殯儀館</a>
             <div id="modalFuneral" class="hidden modal-text">協助辦理殯儀館手續，將逝者大體安置於館內冰庫中。</div>
-            <strong class="sheet-item last" data-dropdown="btn">自宅</strong>
-            <ol class="text-left note right" data-dropdown="content">
+            <a class="sheet-item last" data-fancybox data-src="#modalFuneral2" href="javascript:;" title="按我看更多說明">自宅</a>
+            <ol class="text-left note right">
                 <li>拜腳尾飯</li>
                 <li>燒腳尾錢</li>
                 <li>淨身更衣</li>
@@ -92,15 +92,17 @@
             <div class="line" style="width: 60px"></div>
         </li>
         <li class="sheet one-one hidden-sm">
-            <strong class="sheet-item" data-dropdown="btn">殯儀館/自宅</strong>
-            <ol class="text-left note right" data-dropdown="content">
-                <li>拜腳尾飯</li>
-                <li>燒腳尾錢</li>
-                <li>淨身更衣</li>
-            </ol>
+            <a class="sheet-item" data-fancybox data-src="#modalFuneral2" href="javascript:;" title="按我看更多說明">殯儀館/自宅</a>
+            <div id="modalFuneral2" class="hidden modal-text">
+                <ol class="text-left ml-16 mt-16 mb-0">
+                    <li>拜腳尾飯</li>
+                    <li>燒腳尾錢</li>
+                    <li>淨身更衣</li>
+                </ol>
+            </div>
         </li>
         <li class="sheet one-one">
-            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-ceremony.jpg" data-caption="【豎靈】 1.安靈誦經、2.家屬拜飯事宜告知">豎靈</a>
+            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-ceremony.jpg" data-caption="【豎靈】<br><ol class='text-left inline-block'><li>安靈誦經</li><li>家屬拜飯事宜告知</li>">豎靈</a>
             <ol class="text-left note right">
                 <li>安靈誦經</li>
                 <li>家屬拜飯事宜告知</li>
@@ -108,7 +110,7 @@
             <div class="line" style="width: 140px"></div>
         </li>
         <li class="sheet one-one">
-            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-plan.jpg" data-caption="【協調】 1.服務流程說明與溝通、2.擇日及確定出殯日期、3.確定宗教別以便安排儀式、4.印製訃聞、5.相關事宜安排">協調</a>
+            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-plan.jpg" data-caption="【協調】<br><ol class='text-left inline-block'><li>服務流程說明與溝通</li><li>擇日及確定出殯日期</li><li>確定宗教別以便安排儀式</li><li>印製訃聞</li><li>相關事宜安排">協調</a>
             <ol class="text-left note left">
                 <li>服務流程說明與溝通</li>
                 <li>擇日及確定出殯日期</li>
@@ -119,7 +121,7 @@
             <div class="line" style="width: 230px"></div>
         </li>
         <li class="sheet one-one">
-            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-contact.jpg" data-caption="【聯繫】 1.相關人員、用品之聯繫與準備、2.訂廳、爐及相關之手續、3.與家屬保持聯絡">聯繫</a>
+            <a data-fancybox class="sheet-item" title="按我看更多說明" href="~/Content/images/Flow/step-contact.jpg" data-caption="【聯繫】<br><ol class='text-left inline-block'><li>相關人員、用品之聯繫與準備</li><li>訂廳、爐及相關之手續</li><li>與家屬保持聯絡</li>">聯繫</a>
             <ol class="text-left note right">
                 <li>相關人員、用品之聯繫與準備</li>
                 <li>訂廳、爐及相關之手續</li>
@@ -128,16 +130,31 @@
             <div class="line" style="width: 140px"></div>
         </li>
         <li class="sheet one-two">
-            <a data-fancybox class="sheet-item" title="按我看更多說明" data-options='{"src": "#modal-funeral", "touch": false, "smallBtn" : false}' href="javascript:;">奠禮</a>
+            <a data-fancybox class="sheet-item" title="按我看更多說明" data-options='{"src": "#modalFuneral4", "smallBtn" : false}' href="javascript:;">奠禮</a>
             <ol class="text-left note left">
                 <li>式場佈置</li>
                 <li>相關人員、用品之安排</li>
                 <li>移靈、法事、家奠、公奠、起靈</li>
             </ol>
             <div class="line" style="width: 220px"></div>
+
+            <div id="modalFuneral4" class="hidden modal">
+                <section class="row">
+                    <div class="col-md-6"><img src="~/Content/images/Flow/step-funeral.jpg" alt="奠禮1"></div>
+                    <div class="col-md-6"><img src="~/Content/images/Flow/step-funeral2.jpg" alt="奠禮2"></div>
+                </section>
+                <footer class="modal-footer text-white">
+                    【奠禮】<br>
+                    <ol class="text-left inline-block">
+                        <li>式場佈置</li>
+                        <li>相關人員、用品之安排</li>
+                        <li>移靈、法事、家奠、公奠、起靈</li>
+                    </ol>
+                </footer>
+            </div>
         </li>
         <li class="sheet two-one">
-            <a data-fancybox class="sheet-item first" title="按我看更多說明" href="~/Content/images/Flow/step-cremation.jpg" data-caption="【火化】 1.火化儀式、2.撿骨、封罐">火化</a>
+            <a data-fancybox class="sheet-item first" title="按我看更多說明" href="~/Content/images/Flow/step-cremation.jpg" data-caption="【火化】<br><ol class='text-left inline-block'><li>火化儀式</li><li>撿骨、封罐</li>">火化</a>
             <ol class="text-left note left">
                 <li>火化儀式</li>
                 <li>撿骨、封罐</li>
@@ -148,38 +165,29 @@
             <div class="line" style="width: 155px"></div>
         </li>
         <li class="sheet one-one hidden-sm">
-            <strong class="sheet-item" data-dropdown="btn">火化/安葬</strong>
-            <ol class="text-left note right" data-dropdown="content">
-                <li>火化儀式、撿骨、封罐</li>
-                <li>土葬儀式</li>
-            </ol>
+            <a class="sheet-item" data-fancybox data-src="#modalFuneral3" href="javascript:;" title="按我看更多說明">火化/安葬</a>
+            <div id="modalFuneral3" class="hidden modal-text">
+                <ol class="text-left ml-16 mt-16 mb-0">
+                    <li>火化儀式、撿骨、封罐</li>
+                    <li>土葬儀式</li>
+                </ol>
+            </div>
         </li>
         <li class="sheet one-one">
-            @* <strong class="sheet-item tooltip">返主安靈<span class="tips font-md text-nowrap">由誦經人員至喪家進行返主安靈儀式</span></strong> *@
-
-            <a class="sheet-item" data-fancybox data-animation-duration="500" data-src="#modalCeremony" href="javascript:;" title="按我看更多說明">返主安靈</a>
+            <a class="sheet-item" data-fancybox data-src="#modalCeremony" href="javascript:;" title="按我看更多說明">返主安靈</a>
             <div id="modalCeremony" class="hidden modal-text">由誦經人員至喪家進行返主安靈儀式。</div>
         </li>
         <li class="sheet one-one">
-            @* <strong class="sheet-item tooltip">晉塔<span class="tips font-md text-nowrap">依實際各項費用，由專案禮儀師說明</span></strong> *@
-
-            <a class="sheet-item" data-fancybox data-animation-duration="500" data-src="#modalCompleted" href="javascript:;" title="按我看更多說明">晉塔</a>
+            <a class="sheet-item" data-fancybox data-src="#modalCompleted" href="javascript:;" title="按我看更多說明">晉塔</a>
             <div id="modalCompleted" class="hidden modal-text">依實際各項費用，由專案禮儀師說明。</div>
         </li>
         <li class="sheet">
-            <strong class="sheet-item" data-dropdown="btn">後續關懷</strong>
-            <p class="text-left note right" data-dropdown="content">滿七、百日、對年忌日通知聯繫</p>
+            <a class="sheet-item" data-fancybox data-src="#modalEnd" href="javascript:;" title="按我看更多說明">後續關懷</a>
+            <p class="text-left note right">滿七、百日、對年忌日通知聯繫</p>
             <div class="line" style="width: 385px"></div>
+
+            <div id="modalEnd" class="hidden modal-text">滿七、百日、對年忌日通知聯繫。</div>
         </li>
     </ul>
 </article>
 
-<article id="modal-funeral" class="hidden modal">
-    <section class="row">
-        <div class="col-md-6"><img src="~/Content/images/Flow/step-funeral.jpg" alt="奠禮1"></div>
-        <div class="col-md-6"><img src="~/Content/images/Flow/step-funeral2.jpg" alt="奠禮2"></div>
-    </section>
-    <footer class="modal-footer text-white">
-        【奠禮】 1.式場佈置。 2.相關人員、用品之安排。 3.移靈、法事、家奠、公奠、起靈
-    </footer>
-</article>
