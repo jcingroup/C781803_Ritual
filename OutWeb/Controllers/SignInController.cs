@@ -55,7 +55,7 @@ namespace OutWeb.Controllers
             else
                 return View();
 
-            return RedirectToAction("TeamList", "_SysAdm");
+            return RedirectToAction("ProductsList", "_SysAdm");
         }
 
         /// <summary>
