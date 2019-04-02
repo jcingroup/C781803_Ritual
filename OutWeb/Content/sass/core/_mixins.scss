@@ -22,8 +22,8 @@
 @import "mixins/gradient";       // 背景漸層
 
 // == extend 原本放在util.scss裡，改成 mixin @include 方法
-@mixin clearfix {
-    @include mixin-dryer(clearfix) {
+@mixin clearfix($ext: true) {
+    @include mixin-dryer(clearfix, $ext) {
         @include el(after, table) { clear: both; }
         @if $lte7 { zoom: 1 }
     }

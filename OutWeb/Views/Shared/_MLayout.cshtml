@@ -68,7 +68,9 @@
                 <aside id="sidebar">
                     <h6 class="oi" data-glyph="menu">功能選單 MENU</h6>
 
-                    <a href="~/_SysAdm/TeamList" class='collapse-toggle oi @(ViewBag.subnav == "Team" ? "active" : "")' data-glyph="flag">全台服務團隊管理</a>
+                    <a href="~/_SysAdm/TeamList" class='oi @(ViewBag.subnav == "Team" ? "active" : "")' data-glyph="flag">全台服務團隊管理</a>
+
+                    <a href="~/_SysAdm/ProductsList" class='oi @(ViewBag.subnav == "Products" ? "active" : "")' data-glyph="basket">保健食品管理</a>
 
                     <header class='collapse-toggle oi @(ViewBag.subnav == "Cog" ? "active" : "")' data-glyph="cog">系統設定</header>
                     <nav class='collapse-content @(ViewBag.subnav == "Cog" ? "in" : "")'>

@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Crumb = "保健食品管理";
+    ViewBag.subnav = "Products";
+}
+
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>@ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
+
+<form>
+    <dl class="field">
+        <dt class="col-2"><sup title="必填">*</sup> 發稿時間</dt>
+        <dd class="col-2">
+            <input type="date" value="" class="form-element" required>
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-2"><sup title="必填">*</sup> 產品名稱</dt>
+        <dd class="col-8">
+            <input type="text" class="form-element" required>
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-2">列表圖</dt>
+        <dd class="col-8">
+            <div class="input-file">
+                <input type="file" class="full">
+            </div>
+            <small>
+                本系統允許上傳 .jpg .gif .png 類型的檔案。 <br>
+                單個檔案大小建議不超過 1MB ，最多可上傳 1 個檔案，謝謝！
+            </small>
+            <ol class="list-unstyled">
+                <li class="uploaded">
+                    <img src="" alt="">
+                    <button type="button" class="hover-danger" title="刪除此檔案">&times;</button>
+                </li>
+            </ol>
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-2">排序</dt>
+        <dd class="col-2">
+            <input type="number" class="form-element" value="0">
+        </dd>
+        <dd class="col-8 form-label text-danger font-sm">
+            數字愈大愈前面。預設值為 0 則以時間排序(時間愈近愈前面)。
+        </dd>
+    </dl>
+    <dl class="field">
+        <dt class="col-2">
+            顯示狀態
+        </dt>
+        <dd class="col-8">
+            <label class="switch">
+                <input type="checkbox" name="fSt" value="true" checked>
+                <div class="slider round"></div>
+            </label>
+        </dd>
+    </dl>
+
+    <fieldset class="mb-24">
+        <legend class="underline">[ 產品內容 ]</legend>
+        @* 編輯器 *@
+        <textarea name="" id="" cols="30" rows="14" class="form-element"></textarea>
+    </fieldset>
+
+    <footer class="submit-bar fixed-bottom">
+        <button type="submit" class="btn success oi" data-glyph="circle-check">確定儲存</button>
+        <button type="button" class="btn warning oi" data-glyph="circle-x" onclick="location.href='ProductsList'" title="回列表">取消</button>
+    </footer>
+</form>

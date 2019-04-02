@@ -240,16 +240,16 @@ $blue-grey:         #607D8B;
         margin-top: -24px;
     }
 
-    // input {
-    //     @extend .font-sm, .m-2;
-    //     vertical-align: middle;
-    //     width: 100%;
-    //     max-height: 26px;
+    input {
+        @extend .font-sm, .m-2;
+        vertical-align: middle;
+        width: 100%;
+        max-height: 26px;
 
-    //     &:focus {
-    //         outline: 0;
-    //     }
-    // }
+        &:focus {
+            outline: 0;
+        }
+    }
     // .btn {
     //     float: right;
     //     margin-top: -29px;

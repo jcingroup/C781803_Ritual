@@ -135,7 +135,7 @@ namespace OutWeb.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("ProductList");
+                    return RedirectToAction("ProductsList");
                 }
 
             }

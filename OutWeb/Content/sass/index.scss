@@ -47,7 +47,7 @@ $modal-close-size:       60px;
 h3.title {
     margin: 0;
     font-size: em(32px);
-    
+
     @include el(after) {
         width: 325px;
         height: 1px;
@@ -275,7 +275,7 @@ p {
 
     @include mq(phone,break(tablet,-1)) {
         article {
-            @include clearfix;
+            @include clearfix(false);
         }
         .thumbnail {
             float: left;

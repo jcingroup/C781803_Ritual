@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.BodyClass = "Products";
+    ViewBag.Title = "保健食品";
+    ViewBag.TitleEn = "Healthy Food";
+    ViewBag.Breadcrumb = "葉黃素"; @* 產品名稱 *@
+}
+
+@section breadcrumb {
+    <li><a href="~/Products">保健食品</a></li>
+}
+<h3 class="title">@ViewBag.Breadcrumb</h3>
+
+<div class="editor mb-48">
+    這裡是產品的編輯器內容
+    這裡是產品的編輯器內容這裡是產品的編輯器內容這裡是產品的編輯器內容這裡是產品的編輯器內容這裡是產品的編輯器內容
+</div>
+
+<nav class="text-center">
+    <a href="~/Products" class="btn sm">回列表 BACK</a>
+</nav>

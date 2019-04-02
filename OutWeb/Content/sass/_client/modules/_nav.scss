@@ -10,22 +10,55 @@
         display: inline-block;
         height: 100%;
         position: relative;
-        padding: 0 18px;
-        letter-spacing: 0.05em;
-        line-height: 70px;
         color: #fff;
-        @include rem('font-size', 20px);
+        letter-spacing: 0.05em;
         font-weight: bold;
-        text-shadow: 0 0 3px rgba(#000, 0.5);
 
+        @include rem('font-size', 20px);
+
+        @include mq-max(break(wide,-1)) {
+            @include rem('font-size', 17px);
+        }
+
+        &.product {
+            background-color: rgba(darken(color(success), 9), .8);
+        }
         &:hover, &:active, &.current {
-            background: rgba($brand-primary, 0.8);
+            background-color: rgba($brand-primary, 0.8);
         }
 
         @if $isIndex {
-            padding: 0 35px;
-            line-height: 60px;
             text-shadow: 0 0 3px rgba(#000, 0.7);
+            line-height: 60px;
+            width: (100% / 8);
+            margin: 0 -2px;
+
+            @include mq-max(break(wider,-1)) {
+                padding: 0 25px;
+            }
+            @include mq-max(break(wide,-1)) {
+                padding: 0 18px;
+            }
+
+            &:first-of-type {
+                border-radius: 30px 0 0 30px;
+            }
+            &:last-of-type {
+                border-radius: 0 30px 30px 0;
+            }
+        }
+        @if $isPage {
+            text-shadow: 0 0 3px rgba(#000, 0.5);
+            line-height: 70px;
+            padding: 0 18px;
+
+            @include mq-max(break(wider,-1)) {
+                padding: 0 10px;
+            }
+            @include mq-max(break(wide,-1)) {
+                padding: 0 8px;
+                line-height: 60px;
+            }
         }
     }
 
@@ -90,6 +123,14 @@
     // 本次專案
     margin-bottom: $spacer*3;
 
+    @include mq-max(break(wide,-1)) {
+        margin-bottom: $spacer*2;
+    }
+
+    @include mq-max(break(desktop,-1)) {
+        margin-bottom: 0;
+    }
+
     @include mq($mobile-menu-bk) {
         float: right;
 
@@ -101,44 +142,6 @@
             background: rgba($brand-primary, 0.8);
             box-shadow: -5px 5px 10px rgba(#000, 0.2);
             border-radius: 30px;
-        }
-    }
-
-    @include mq-max(break(wider,-1)) {
-        > a {
-            padding: 0 15px;
-
-            @if $isIndex {
-                padding: 0 25px;
-            }
-        }
-    }
-
-    @include mq-max(break(wide,-1)) {
-        margin-bottom: $spacer*2;
-
-        > a {
-            padding: 0 12px;
-            line-height: 60px;
-            @include rem('font-size', 17px);
-
-            @if $isIndex {
-                padding: 0 18px;
-            }
-        }
-    }
-
-    @include mq-max(break(desktop,-1)) {
-        margin-bottom: 0;
-
-        > a {
-            padding: 0 10px;
-            line-height: 60px;
-            @include rem('font-size', 17px);
-
-            @if $isIndex {
-                padding: 0 18px;
-            }
         }
     }
 

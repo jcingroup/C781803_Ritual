@@ -161,5 +161,17 @@ namespace OutWeb.Controllers
         }
 
         #endregion 修改密碼
+
+
+        #region 保健食品
+        public ActionResult ProductsList()
+        {
+            return View();
+        }
+        public ActionResult ProductsEdit()
+        {
+            return View();
+        }
+        #endregion 保健食品
     }
 }

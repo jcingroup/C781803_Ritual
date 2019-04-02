@@ -29,13 +29,14 @@
                 </h1>
                 <nav id="menu">
                     <a href="~/AboutUs" class='@(ViewBag.BodyClass == "AboutUs" ? "current" : "")'>公司簡介</a>
-                    <a href="~/Services" class='@(ViewBag.BodyClass == "Services" ? "current" : "")'>服務項目</a>
+                    <a href="~/Services" class='@(ViewBag.BodyClass == "Service" ? "current" : "")'>服務項目</a>
                     <a href="~/Plan" class='@(ViewBag.BodyClass == "Plan" ? "current" : "")'>生前契約</a>
                     <a href="~/Flow" class='@(ViewBag.BodyClass == "Flow" ? "current" : "")'>服務流程介紹</a>
                     <a href="~/Trust" class='@(ViewBag.BodyClass == "Trust" ? "current" : "")'>合法信託查詢</a>
                     <a href="~/ContactUs" class='@(ViewBag.BodyClass == "ContactUs" ? "current" : "")'>聯絡我們</a>
                     <a href="~/Public" class='@(ViewBag.BodyClass == "Public" ? "current" : "")'>公開資訊</a>
                     @* <a href="~/Team" class='@(ViewBag.BodyClass == "Team" ? "current" : "")'>全台服務團隊</a> *@
+                    <a href="~/Products" class='@(ViewBag.BodyClass == "Products" ? "current" : "") product'>保健食品</a>
                 </nav>
                 @if (ViewBag.IsFirstPage)
                 {

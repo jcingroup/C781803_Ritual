@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.BodyClass = "Products";
+    ViewBag.Title = "保健食品";
+    ViewBag.TitleEn = "Healthy Food";
+    ViewBag.Breadcrumb = ViewBag.Title;
+}
+
+<h3 class="title">
+    @ViewBag.Title
+    <span>@ViewBag.TitleEn</span>
+</h3>
+
+<section class="row row-x0">
+    <div class="col-xs-6 col-md-3">
+        <figure class="thumbnail">
+            @* if 有圖
+            <div class="thumbnail-pic">
+                <img src="" alt="">
+            </div>
+            else *@
+            <div class="thumbnail-pic none">
+                <i class="fas fa-image"></i>
+            </div>
+            <a href="~/Products/Content" class="thumbnail-link">
+                <figcaption class="thumbnail-title">葉黃素 Lutein</figcaption>
+            </a>
+        </figure>
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <figure class="thumbnail">
+            <div class="thumbnail-pic none">
+                <i class="fas fa-image"></i>
+            </div>
+            <a href="~/Products/Content" class="thumbnail-link">
+                <figcaption class="thumbnail-title">唯骨力</figcaption>
+            </a>
+        </figure>
+    </div>
+</section>

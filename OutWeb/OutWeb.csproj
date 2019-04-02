@@ -162,6 +162,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Authorize\AuthAttribute.cs" />
     <Compile Include="Authorize\ErrorHandlerAttribute.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
@@ -473,6 +474,10 @@
     <Content Include="Views\_SysAdm\TeamDataEdit.cshtml" />
     <Content Include="Views\_SysAdm\TeamList.cshtml" />
     <Content Include="Views\Flow\Flow.cshtml" />
+    <Content Include="Views\_SysAdm\ProductsList.cshtml" />
+    <Content Include="Views\_SysAdm\ProductsEdit.cshtml" />
+    <Content Include="Views\Products\List.cshtml" />
+    <Content Include="Views\Products\Content.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

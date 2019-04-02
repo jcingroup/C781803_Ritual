@@ -38,7 +38,7 @@
 
     // 各尺寸按鈕
     &.sm {
-        @extend .font-md, .py-4, .px-12;
+        @extend .font-md, .py-8, .px-12;
         // font-size: $btn-sm;
         // padding: ($btn-sm * $btn-line-height * 0.4) ($btn-sm * 0.8);
     }

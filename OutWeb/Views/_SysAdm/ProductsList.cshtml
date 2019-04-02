@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Crumb = "保健食品管理";
+    ViewBag.subnav = "Products";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>@ViewBag.Crumb</li>
+    </ul>
+}
+
+<h3 class="title">@ViewBag.Crumb</h3>
+
+<div class="alert-warning mb-16">
+    <strong>前台排序：</strong> 數字愈大愈前面。預設值為 0 則以時間排序(時間愈近愈前面)。
+</div>
+
+<div class="btn-group mb-8">
+    <button type="button" class="btn success oi" data-glyph="plus" onclick="location.href='@Url.Content("/_SysAdm/ProductsEdit")'">新增</button>
+</div>
+
+<header class="table-head form-inline">
+    <input type="text" class="form-element" name="" placeholder="請輸入關鍵字" value="">
+    <button class="btn">搜尋</button>
+</header>
+<table class="table-list table-hover table-striped">
+    <colgroup>
+        <col style="width: 6%">
+        <col>
+        <col style="width: 12%">
+        <col style="width: 12%">
+        <col style="width: 6%">
+    </colgroup>
+    <tr>
+        @* 點選排序功能 (點一下遞增, 點兩下遞減)
+            <button class="th-sort-toggle"></button>
+            遞增 asc
+            <button class="th-sort-toggle asc"></button>
+            遞減 desc
+            <button class="th-sort-toggle desc"></button>
+        *@
+        <th class="item-edit">修改</th>
+        <th class="text-left"><button id="" type="button" sort-type="" class="th-sort-toggle">產品名稱</button></th>
+        <th><button id="sortDisplayForFront" type="button" sort-type="" class="th-sort-toggle">前台顯示</button></th>
+        <th><button id="sortIndex" sort-type="" type="button" class="th-sort-toggle">前台排序</button></th>
+        <th class="item-edit">刪除</th>
+    </tr>
+    <tr>
+        <td><button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content("/_SysAdm/ProductsEdit")'"></button></td>
+        <td class="text-left">葉黃素 Lutein</td>
+        <td>
+            <span class="label-success">上架</span>
+        </td>
+        <td>0</td>
+        <td><button class="hover-danger oi" title="刪除" type="button" data-glyph="trash"></button></td>
+    </tr>
+    <tr>
+        <td><button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content("/_SysAdm/ProductsEdit")'"></button></td>
+        <td class="text-left">維骨力</td>
+        <td>
+            <span class="label-muted">下架</span>
+        </td>
+        <td>0</td>
+        <td><button class="hover-danger oi" title="刪除" type="button" data-glyph="trash"></button></td>
+    </tr>
+</table>
+<footer class="table-foot">
+    <small class="pull-right">第 1 - 10 筆，共 2 筆</small>
+    <nav class="pager">
+        <button type="button" class="oi" data-glyph="media-step-backward" title="到最前頁" disabled></button>
+        <button type="button" class="oi" data-glyph="chevron-left" title="上一頁" disabled></button>
+        <span>
+            第
+            <input type="number" class="form-element text-center" value="1">
+            頁，共 1 頁
+        </span>
+        <button type="button" class="oi" title="下一頁" data-glyph="chevron-right"></button>
+        <button type="button" class="oi" title="到最後頁" data-glyph="media-step-forward"></button>
+    </nav>
+</footer>
