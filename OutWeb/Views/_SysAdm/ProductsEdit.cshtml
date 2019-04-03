@@ -4,7 +4,6 @@
     ViewBag.subnav = "Products";
 }
 
-
 @section Breadcrumb {
     <ul class="breadcrumb">
         <li>@ViewBag.Crumb</li>
@@ -67,8 +66,28 @@
 
     <fieldset class="mb-24">
         <legend class="underline">[ 產品內容 ]</legend>
-        @* 編輯器 *@
-        <textarea name="" id="" cols="30" rows="14" class="form-element"></textarea>
+        <aside class="alert-warning mb-16">
+            <strong>編輯器注意事項:</strong><br>
+            從 WORD 複製文字時，請使用下方的<img src="~/Content/images/_sysadm/icon-word.jpg" /> 圖示來貼上 WORD 文字，避免跑版<br />
+            編輯器上傳圖片或新增表格等時，請勿設定寬度及高度(將數字刪除) ，以免行動裝置顯示時會跑版。<br />
+            檔案尺寸寬度超過 1600 或 高度超過1200 的圖片會被壓縮(PNG透明背景會變成不透明)
+        </aside>
+
+        <nav class="tab">
+            <a href="#" class="tab-nav active" data-tab="#tab1">電腦版<small>(製圖寬度建議:1460px)</small></a>
+            <a href="#" class="tab-nav" data-tab="#tab2">行動版<small>(製圖寬度建議:768px)</small></a>
+        </nav>
+        <section class="tab-main">
+            <div id="tab1" class="tab-pane in">
+                @* 編輯器 *@
+                <textarea name="" id="" cols="30" rows="14" class="form-element"></textarea>
+            </div>
+            <div id="tab2" class="tab-pane">
+                @* 編輯器 *@
+                <textarea name="" id="" cols="30" rows="14" class="form-element"></textarea>
+            </div>
+        </section>
+
     </fieldset>
 
     <footer class="submit-bar fixed-bottom">
@@ -76,3 +95,21 @@
         <button type="button" class="btn warning oi" data-glyph="circle-x" onclick="location.href='ProductsList'" title="回列表">取消</button>
     </footer>
 </form>
+
+
+@section IncludeScript {
+    <script>
+        $("[data-tab]").click(function (e) {
+            var tab = $(this).data("tab");
+            $(tab).addClass("in").siblings('.tab-pane').removeClass("in");
+
+            $(".tab-nav").each(function () {
+                if ($(this).data("tab") == tab) {
+                   $(this).addClass("active").siblings('.active').removeClass("active");
+                }
+            });
+
+            e.preventDefault();
+        });
+    </script>
+}

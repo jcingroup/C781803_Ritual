@@ -1326,14 +1326,22 @@ a.label-muted:hover, a.label-muted:focus, a.label-muted:active {
   border-top: 2px solid #5CB85C;
   box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.1);
 }
-
 .tab-main {
   border: 1px solid #e5e8ec;
 }
+.tab-pane {
+  display: none;
+}
+.tab-pane.in {
+  display: block;
+}
 
-.tab-main textarea, textarea.tab-content {
+.tab-main textarea, textarea.tab-pane {
   border: none;
   box-shadow: none;
+}
+.tab-main textarea:focus, textarea.tab-pane:focus {
+  outline: 1px dashed #e5e8ec;
 }
 
 .text-hide {

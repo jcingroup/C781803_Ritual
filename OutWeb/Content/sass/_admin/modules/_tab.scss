@@ -4,36 +4,48 @@ $tab-border-color: lighten(color('muted'), 8);
 
 .tab {
     @include clearfix;
-}
-.tab-nav {
-    @extend .py-4, .px-12, .text-muted;
 
-    display: block;
-    float: left;
-    margin-bottom: -1px;
-    background: darken(color('light'), 1);
-    border: 1px solid $tab-border-color;
-    border-bottom: transparent;
+    &-nav {
+        @extend .py-4, .px-12, .text-muted;
 
-    &:hover {
-        @extend .text-success, .bg-white;
+        display: block;
+        float: left;
+        margin-bottom: -1px;
+        background: darken(color('light'), 1);
+        border: 1px solid $tab-border-color;
+        border-bottom: transparent;
+
+        &:hover {
+            @extend .text-success, .bg-white;
+        }
+
+        &.active {
+            @extend .bg-white, .text-primary;
+
+            border-top: 2px solid color('success');
+            box-shadow: 0 (-2px) 2px rgba(#000, .1); //#ddd
+        }
     }
 
-    &.active {
-        @extend .bg-white, .text-primary;
-
-        border-top: 2px solid color('success');
-        box-shadow: 0 (-2px) 2px rgba(#000, .1); //#ddd
+    &-main {
+        @extend .p-12;
+        border: 1px solid $tab-border-color;
     }
-}
+    &-pane {
+        display: none;
 
-.tab-main {
-    @extend .p-12;
-    border: 1px solid $tab-border-color;
+        &.in {
+            display: block;
+        }
+    }
 }
 textarea {
-    .tab-main &, &.tab-content {
+    .tab-main &, &.tab-pane {
         border: none;
         box-shadow: none;
+
+        &:focus {
+            outline: 1px dashed $tab-border-color;
+        }
     }
 }
