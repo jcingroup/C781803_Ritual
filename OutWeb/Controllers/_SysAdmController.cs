@@ -1,17 +1,21 @@
 ﻿using Newtonsoft.Json;
 using OutWeb.Authorize;
+using OutWeb.Models.Manage.ProductModels;
 using OutWeb.Models.Manage.TeamModels;
 using OutWeb.Modules.Manage;
+using OutWeb.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using WebUser.Controller;
 
 namespace OutWeb.Controllers
 {
     [Auth]
     [ErrorHandler]
-    public class _SysAdmController : Controller
+    public class _SysAdmController : WebUserController
     {
         public _SysAdmController()
         {
@@ -28,20 +32,16 @@ namespace OutWeb.Controllers
             model.Filter.QueryString = qry ?? string.Empty;
             model.Filter.SortColumn = sort ?? string.Empty;
             model.Filter.Disable = disable ?? string.Empty;
-            model.Filter.CityID = city ;
+            model.Filter.CityID = city;
             model.Filter.AreaID = area;
             model.Filter.DoPagination = true;
 
             TeamModule mdu = new TeamModule();
             model.Result = mdu.DoGetList(model.Filter);
 
-
             TempData["CityData"] = mdu.GetCityData();
             return View(model);
         }
-
-
-
 
         [HttpGet]
         public ActionResult TeamDataAdd()
@@ -106,7 +106,6 @@ namespace OutWeb.Controllers
             return resultJson;
         }
 
-
         [HttpPost]
         public JsonResult GetCityArea(int? ID)
         {
@@ -162,16 +161,52 @@ namespace OutWeb.Controllers
 
         #endregion 修改密碼
 
-
         #region 保健食品
+
         public ActionResult ProductsList()
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult ProductsAdd()
+        {
+            var today = DateTime.UtcNow.AddHours(8).ToString("yyyy\\-MM\\-dd");
+            ProductDetailsDataModel defaultModel = new ProductDetailsDataModel();
+            defaultModel.Data = new Entities.PRODUCT()
+            {
+                PUBLISH_DT = today,
+                SORT = 1,
+            };
+            return View(defaultModel);
+        }
+
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult ProductsAdd(FormCollection form, List<HttpPostedFileBase> files)
+        {
+            int identityId = 0;
+            using (var module = ListFactoryService.Create(Enums.ListMethodType.PRODUCT))
+            {
+                identityId = module.DoSaveData(form, null, files);
+            }
+            var redirectUrl = new UrlHelper(Request.RequestContext).Action("ProductsEdit", "_SysAdm", new { ID = identityId });
+            return Json(new { Url = redirectUrl });
+        }
+
+        [HttpGet]
         public ActionResult ProductsEdit()
         {
             return View();
         }
+
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult ProductsEdit(FormCollection form, List<HttpPostedFileBase> files)
+        {
+            return View();
+        }
+
         #endregion 保健食品
     }
 }

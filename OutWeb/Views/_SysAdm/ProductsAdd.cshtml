@@ -12,9 +12,9 @@
     </ul>
 }
 
-<h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">編輯</small></h3>
+<h3 class="title">@ViewBag.Crumb <small class="oi" data-glyph="tags">新增</small></h3>
 
-@using (Html.BeginForm("ProductsEdit", "_SysAdm", FormMethod.Post, new { id = "formManageProductsData", @class = "form-list" }))
+@using (Html.BeginForm("ProductsAdd", "_SysAdm", FormMethod.Post, new { id = "formManageProductsData", @class = "form-list" }))
 {
     Html.RenderPartial("_ProductsDataPartial", Model);
 }

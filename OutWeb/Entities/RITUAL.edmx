@@ -13,8 +13,6 @@
           <Property Name="MAP_CITY_ID" Type="int" Nullable="false" />
           <Property Name="AREA_NM" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'RITUAL.dbo.CITY' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="CITY">
           <Key>
             <PropertyRef Name="ID" />
@@ -22,6 +20,39 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CITY_NM" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FILEBASE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FILE_RANDOM_NM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FILE_REL_NM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FILE_PATH" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="IDENTIFY_KEY" Type="int" />
+          <Property Name="SQ" Type="float" />
+          <Property Name="BUD_DT" Type="datetime" Nullable="false" />
+          <Property Name="BUD_ID" Type="int" Nullable="false" />
+          <Property Name="MAP_ID" Type="int" Nullable="false" />
+          <Property Name="MAP_SITE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FILE_TP" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="URL_PATH" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRODUCT_NAME" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PUBLISH_DT" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="SORT" Type="int" />
+          <Property Name="CONTENT" Type="nvarchar(max)" />
+          <Property Name="CONTENT_MOBILE" Type="nvarchar(max)" />
+          <Property Name="BUD_DT" Type="datetime" Nullable="false" />
+          <Property Name="UPT_DT" Type="datetime" Nullable="false" />
+          <Property Name="BUD_ID" Type="int" Nullable="false" />
+          <Property Name="UPT_ID" Type="int" Nullable="false" />
+          <Property Name="DISPLAY" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TEAM">
           <Key>
@@ -57,14 +88,11 @@
         </EntityType>
         <EntityContainer Name="RITUALModelStoreContainer">
           <EntitySet Name="AREA" EntityType="Self.AREA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CITY" EntityType="Self.CITY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FILEBASE" EntityType="Self.FILEBASE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TEAM" EntityType="Self.TEAM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CITY" EntityType="Self.CITY" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CITY].[ID] AS [ID], 
-    [CITY].[CITY_NM] AS [CITY_NM]
-    FROM [dbo].[CITY] AS [CITY]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -105,6 +133,8 @@
           <EntitySet Name="USER" EntityType="Self.USER" />
           <EntitySet Name="CITY" EntityType="Self.CITY" />
           <EntitySet Name="TEAM" EntityType="RITUALModel.TEAM" />
+          <EntitySet Name="FILEBASE" EntityType="RITUALModel.FILEBASE" />
+          <EntitySet Name="PRODUCT" EntityType="RITUALModel.PRODUCT" />
         </EntityContainer>
         <EntityType Name="TEAM">
           <Key>
@@ -123,6 +153,39 @@
           <Property Name="BUD_ID" Type="Int32" Nullable="false" />
           <Property Name="SQ" Type="Int32" />
           <Property Name="DISABLED" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="FILEBASE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FILE_RANDOM_NM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FILE_REL_NM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FILE_PATH" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IDENTIFY_KEY" Type="Int32" />
+          <Property Name="SQ" Type="Double" />
+          <Property Name="BUD_DT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BUD_ID" Type="Int32" Nullable="false" />
+          <Property Name="MAP_ID" Type="Int32" Nullable="false" />
+          <Property Name="MAP_SITE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FILE_TP" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="URL_PATH" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRODUCT_NAME" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PUBLISH_DT" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SORT" Type="Int32" />
+          <Property Name="CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CONTENT_MOBILE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BUD_DT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UPT_DT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BUD_ID" Type="Int32" Nullable="false" />
+          <Property Name="UPT_ID" Type="Int32" Nullable="false" />
+          <Property Name="DISPLAY" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -177,6 +240,41 @@
                 <ScalarProperty Name="ADDR" ColumnName="ADDR" />
                 <ScalarProperty Name="MAP_AREA_ID" ColumnName="MAP_AREA_ID" />
                 <ScalarProperty Name="MAP_CITY_ID" ColumnName="MAP_CITY_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FILEBASE">
+            <EntityTypeMapping TypeName="RITUALModel.FILEBASE">
+              <MappingFragment StoreEntitySet="FILEBASE">
+                <ScalarProperty Name="URL_PATH" ColumnName="URL_PATH" />
+                <ScalarProperty Name="FILE_TP" ColumnName="FILE_TP" />
+                <ScalarProperty Name="MAP_SITE" ColumnName="MAP_SITE" />
+                <ScalarProperty Name="MAP_ID" ColumnName="MAP_ID" />
+                <ScalarProperty Name="BUD_ID" ColumnName="BUD_ID" />
+                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
+                <ScalarProperty Name="SQ" ColumnName="SQ" />
+                <ScalarProperty Name="IDENTIFY_KEY" ColumnName="IDENTIFY_KEY" />
+                <ScalarProperty Name="FILE_PATH" ColumnName="FILE_PATH" />
+                <ScalarProperty Name="FILE_REL_NM" ColumnName="FILE_REL_NM" />
+                <ScalarProperty Name="FILE_RANDOM_NM" ColumnName="FILE_RANDOM_NM" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCT">
+            <EntityTypeMapping TypeName="RITUALModel.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCT">
+                <ScalarProperty Name="DISPLAY" ColumnName="DISPLAY" />
+                <ScalarProperty Name="UPT_ID" ColumnName="UPT_ID" />
+                <ScalarProperty Name="BUD_ID" ColumnName="BUD_ID" />
+                <ScalarProperty Name="UPT_DT" ColumnName="UPT_DT" />
+                <ScalarProperty Name="BUD_DT" ColumnName="BUD_DT" />
+                <ScalarProperty Name="CONTENT_MOBILE" ColumnName="CONTENT_MOBILE" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="PUBLISH_DT" ColumnName="PUBLISH_DT" />
+                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

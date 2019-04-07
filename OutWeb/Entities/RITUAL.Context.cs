@@ -29,5 +29,7 @@ namespace OutWeb.Entities
         public virtual DbSet<USER> USER { get; set; }
         public virtual DbSet<CITY> CITY { get; set; }
         public virtual DbSet<TEAM> TEAM { get; set; }
+        public virtual DbSet<FILEBASE> FILEBASE { get; set; }
+        public virtual DbSet<PRODUCT> PRODUCT { get; set; }
     }
 }

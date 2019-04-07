@@ -19,10 +19,10 @@
         // ... where Session[ "IsAuthorized" ] is set to "true" as soon as the
         // user logs on your system.
 
-        if (UserProvider.Instance.User == null)
-        {
-            return false;
-        }
+        //if (UserProvider.Instance.User == null)
+        //{
+        //    return false;
+        //}
         return true;
     }
 
@@ -39,12 +39,12 @@
         // The base URL used to reach files in CKFinder through the browser.
         //圖片超連結目錄路徑
         //string cusDir = UserSso.Instance.User.UserAccountName + "/";
-        BaseUrl = "~/Content/Upload/";
+        BaseUrl = "~/Content/Upload/CK/";
 
         // The phisical directory in the server where the file will end up. If
         // blank, CKFinder attempts to resolve BaseUrl.
         //圖片儲存磁碟路徑
-        BaseDir = HttpContext.Current.Server.MapPath("~/Content/Upload/");
+        BaseDir = HttpContext.Current.Server.MapPath("~/Content/Upload/CK/");
 
         // Optional: enable extra plugins (remember to copy .dll files first).
         Plugins = new string[] {
@@ -84,10 +84,10 @@
         /*
         縮圖限制：
         */
-            Images.MaxWidth = 1600;
-            Images.MaxHeight = 1200;
-            Images.Quality = 80;
-        
+        Images.MaxWidth = 1600;
+        Images.MaxHeight = 1200;
+        Images.Quality = 80;
+
         // Indicates that the file size (MaxSize) for images must be checked only
         // after scaling them. Otherwise, it is checked right after uploading.
         CheckSizeAfterScaling = true;

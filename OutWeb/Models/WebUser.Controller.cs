@@ -1,4 +1,6 @@
 ﻿using OutWeb.Authorize;
+using OutWeb.Enums;
+using OutWeb.Repositories;
 using System.Web.Mvc;
 
 
@@ -18,6 +20,8 @@ namespace WebUser.Controller
             base.Initialize(requestContext);
 
             ViewBag.IsFirstPage = false; //是否為首頁，請在首頁的Action此值設為True
+            PublicMethodRepository.CurrentMode = SiteMode.Back;
+            PublicMethodRepository.ListPageSize = (int)PageSizeConfig.SIZE10;
 
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

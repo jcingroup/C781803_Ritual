@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -12,7 +13,10 @@ namespace OutWeb.Repositories
 {
     public static class PublicMethodRepository
     {
+        public static int ListPageSize { get; set; } = 0;
+
         private static string m_customLanguageCode = string.Empty;
+        public static SiteMode CurrentMode { get; set; } = SiteMode.NotSet;
 
         private static Language m_language = Language.NotSet;
         public static void FilterXss<T>(T obj)
@@ -70,6 +74,43 @@ namespace OutWeb.Repositories
                 }
             }
         }
+
+        /// <summary>
+        /// 根據傳入的陣列 依照順序建立目錄
+        /// </summary>
+        /// <param name="dirArray"></param>
+        public static void CreateDir(string[] dirArray)
+        {
+            string serverRoorDir = HttpContext.Current.Server.MapPath("~");
+            string dir = string.Empty;
+            foreach (string d in dirArray)
+            {
+                dir = serverRoorDir += @"\" + d;
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
+            }
+        }
+
+        public static string UrlMathPath
+        {
+            get
+            {
+                var context = HttpContext.Current;
+                var scheme = context.Request.Url.Scheme;
+                var host = context.Request.Url.Host;
+                var port = context.Request.Url.Port;
+                var applicationPath = context.Request.ApplicationPath;
+                var url = string.Empty;
+                if (!applicationPath.Equals("/"))
+                    url = string.Format("{0}://{1}:{2}/{3}", scheme, host, port, applicationPath);
+                else
+                    url = string.Format("{0}://{1}:{2}", scheme, host, port);
+
+                return url;
+            }
+        }
+
+
 
         /// <summary>
         /// 使用者自訂語系
