@@ -225,6 +225,7 @@
     <Compile Include="Models\IPaginationModel.cs" />
     <Compile Include="Models\ListFilterBase.cs" />
     <Compile Include="Models\ListResultBase.cs" />
+    <Compile Include="Models\ListViewBase.cs" />
     <Compile Include="Models\Manage\AgentModels\AgentDataModel.cs" />
     <Compile Include="Models\Manage\FilesModel.cs" />
     <Compile Include="Models\Manage\FileViewModel.cs" />

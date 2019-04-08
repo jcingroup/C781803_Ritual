@@ -78,11 +78,11 @@
             <label class="switch">
                 @if (Model.Data.DISPLAY)
                 {
-                    <input type="checkbox" name="DisplayStatus" value="false">
+                    <input type="checkbox" name="DisplayStatus" checked>
                 }
                 else
                 {
-                    <input type="checkbox" name="DisplayStatus" value="true" checked>
+                    <input type="checkbox" name="DisplayStatus">
                 }
                 <div class="slider round"></div>
             </label>
@@ -117,7 +117,7 @@
 
     <footer class="submit-bar fixed-bottom">
         <button id="submitBtn" type="button" class="btn success oi" data-glyph="circle-check">確定儲存</button>
-        <button type="button" class="btn warning oi" data-glyph="circle-x" onclick="location.href='ProductsList'" title="回列表">取消</button>
+        <button type="button" class="btn warning oi" data-glyph="circle-x" onclick="location.href='/_SysAdm/ProductsList'" title="回列表">取消</button>
     </footer>
 </form>
 <script>

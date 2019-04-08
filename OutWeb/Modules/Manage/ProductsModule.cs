@@ -42,7 +42,7 @@ namespace OutWeb.Modules.Manage
                 //else if (PublicMethodRepository.CurrentMode == SiteMode.Home)
                 //    data = enumerable.Where(s => !s.DISABLE && s.HOME_PAGE_DISPLAY).ToList();
                 //else
-                data = enumerable.Where(s => s.DISPLAY).ToList();
+                data = enumerable.ToList();
 
                 //關鍵字搜尋
                 if (!string.IsNullOrEmpty(filterModel.QueryString))
@@ -66,7 +66,7 @@ namespace OutWeb.Modules.Manage
 
                 //分頁
                 bool isDoPage = PublicMethodRepository.CurrentMode == SiteMode.FronEnd ||
-                     PublicMethodRepository.CurrentMode == SiteMode.Home ? false : true;
+                     PublicMethodRepository.CurrentMode == SiteMode.Home ? false : false;
                 data = this.DoListPageList(filterModel.CurrentPage, data, out PaginationResult pagination, isDoPage);
                 result.Pagination = pagination;
                 foreach (var d in data)
@@ -95,8 +95,8 @@ namespace OutWeb.Modules.Manage
                 saveModel = this.DB.PRODUCT.Where(s => s.ID == ID).FirstOrDefault();
             }
             saveModel.PUBLISH_DT = form["PublishDate"];
-            saveModel.PRODUCT_NAME = form["TITLE"];
-            saveModel.DISPLAY = form["DisplayStatus"] == "true" ? true : false;
+            saveModel.PRODUCT_NAME = form["ProductName"];
+            saveModel.DISPLAY = form["DisplayStatus"] == "on" ? true : false;
             saveModel.SORT = form["Sort"] == null ? 1 : form["Sort"] == string.Empty ? 1 : Convert.ToInt32(form["Sort"]);
 
             saveModel.CONTENT = form["Content"];
@@ -194,7 +194,7 @@ namespace OutWeb.Modules.Manage
             //    data = DB.PRODUCT.Where(w => w.ID == ID).FirstOrDefault();
             //}
 
-            data = DB.PRODUCT.Where(w => w.ID == ID && w.DISPLAY).FirstOrDefault();
+            data = DB.PRODUCT.Where(w => w.ID == ID).FirstOrDefault();
 
             PublicMethodRepository.HtmlDecode(data);
             result.Data = data;
@@ -286,36 +286,28 @@ namespace OutWeb.Modules.Manage
         {
             switch (sortCloumn)
             {
-                case "sortTitle/asc":
-                    data = data.OrderBy(o => o.PUBLISH_DT).ThenBy(g => g.SORT).ToList();
+                case "sortProductName/asc":
+                    data = data.OrderBy(o => o.PRODUCT_NAME).ThenBy(g => g.SORT).ToList();
                     break;
 
-                case "sortTitle/desc":
-                    data = data.OrderByDescending(o => o.PUBLISH_DT).ThenBy(g => g.SORT).ToList();
+                case "sortProductName/desc":
+                    data = data.OrderByDescending(o => o.PRODUCT_NAME).ThenBy(g => g.SORT).ToList();
                     break;
 
-                case "sortSpec/asc":
-                    data = data.OrderBy(o => o.PRODUCT_NAME).ThenByDescending(g => g.SORT).ToList();
-                    break;
-
-                case "sortSpec/desc":
-                    data = data.OrderByDescending(o => o.PRODUCT_NAME).ThenByDescending(g => g.SORT).ToList();
-                    break;
-
-                case "sortStatus/asc":
+                case "sortDisplayForFront/asc":
                     data = data.OrderBy(o => o.DISPLAY).ThenBy(g => g.SORT).ToList();
                     break;
 
-                case "sortStatus/desc":
+                case "sortDisplayForFront/desc":
                     data = data.OrderByDescending(o => o.DISPLAY).ThenBy(g => g.SORT).ToList();
                     break;
 
                 case "sortIndex/asc":
-                    data = data.OrderBy(o => o.SORT).ThenBy(g => g.SORT).ToList();
+                    data = data.OrderBy(o => o.SORT).ThenByDescending(g => g.SORT).ToList();
                     break;
 
                 case "sortIndex/desc":
-                    data = data.OrderByDescending(o => o.SORT).ThenBy(g => g.SORT).ToList();
+                    data = data.OrderByDescending(o => o.SORT).ThenByDescending(g => g.SORT).ToList();
                     break;
 
                 default:

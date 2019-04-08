@@ -1,7 +1,12 @@
-﻿
+﻿@using OutWeb.Models.Manage
+@using OutWeb.Entities
+@using OutWeb.Repositories
+@using OutWeb.Models
+@model ListViewBase
 @{
     ViewBag.Crumb = "保健食品管理";
     ViewBag.subnav = "Products";
+    List<PRODUCT> Data = (Model.Result.Data as List<PRODUCT>);
 }
 
 @section Breadcrumb {
@@ -10,73 +15,222 @@
     </ul>
 }
 
+@section IncludeScript{
+    @*提交分頁表單,建立隱藏欄位為查詢欄位值*@
+    <script>
+    function paginationSubmit(page) {
+        $('input[name="page"]').val(page);
+
+        var input = $("<input>")
+            .attr("type", "hidden")
+            .attr("name", "qry").val("@Model.Filter.QueryString");
+
+        var input = $("<input>")
+            .attr("type", "hidden")
+            .attr("name", "sort").val("@Model.Filter.SortColumn");
+
+        $('#formManageProducts').append($(input));
+        $('#formManageProducts')[0].submit();
+    }
+
+    //提交表單 (提供延遲提交用)
+    function submitForm() {
+        var val = $('input[name="page"]').val();
+        paginationSubmit(val);
+    }
+
+    $('input[name="page"]').on('change keyup', function(value) {
+        var lastPage = parseInt('@Model.Result.Pagination.LastPage');
+        var pageLen = parseInt('@Model.Result.Pagination.LastPage.ToString().Length');
+        var val = $(this).val();
+
+        if (val.length > pageLen || parseInt(val) > lastPage) {
+            val = val.slice(0, pageLen);
+            $(this).val(lastPage);
+            paginationSubmit(lastPage);
+        } else if (val.length < pageLen) {
+            setTimeout("submitForm()", 500)
+        } else {
+            paginationSubmit(val);
+        }
+    });
+    </script>
+    <script>
+
+        (function ($) {
+            $(function () {
+
+                $('#statusDropListFront').val('@Model.Filter.DisplayForFrontEnd');
+
+                //搜尋
+                $('#searchBtn').click(function () {
+                    $('#numPage').val(1);
+                    $('#formManageProducts').submit();
+                });
+
+                //刪除
+                $('.delete-btn').click(function () {
+                    var id = $(this).attr('data-id');
+                    var url = "@Url.Content("~/_SysAdm/ProductsDelete")";
+                    $.ajax({
+                        async: false,
+                        url: url,
+                        data: { ID: id },
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (data) {
+                            alert(data.messages);
+                            if (data.success) {
+                                window.location.reload()
+                            }
+                        }, error: function (error) {
+                            //alert(error.messages);
+                        }
+                    });
+                })
+
+               //排序
+                $('.th-sort-toggle').on('click', function () {
+                    var form = document.forms[0];
+                    var  formData =  $(form).serializeArray();
+                    var queryStr = $.param(formData);
+                    var sortNm = $(this).attr('id');
+                    var sortType = $(this).attr('sort-type') == '' ? 'asc' : $(this).attr('sort-type');
+                    window.location = '@Url.Content("~/_SysAdm/ProductsList?")' + queryStr +"&sort=" + sortNm + '/' + sortType + '&page=@Model.Result.Pagination.CurrentPage';
+                })
+
+                var sortColumn;
+                var sortTp;
+                if ('@Model.Filter.SortColumn' != '') {
+                    sortColumn = '@Model.Filter.SortColumn'.split('/')[0]
+                    sortTp = '@Model.Filter.SortColumn'.split('/')[1];
+                }
+
+                if (sortTp == 'asc') {
+                    sortTp = 'desc';
+                }
+                else {
+                    sortTp = 'asc';
+                }
+
+                switch (sortColumn) {
+                    case "sortProductName":
+                        $('#sortProductName').addClass(sortTp)
+                        $('#sortProductName').attr('sort-type', sortTp);
+                        break;
+                    case "sortDisplayForFront":
+                        $('#sortDisplayForFront').addClass(sortTp)
+                        $('#sortDisplayForFront').attr('sort-type', sortTp);
+                        break;
+                    case "sortIndex":
+                        $('#sortIndex').addClass(sortTp)
+                        $('#sortIndex').attr('sort-type', sortTp);
+                        break;
+                    default:
+                    case "sortIndex":
+                        $('#sortIndex').addClass(sortTp)
+                        $('#sortIndex').attr('sort-type', sortTp);
+                        break;
+                }
+            });
+        })(jQuery);
+    </script>
+}
+
 <h3 class="title">@ViewBag.Crumb</h3>
+@using (Html.BeginForm("ProductsList", "_SysAdm", FormMethod.Get, new { id = "formManageProducts" }))
+{
+    <div class="alert-warning mb-16">
+        <strong>前台排序：</strong> 數字愈大愈前面。預設值為 0 則以時間排序(時間愈近愈前面)。
+    </div>
 
-<div class="alert-warning mb-16">
-    <strong>前台排序：</strong> 數字愈大愈前面。預設值為 0 則以時間排序(時間愈近愈前面)。
-</div>
+    <div class="btn-group mb-8">
+        <button type="button" class="btn success oi" data-glyph="plus" onclick="location.href='@Url.Content("/_SysAdm/ProductsAdd")'">新增</button>
+    </div>
 
-<div class="btn-group mb-8">
-    <button type="button" class="btn success oi" data-glyph="plus" onclick="location.href='@Url.Content("/_SysAdm/ProductsAdd")'">新增</button>
-</div>
-
-<header class="table-head form-inline">
-    <input type="text" class="form-element" name="" placeholder="請輸入關鍵字" value="">
-    <button class="btn">搜尋</button>
-</header>
-<table class="table-list table-hover table-striped">
-    <colgroup>
-        <col style="width: 6%">
-        <col>
-        <col style="width: 12%">
-        <col style="width: 12%">
-        <col style="width: 6%">
-    </colgroup>
-    <tr>
-        @* 點選排序功能 (點一下遞增, 點兩下遞減)
+    <header class="table-head form-inline">
+        <input type="text" class="form-element" placeholder="請輸入關鍵字" name="qry" value="@Model.Filter.QueryString">
+        <button class="btn" id="searchBtn"> 搜尋</button>
+    </header>
+    <table class="table-list table-hover table-striped">
+        <colgroup>
+            <col style="width: 6%">
+            <col>
+            <col style="width: 12%">
+            <col style="width: 12%">
+            <col style="width: 6%">
+        </colgroup>
+        <tr>
+            @* 點選排序功能 (點一下遞增, 點兩下遞減)
             <button class="th-sort-toggle"></button>
             遞增 asc
             <button class="th-sort-toggle asc"></button>
             遞減 desc
             <button class="th-sort-toggle desc"></button>
-        *@
-        <th class="item-edit">修改</th>
-        <th class="text-left"><button id="" type="button" sort-type="" class="th-sort-toggle">產品名稱</button></th>
-        <th><button id="sortDisplayForFront" type="button" sort-type="" class="th-sort-toggle">前台顯示</button></th>
-        <th><button id="sortIndex" sort-type="" type="button" class="th-sort-toggle">前台排序</button></th>
-        <th class="item-edit">刪除</th>
-    </tr>
-    <tr>
-        <td><button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content("/_SysAdm/ProductsEdit")'"></button></td>
-        <td class="text-left">葉黃素 Lutein</td>
-        <td>
-            <span class="label-success">上架</span>
-        </td>
-        <td>0</td>
-        <td><button class="hover-danger oi" title="刪除" type="button" data-glyph="trash"></button></td>
-    </tr>
-    <tr>
-        <td><button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content("/_SysAdm/ProductsEdit")'"></button></td>
-        <td class="text-left">維骨力</td>
-        <td>
-            <span class="label-muted">下架</span>
-        </td>
-        <td>0</td>
-        <td><button class="hover-danger oi" title="刪除" type="button" data-glyph="trash"></button></td>
-    </tr>
-</table>
+            *@
+            <th class="item-edit">修改</th>
+            <th class="text-left"><button id="sortProductName" type="button" sort-type="" class="th-sort-toggle">產品名稱</button></th>
+            <th><button id="sortDisplayForFront" type="button" sort-type="" class="th-sort-toggle">前台顯示</button></th>
+            <th><button id="sortIndex" sort-type="" type="button" class="th-sort-toggle">前台排序</button></th>
+            <th class="item-edit">刪除</th>
+        </tr>
 
-<footer class="table-foot clearfix">
-    <small class="pull-right">第 1 - 10 筆，共 2 筆</small>
-    @* 不用分頁，資料全列出來<nav class="pager">
-        <button type="button" class="oi" data-glyph="media-step-backward" title="到最前頁" disabled></button>
-        <button type="button" class="oi" data-glyph="chevron-left" title="上一頁" disabled></button>
-        <span>
-            第
-            <input type="number" class="form-element text-center" value="1">
-            頁，共 1 頁
-        </span>
-        <button type="button" class="oi" title="下一頁" data-glyph="chevron-right"></button>
-        <button type="button" class="oi" title="到最後頁" data-glyph="media-step-forward"></button>
-    </nav> *@
-</footer>
+        @if (Data.Count == 0)
+        {
+            <tr class="bg-pale-red"><td colspan="5">查無資料!</td></tr>
+        }
+        @foreach (var data in Data)
+        {
+            <tr>
+                <td><button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content("~/_SysAdm/ProductsEdit?ID=" + data.ID)'"></button></td>
+                <td class="text-left">@data.PRODUCT_NAME</td>
+                <td>
+                    @if (data.DISPLAY)
+                    {
+                        <span class="label-success">上架</span>
+                    }
+                    else
+                    {
+                        <span class="label-danger">下架</span>
+                    }
+                </td>
+                <td>@data.SORT</td>
+                <td><button class="hover-danger oi delete-btn" title="刪除" type="button" data-glyph="trash" data-id="@data.ID"></button></td>
+            </tr>
+        }
+
+        @*<tr>
+            <td><button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content("/_SysAdm/ProductsEdit")'"></button></td>
+            <td class="text-left">葉黃素 Lutein</td>
+            <td>
+                <span class="label-success">上架</span>
+            </td>
+            <td>0</td>
+            <td><button class="hover-danger oi" title="刪除" type="button" data-glyph="trash"></button></td>
+        </tr>
+        <tr>
+            <td><button class="hover-primary oi" title="修改" data-glyph="pencil" type="button" onclick="location.href='@Url.Content("/_SysAdm/ProductsEdit")'"></button></td>
+            <td class="text-left">維骨力</td>
+            <td>
+                <span class="label-muted">下架</span>
+            </td>
+            <td>0</td>
+            <td><button class="hover-danger oi" title="刪除" type="button" data-glyph="trash"></button></td>
+        </tr>*@
+    </table>
+
+    <footer class="table-foot clearfix">
+        <small class="pull-right">第 1 - @Data.Count() 筆，共 @Data.Count() 筆</small>
+        @* 不用分頁，資料全列出來<nav class="pager">
+                <button type="button" class="oi" data-glyph="media-step-backward" title="到最前頁" disabled></button>
+                <button type="button" class="oi" data-glyph="chevron-left" title="上一頁" disabled></button>
+                <span>
+                    第
+                    <input type="number" class="form-element text-center" value="1">
+                    頁，共 1 頁
+                </span>
+                <button type="button" class="oi" title="下一頁" data-glyph="chevron-right"></button>
+                <button type="button" class="oi" title="到最後頁" data-glyph="media-step-forward"></button>
+            </nav> *@
+    </footer>
+}

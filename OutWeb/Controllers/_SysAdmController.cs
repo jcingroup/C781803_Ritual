@@ -1,8 +1,12 @@
 ﻿using Newtonsoft.Json;
 using OutWeb.Authorize;
+using OutWeb.Entities;
+using OutWeb.Enums;
+using OutWeb.Models;
 using OutWeb.Models.Manage.ProductModels;
 using OutWeb.Models.Manage.TeamModels;
 using OutWeb.Modules.Manage;
+using OutWeb.Repositories;
 using OutWeb.Service;
 using System;
 using System.Collections.Generic;
@@ -163,9 +167,23 @@ namespace OutWeb.Controllers
 
         #region 保健食品
 
-        public ActionResult ProductsList()
+        public ActionResult ProductsList(int? page, string qry, string sort, string fSt, string pSdate, string pEdate)
         {
-            return View();
+            PublicMethodRepository.CurrentMode = SiteMode.Back;
+            ListViewBase model = new ListViewBase();
+            model.Filter.CurrentPage = page ?? 1;
+            model.Filter.QueryString = qry ?? string.Empty;
+            model.Filter.SortColumn = sort ?? string.Empty;
+            model.Filter.DisplayForFrontEnd = fSt ?? string.Empty;
+            model.Filter.PublishStartDate = pSdate;
+            model.Filter.PublishEndate = pEdate;
+
+            using (var module = ListFactoryService.Create(ListMethodType.PRODUCT))
+            {
+                model.Result = (module.DoGetList(model.Filter) as ListResultBase);
+                model.Result.Data = (model.Result.Data as List<PRODUCT>);
+            }
+            return View(model);
         }
 
         [HttpGet]
@@ -195,16 +213,60 @@ namespace OutWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult ProductsEdit()
+        public ActionResult ProductsEdit(int? ID)
         {
-            return View();
+            if (!ID.HasValue)
+                return RedirectToAction("ProductList");
+            ProductDetailsDataModel model;
+            using (var module = ListFactoryService.Create(Enums.ListMethodType.PRODUCT))
+            {
+                model = (module.DoGetDetailsByID((int)ID) as ProductDetailsDataModel);
+            }
+            if (model.Data == null)
+                return RedirectToAction("Login", "SignIn");
+
+            //取檔案
+            using (FileModule fileModule = new FileModule())
+            {
+                model.FilesData = fileModule.GetFiles((int)model.Data.ID, "Products");
+            }
+            return View(model);
         }
 
         [ValidateInput(false)]
         [HttpPost]
         public ActionResult ProductsEdit(FormCollection form, List<HttpPostedFileBase> files)
         {
-            return View();
+            int? ID = Convert.ToInt32(form["ID"]);
+            int identityId = 0;
+            using (var module = ListFactoryService.Create(Enums.ListMethodType.PRODUCT))
+            {
+                identityId = module.DoSaveData(form, ID, files);
+            }
+            var redirectUrl = new UrlHelper(Request.RequestContext).Action("ProductsEdit", "_SysAdm", new { ID = identityId });
+            return Json(new { Url = redirectUrl });
+        }
+
+        [HttpPost]
+        public JsonResult ProductsDelete(int? ID)
+        {
+            bool success = true;
+            string messages = string.Empty;
+            try
+            {
+                using (var module = ListFactoryService.Create(Enums.ListMethodType.PRODUCT))
+                {
+                    module.DoDeleteByID((int)ID);
+                }
+                messages = "刪除成功";
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                messages = ex.Message;
+            }
+            var resultJson = Json(new { success = success, messages = messages });
+            return resultJson;
         }
 
         #endregion 保健食品
