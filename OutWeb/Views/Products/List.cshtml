@@ -1,9 +1,17 @@
-﻿
+﻿@using OutWeb.Models.Manage
+@using OutWeb.Entities
+@using OutWeb.Repositories
+@using OutWeb.Models
+
+@model ListViewBase
 @{
     ViewBag.BodyClass = "Products";
     ViewBag.Title = "保健食品";
     ViewBag.TitleEn = "Healthy Food";
     ViewBag.Breadcrumb = ViewBag.Title;
+    List<PRODUCT> Data = (Model.Result.Data as List<PRODUCT>);
+    string currentUrl = PublicMethodRepository.UrlMathPath;
+    Dictionary<int, List<FileViewModel>> Files = TempData["Files"] as Dictionary<int, List<FileViewModel>>;
 }
 
 <h3 class="title">
@@ -12,29 +20,51 @@
 </h3>
 
 <section class="row row-x0">
-    <div class="col-xs-6 col-md-3">
-        <figure class="thumbnail">
-            @* if 有圖
-            <div class="thumbnail-pic">
-                <img src="" alt="">
-            </div>
-            else *@
-            <div class="thumbnail-pic none">
-                <i class="fas fa-image"></i>
-            </div>
-            <a href="~/Products/Content" class="thumbnail-link">
-                <figcaption class="thumbnail-title">葉黃素 Lutein</figcaption>
-            </a>
-        </figure>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <figure class="thumbnail">
-            <div class="thumbnail-pic none">
-                <i class="fas fa-image"></i>
-            </div>
-            <a href="~/Products/Content" class="thumbnail-link">
-                <figcaption class="thumbnail-title">唯骨力</figcaption>
-            </a>
-        </figure>
-    </div>
+
+    @foreach (var data in Data)
+    {
+        string fileUrl = string.Empty;
+        var file = Files.Where(s => s.Key == data.ID).First().Value.FirstOrDefault();
+        if (file == null)
+        {
+            fileUrl = @"";
+        }
+        else
+        {
+            fileUrl = currentUrl + "/" + file.FileUrl;
+        }
+        <div class="col-xs-6 col-md-3">
+            <figure class="thumbnail">
+
+                @if (file != null)
+                {
+
+                    <div class="thumbnail-pic">
+                        <img src="@fileUrl" alt="@data.PRODUCT_NAME">
+                    </div>
+                }
+                else
+                {
+                    <div class="thumbnail-pic none">
+                        <i class="fas fa-image"></i>
+                    </div>
+                }
+
+                <a href="@Url.Content("~/Products/Content?ID=" + data.ID)" class="thumbnail-link">
+                    <figcaption class="thumbnail-title">@data.PRODUCT_NAME</figcaption>
+                </a>
+            </figure>
+        </div>
+
+    }
+    @*<div class="col-xs-6 col-md-3">
+            <figure class="thumbnail">
+                <div class="thumbnail-pic none">
+                    <i class="fas fa-image"></i>
+                </div>
+                <a href="~/Products/Content" class="thumbnail-link">
+                    <figcaption class="thumbnail-title">唯骨力</figcaption>
+                </a>
+            </figure>
+        </div>*@
 </section>

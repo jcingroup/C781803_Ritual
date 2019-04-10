@@ -1,9 +1,11 @@
-﻿
+﻿@using OutWeb.Repositories
+@using OutWeb.Models.Manage.ProductModels
+@model ProductDetailsDataModel
 @{
     ViewBag.BodyClass = "Products";
     ViewBag.Title = "保健食品";
     ViewBag.TitleEn = "Healthy Food";
-    ViewBag.Breadcrumb = "葉黃素"; @* 產品名稱 *@
+    ViewBag.Breadcrumb = Model.Data.PRODUCT_NAME; @* 產品名稱 *@
 }
 
 @section breadcrumb {
@@ -12,8 +14,11 @@
 <h3 class="title">@ViewBag.Breadcrumb</h3>
 
 <div class="editor mb-48">
-    這裡是產品的編輯器內容
-    這裡是產品的編輯器內容這裡是產品的編輯器內容這裡是產品的編輯器內容這裡是產品的編輯器內容這裡是產品的編輯器內容
+    @Html.Raw(Model.Data.CONTENT)
+</div>
+
+<div class="editor mb-48">
+    @Html.Raw(Model.Data.CONTENT_MOBILE)
 </div>
 
 <nav class="text-center">
