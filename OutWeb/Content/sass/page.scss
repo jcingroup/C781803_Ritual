@@ -829,3 +829,15 @@ button.sheet-item,
         @extend .ml-24;
     }
 }
+.editor-pc{
+    display: block;
+    @include mq-max(break(tablet,-1)) {
+        display: none;
+    }
+}
+.editor-m{
+    display: none;
+    @include mq-max(break(tablet,-1)) {
+        display: block;
+    }
+}
