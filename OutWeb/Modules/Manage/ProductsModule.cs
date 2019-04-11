@@ -42,7 +42,10 @@ namespace OutWeb.Modules.Manage
                 //else if (PublicMethodRepository.CurrentMode == SiteMode.Home)
                 //    data = enumerable.Where(s => !s.DISABLE && s.HOME_PAGE_DISPLAY).ToList();
                 //else
-                data = enumerable.ToList();
+                if (PublicMethodRepository.CurrentMode == SiteMode.FronEnd)
+                    data = enumerable.Where(s => s.DISPLAY).ToList();
+                else
+                    data = enumerable.ToList();
 
                 //關鍵字搜尋
                 if (!string.IsNullOrEmpty(filterModel.QueryString))
