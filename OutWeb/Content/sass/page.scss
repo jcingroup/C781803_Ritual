@@ -113,13 +113,16 @@ h3.title {
 
 // thumbnail
 .thumbnail {
+    @extend .mb-12;
+
     border: 1px solid #ddd;
     padding: $spacer/2;
     position: relative;
 
-    @at-root img#{&}, img {
+    @at-root img#{&}, #{&} img {
         max-width: 100%;
     }
+    img { height: auto; }
 
     &-link {
         display: block;
@@ -154,8 +157,6 @@ h3.title {
             }
         }
 
-        img { height: auto; }
-
         &:hover, &:active, &:focus {
             color: #fff;
 
@@ -189,9 +190,12 @@ h3.title {
         position: absolute;
         left: 0;
         top: 45%;
-        transform: translateY(-50%);
+
         font-size: em(30px);
+        line-height: 1.15;
         text-shadow: 0 0 7px rgba(#000, 0.7);
+
+        transform: translateY(-50%);
         transition: top 0.5s;
 
         @include el(after) {
@@ -215,12 +219,16 @@ h3.title {
 
     // 產品圖
     &-pic {
-        height: 230px;
+        position: relative;
         overflow: hidden;
+        height: 230px;
 
         img {
-            max-width: auto;
-            min-height: 100%;
+            max-width: initial;
+            height: 100%;
+            filter: brightness(.9);
+
+            @include center;
         }
     }
 }
@@ -233,7 +241,6 @@ h3.title {
 // 無圖時
 .none {
     background-color: darken($muted, 20);
-    // border: 1px solid lighten($muted, 4);
     color: darken($muted, 10);
     position: relative;
 

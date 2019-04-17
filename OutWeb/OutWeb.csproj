@@ -1762,6 +1762,7 @@
     <Content Include="Views\_SysAdm\ProductsAdd.cshtml" />
     <None Include="Web.Debug2.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

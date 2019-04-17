@@ -11,11 +11,14 @@
     @include clearfix;
 
     & + & { margin-top: 0.5rem; }
+
+    &-r {
+        margin-right: ($grid-gutter-width / -2);
+        margin-left:  ($grid-gutter-width / -2);
+    }
 }
 
 .row-x0 {
-    // margin-right: ($grid-gutter-width / -2);
-    // margin-left:  ($grid-gutter-width / -2);
     > [class*="col-"] {
         &:first-child { padding-left: 0; }
         &:last-child  { padding-right: 0; }
