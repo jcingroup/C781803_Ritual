@@ -22,6 +22,10 @@
 
         &.product {
             background-color: rgba(darken(color(success), 9), .8);
+            display: none;
+            @include mq($mobile-menu-bk) {
+                display: inline-block;
+            }
         }
         &:hover, &:active, &.current {
             background-color: rgba($brand-primary, 0.8);
@@ -53,6 +57,10 @@
             @include mq-max(break(wide,-1)) {
                 padding: 0 8px;
                 line-height: 60px;
+            }
+
+            &.product {
+                display: inline-block;
             }
         }
     }
@@ -231,10 +239,62 @@
         }
     }
 
+    // 獨立保健食品
+    .products-link {
+        display: none;
+        background: none;
+        position: relative;
+        z-index: z(overlay) + 1;
+
+        @include transition(.3s);
+
+
+        // 本次專案
+        @extend .pull-left, .text-white;
+
+        height: $header-mobile-height;
+        width: 112px;
+        margin: 0 $spacer*0.75 $spacer*1.75 0;
+        margin-top: 5px;
+        padding: 0 6px;
+        font-size: em(20px);
+        border: 1px solid;
+
+        @if $isIndex {
+            margin: 0;
+            padding: 0 12px;
+            position: absolute;
+            left: 50%;
+            top: 55px;
+            transform: translateX(-350px);
+            background: rgba(darken(color(success), 9), .8);
+            border: 0;
+            border-radius: 18px;
+
+            &:hover {
+                color: #fff;
+                background: rgba(darken(color(success), 18), .8);
+            }
+
+            @include mq-max(break($mobile-menu-bk,-1)) {
+                display: block;
+            }
+
+            @include el(after, inline-block, "保健食品") {
+                margin-top: 3px;
+            }
+        }
+    }
+
     @include mq-max(break(tablet,-1)) {
         .mobile-toggle {
             @if $isIndex {
                 top: 8px;
+                transform: translateX(-310px);
+            }
+        }
+        .products-link {
+            @if $isIndex {
                 transform: translateX(-310px);
             }
         }
@@ -252,6 +312,16 @@
                 border-radius: 15px;
             }
         }
+        .products-link {
+            font-size: em(16px);
+            height: 30px;
+            width: 96px;
+            @if $isIndex {
+                top: 45px;
+                transform: translateX(-260px);
+                border-radius: 15px;
+            }
+        }
     }
 
     @include mq-max(break(phone,-1)) {
@@ -259,6 +329,11 @@
 
             @if $isIndex {
                 top: 6px;
+                transform: translateX(-175px);
+            }
+        }
+        .products-link {
+            @if $isIndex {
                 transform: translateX(-175px);
             }
         }
